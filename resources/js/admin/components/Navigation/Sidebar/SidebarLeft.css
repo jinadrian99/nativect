@@ -1,0 +1,14 @@
+.navLinkItem{
+  display: inline-block;
+  padding: 0 5px;
+  font-weight: bolder;
+  color: black;
+}
+.nav-item:hover{
+  background-color: #41474C;
+}
+.space-15{
+  width: 15px;
+  height: 10px;
+  display: inline-block;
+}

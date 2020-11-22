@@ -1,0 +1,34 @@
+.navbar-brand-cus{
+    position: absolute;
+    left: (50% - 0vh);
+    top: 0.1vh;
+}
+
+.navbar-brand-cus:hover{
+    color: #000 !important;
+}
+
+.nav-item-cus:hover{
+    color: #000 !important;
+    background-color : #f8f8f8 !important;
+    border-bottom: 0px solid #f8f8f8 !important;
+}
+
+.nav-cus-font span{
+    font-size: 2vh;
+}
+
+.nav-on-top{
+    z-index: 10000;
+    position: fixed;
+    top: 0px;
+    width: 100vw;
+}
+.icon{
+    position: relative;
+    top: -3px;
+}
+
+.icon-shopping-cart {
+    cursor: pointer;
+}

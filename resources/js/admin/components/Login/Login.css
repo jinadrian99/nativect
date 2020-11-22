@@ -1,0 +1,23 @@
+.bg-hotel{
+    background: linear-gradient(rgba(55, 54, 54, 0.281), rgba(55,54,54,0.281)), url('/image/luxury_hotel-wallpaper-2560x1600.jpeg');
+    background: -moz-linear-gradient(rgba(55,54,54,0.5), rgba(55,54,54,0.5)), url('/image/luxury_hotel-wallpaper-2560x1600.jpeg');
+    background: -webkit-gradient(rgba(55,54,54,0.5), rgba(55,54,54,0.5)), url('/image/luxury_hotel-wallpaper-2560x1600.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    /* linear-gradient(, */
+}
+
+#login-form{
+    width: 30vw;
+    height: auto;
+    background-color: white;
+    border: 0.3vh solid #3f3f3f;
+    border-radius: 3vh;
+
+    position: fixed;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}

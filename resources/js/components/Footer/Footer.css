@@ -1,0 +1,43 @@
+.navbar-text-footer span{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color:#fff;
+    font-weight: bolder;
+    font-size: 3vh;
+    padding-right: 1vw;
+}
+.navbar-text-footer{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #fff;
+    font-weight: bolder;
+    font-size: 3vh;
+    transition: all .1s ease-in-out;
+}
+a:hover{
+    color: rgba(245, 245, 245, 0.712) !important;
+}
+.back-to-home i{
+    cursor: pointer;
+}
+
+.info-footer i{
+    font-weight: lighter; 
+    font-size: 2vh;
+}
+.info-footer i:hover{
+    font-weight: lighter; 
+    font-size: 2vh;
+}
+
+.arrow-right-footer div{
+    
+    height: 1.7vh;
+    width: 2.5vw;
+    display: inline-block;
+    background-image: url(https://www.nativeplaces.com/wp-content/themes/native/dist/img/arrow-right.png);
+    background-repeat: no-repeat;
+    transition: all .3s ease-in-out;
+}
+
+.arrow-right-footer span:hover~div{
+    background-position: 100% 0%;
+}

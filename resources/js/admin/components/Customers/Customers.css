@@ -1,0 +1,24 @@
+h1{
+    font-weight: bold;
+}
+.icon-top{
+    display: block;
+    transition: 1s;
+    overflow: scroll;
+    width: 30px;
+    height: 23px;
+}
+.icon-top:hover{
+    transform: rotate(180deg);
+}
+.btn-add{
+    position: absolute;
+    margin-top: 1px;
+    overflow: hidden;
+    padding: 0;
+}
+.btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #fff;
+    border-color: #151719;
+}
