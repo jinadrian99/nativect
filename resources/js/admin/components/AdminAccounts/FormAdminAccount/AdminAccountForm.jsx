@@ -44,7 +44,7 @@ export default class AdminAccountForm extends Component {
     }
 
     findAdminAccountByID(idAdminAcc){
-        axios.get('http://127.0.0.1:8000/api/admin_accounts/' + idAdminAcc).then(res => {
+        axios.get('https://nativehotel.herokuapp.com/api/admin_accounts/' + idAdminAcc).then(res => {
             if (res.data != null) {
                 this.setState({
                     idAdmin: res.data.idAdmin,
@@ -76,7 +76,7 @@ export default class AdminAccountForm extends Component {
         var AdminAccount = this.state;
         if (window.confirm('Are you sure ?')) {
             console.log(AdminAccount);
-            axios.put('http://127.0.0.1:8000/api/admin_accounts/'+AdminAccount.idAdmin, AdminAccount).then(res => {
+            axios.put('https://nativehotel.herokuapp.com/api/admin_accounts/'+AdminAccount.idAdmin, AdminAccount).then(res => {
                 if (res.data != null) {
                     setTimeout(()=>this.undoPages(),1000);
                 }

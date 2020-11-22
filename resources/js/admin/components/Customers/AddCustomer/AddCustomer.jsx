@@ -52,7 +52,7 @@ export default class AddCustomer extends Component {
             ngayHetHan: this.state.ngayHetHan
         }
         console.log(customer);
-        axios.post('http://127.0.0.1:8000/api/customer', customer).then(res => {
+        axios.post('https://nativehotel.herokuapp.com/api/customer', customer).then(res => {
             if (res.data != null) {
                 this.setState(this.state);
                 alert("Thêm khách hàng thành công");

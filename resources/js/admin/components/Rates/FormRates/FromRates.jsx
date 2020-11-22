@@ -43,7 +43,7 @@ export default class FromRates extends Component {
     }
 
     findRatesByID(id){
-        axios.get('http://127.0.0.1:8000/api/rates/'+id).then( response => {
+        axios.get('https://nativehotel.herokuapp.com/api/rates/'+id).then( response => {
             if(response!=null){
                 this.setState({
                     idBG: response.data.idBG,
@@ -58,7 +58,7 @@ export default class FromRates extends Component {
     }
 
     loadRoomTypes(){
-        axios.get('http://127.0.0.1:8000/api/room_types').then( response => {
+        axios.get('https://nativehotel.herokuapp.com/api/room_types').then( response => {
             if(response.data != null){
                 this.setState({
                     roomType: response.data
@@ -92,7 +92,7 @@ export default class FromRates extends Component {
         rates.idLP = parseInt(rates.idLP);
         if(window.confirm('Are you sure?')){
             console.log(rates);
-            axios.put('http://127.0.0.1:8000/api/rates/'+rates.idBG,rates).then(response => {
+            axios.put('https://nativehotel.herokuapp.com/api/rates/'+rates.idBG,rates).then(response => {
                 if(response.data!=null){
                     // đợi tí để data fetch cái r vào thì mới nhận data mới 
                     setTimeout(()=>this.undoPages(),1000);

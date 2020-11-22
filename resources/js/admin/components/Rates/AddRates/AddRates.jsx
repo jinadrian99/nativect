@@ -44,7 +44,7 @@ export default class AddRates extends Component {
     }
 
     loadRoomTypes(){
-        axios.get('http://127.0.0.1:8000/api/room_types').then( response => {
+        axios.get('https://nativehotel.herokuapp.com/api/room_types').then( response => {
             if(response.data != null){
                 this.setState({
                     roomType: response.data
@@ -91,7 +91,7 @@ export default class AddRates extends Component {
         if(window.confirm('Are you sure?')){
             console.log(rates);
             this.resetForm();
-            axios.post('http://127.0.0.1:8000/api/rates', rates).then(response => {
+            axios.post('https://nativehotel.herokuapp.com/api/rates', rates).then(response => {
                 if(response.data!=null){
                     this.resetForm();
                     toast.success(

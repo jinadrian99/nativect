@@ -19,7 +19,7 @@ class Slide extends Component {
     }
 
     loadSlides(){
-        axios.get('http://127.0.0.1:8000/api/slides').then( response => {
+        axios.get('https://nativehotel.herokuapp.com/api/slides').then( response => {
             this.setState({
                 slide: response.data
             })
@@ -32,7 +32,7 @@ class Slide extends Component {
 
     deleteSlide(id){
         if (window.confirm('Are you sure?')) {
-            axios.delete('http://127.0.0.1:8000/api/slides/'+id).then(res=>{
+            axios.delete('https://nativehotel.herokuapp.com/api/slides/'+id).then(res=>{
                 if (res.data != null) {
                     this.loadSlides();
                 }

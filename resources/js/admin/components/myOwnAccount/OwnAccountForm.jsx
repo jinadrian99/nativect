@@ -169,7 +169,7 @@ export default class OwnAccountForm extends Component {
                 console.log(OwnAcc);
                 if (window.confirm('Are you sure ?')) {
                     console.log(OwnAcc);
-                    axios.put('http://127.0.0.1:8000/api/admin_accounts/'+OwnAcc.idAdmin, OwnAcc).then(res => {
+                    axios.put('https://nativehotel.herokuapp.com/api/admin_accounts/'+OwnAcc.idAdmin, OwnAcc).then(res => {
                         if (res.data != null) {
                             this.resetForm();
                             this.notify();

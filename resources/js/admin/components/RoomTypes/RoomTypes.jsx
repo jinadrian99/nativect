@@ -19,7 +19,7 @@ class RoomTypes extends Component {
     }
 
     loadRoomTypes(){
-        axios.get('http://127.0.0.1:8000/api/room_types').then( response => {
+        axios.get('https://nativehotel.herokuapp.com/api/room_types').then( response => {
             this.setState({
                 roomType: response.data
             })
@@ -37,13 +37,13 @@ class RoomTypes extends Component {
                 imgRaws: obj.imgRaw,
             };
             console.log('img cần xóa',data);
-            axios.post('http://127.0.0.1:8000/api/room_types_delete_file',data).then(res=>{
+            axios.post('https://nativehotel.herokuapp.com/api/room_types_delete_file',data).then(res=>{
                 if(res.data)
                     console.log('Đã xóa hình cũ');
                 else
                     console.log('Không có hình cũ');
             })
-            axios.delete('http://127.0.0.1:8000/api/room_types/'+obj.id).then(res=>{
+            axios.delete('https://nativehotel.herokuapp.com/api/room_types/'+obj.id).then(res=>{
                 if (res.data != null) {
                     this.loadRoomTypes();
                 }

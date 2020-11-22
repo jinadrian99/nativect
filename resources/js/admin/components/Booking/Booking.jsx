@@ -15,7 +15,7 @@ class Booking extends Component {
     }
 
     loadBooking(){
-        axios.get('http://127.0.0.1:8000/api/bookings').then( response => {
+        axios.get('https://nativehotel.herokuapp.com/api/bookings').then( response => {
             this.setState({
                 booking: response.data
             })

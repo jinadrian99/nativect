@@ -56,7 +56,7 @@ export default class SlideForm extends Component {
     }
 
     findSlideByID(idSlide){
-        axios.get('http://127.0.0.1:8000/api/slides/' + idSlide).then(res => {
+        axios.get('https://nativehotel.herokuapp.com/api/slides/' + idSlide).then(res => {
             if (res.data != null) {
                 this.setState({
                     idSlide: res.data.idSlide,
@@ -106,7 +106,7 @@ export default class SlideForm extends Component {
             console.log(file);
             fd.append('data', file);
             console.log('value fd: ', fd.get('data'));
-            axios.post('http://127.0.0.1:8000/api/slides_upload_file', fd, {
+            axios.post('https://nativehotel.herokuapp.com/api/slides_upload_file', fd, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 }
@@ -132,7 +132,7 @@ export default class SlideForm extends Component {
                     console.log(slide);
                     if (window.confirm('Are you sure ?')) {
                         console.log(slide);
-                        axios.put('http://127.0.0.1:8000/api/slides/'+slide.idSlide, slide).then(res => {
+                        axios.put('https://nativehotel.herokuapp.com/api/slides/'+slide.idSlide, slide).then(res => {
                             if (res.data != null) {
                                 setTimeout(()=>this.undoPages(),1000);
                             }

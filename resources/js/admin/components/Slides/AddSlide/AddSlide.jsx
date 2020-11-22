@@ -85,7 +85,7 @@ export default class Slide extends Component {
         console.log(file);
         fd.append('data', file);
         console.log('value fd: ', fd.get('data'));
-        axios.post('http://127.0.0.1:8000/api/slides_upload_file', fd, {
+        axios.post('https://nativehotel.herokuapp.com/api/slides_upload_file', fd, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -108,7 +108,7 @@ export default class Slide extends Component {
                     hinhAnh : this.state.hinhAnh
                 }
                 console.log(slide);
-                axios.post('http://127.0.0.1:8000/api/slides', slide)
+                axios.post('https://nativehotel.herokuapp.com/api/slides', slide)
                 .then(res => {
                     if (res.data != null) {
                         this.setState(this.state);

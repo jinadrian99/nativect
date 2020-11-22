@@ -37,7 +37,7 @@ export default class FromCustomer extends Component {
     }
 
     findCustomerByID(idCustomer){
-        axios.get('http://127.0.0.1:8000/api/customer/'+idCustomer).then( response => {
+        axios.get('https://nativehotel.herokuapp.com/api/customer/'+idCustomer).then( response => {
             if(response!=null){
                 this.setState({
                     idKH: response.data.idKH,
@@ -66,7 +66,7 @@ export default class FromCustomer extends Component {
         var customer = this.state;
         if(window.confirm('Are you sure?')){
             console.log(customer);
-            axios.put('http://127.0.0.1:8000/api/customer/'+customer.idKH,customer).then(response => {
+            axios.put('https://nativehotel.herokuapp.com/api/customer/'+customer.idKH,customer).then(response => {
                 if(response.data!=null){
                     // đợi tí để data fetch cái r vào thì mới nhận data mới 
                     setTimeout(()=>this.undoPages(),1000);

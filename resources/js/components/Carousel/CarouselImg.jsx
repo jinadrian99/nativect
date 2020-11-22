@@ -20,7 +20,7 @@ export default class CarouselImg extends Component {
   }
 
   loadSlides(){
-    axios.get('http://127.0.0.1:8000/api/slides').then(res => {
+    axios.get('https://nativehotel.herokuapp.com/api/slides').then(res => {
       var data = res.data;
       var formatdata = [];
       for(var i=0; i < data.length; i++){

@@ -57,7 +57,7 @@ export default class RoomTypeForm extends Component {
     }
 
     findRoomTypeByID(id){
-        axios.get('http://127.0.0.1:8000/api/room_types/' + id).then(res => {
+        axios.get('https://nativehotel.herokuapp.com/api/room_types/' + id).then(res => {
             if (res.data != null) {
                 this.setState({
                     idLP: res.data.idLP,
@@ -170,7 +170,7 @@ export default class RoomTypeForm extends Component {
                 console.log('hinh anh:' , roomType.hinhAnh);
                 console.log('value room: ',roomType);
                 if (window.confirm('Are you sure ?')) {
-                    axios.put('http://127.0.0.1:8000/api/room_types/'+roomType.idLP, roomType).then(res => {
+                    axios.put('https://nativehotel.herokuapp.com/api/room_types/'+roomType.idLP, roomType).then(res => {
                         if (res.data != null) {
                             setTimeout(()=>this.undoPages(),1000);
                         }
@@ -183,7 +183,7 @@ export default class RoomTypeForm extends Component {
             var data = {
                 imgRaws: this.state.imgRaw
             };
-            axios.post('http://127.0.0.1:8000/api/room_types_delete_file',data).then(res=>{
+            axios.post('https://nativehotel.herokuapp.com/api/room_types_delete_file',data).then(res=>{
                 if(res.data)
                     console.log('Đã xóa hình cũ');
                 else
@@ -198,7 +198,7 @@ export default class RoomTypeForm extends Component {
                 fd.append('data[]', file);
             }
             console.log('value fd: ',fd.getAll('data[]'));
-            axios.post('http://127.0.0.1:8000/api/room_types_upload_file', fd, {
+            axios.post('https://nativehotel.herokuapp.com/api/room_types_upload_file', fd, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 }
@@ -241,7 +241,7 @@ export default class RoomTypeForm extends Component {
                         console.log('hinh anh:' , roomType.hinhAnh);
                         console.log('value room: ',roomType);
                         if (window.confirm('Are you sure ?')) {
-                            axios.put('http://127.0.0.1:8000/api/room_types/'+roomType.idLP, roomType).then(res => {
+                            axios.put('https://nativehotel.herokuapp.com/api/room_types/'+roomType.idLP, roomType).then(res => {
                                 if (res.data != null) {
                                     setTimeout(()=>this.undoPages(),1000);
                                 }
@@ -280,7 +280,7 @@ export default class RoomTypeForm extends Component {
         //     console.log('hinh anh:' , roomType.hinhAnh);
         //     console.log('value room: ',roomType);
         //     if (window.confirm('Are you sure ?')) {
-        //         axios.put('http://127.0.0.1:8000/api/room_types/'+roomType.idLP, roomType).then(res => {
+        //         axios.put('https://nativehotel.herokuapp.com/api/room_types/'+roomType.idLP, roomType).then(res => {
         //             if (res.data != null) {
         //                 setTimeout(()=>this.undoPages(),1000);
         //             }

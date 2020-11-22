@@ -28,7 +28,7 @@ export class Register extends Component {
     }
 
     loadCustomers(){
-        axios.get('http://127.0.0.1:8000/api/customer').then( response => {
+        axios.get('https://nativehotel.herokuapp.com/api/customer').then( response => {
             this.setState({
                 customers: response.data
             })
@@ -41,7 +41,7 @@ export class Register extends Component {
 
     deleteCustomer(id){
         if(window.confirm('Are you sure?')){
-            axios.delete('http://127.0.0.1:8000/api/customer/'+id).then((response)=>{
+            axios.delete('https://nativehotel.herokuapp.com/api/customer/'+id).then((response)=>{
                 if(response.data!=null){
                     this.loadCustomers();
                 }

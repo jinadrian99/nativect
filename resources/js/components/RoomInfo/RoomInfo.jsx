@@ -56,7 +56,7 @@ export default class RoomInfo extends Component {
 
     findRoomTypeByID(id){
         console.log('idRoomType: ', id);
-        axios.get('http://127.0.0.1:8000/api/room_types/' + id).then( res => {
+        axios.get('https://nativehotel.herokuapp.com/api/room_types/' + id).then( res => {
             if (res.data != null) {
                 this.setState({
                     roomType: res.data,
@@ -69,7 +69,7 @@ export default class RoomInfo extends Component {
 
     findRoomRateByID(id){
         console.log('idRoomRate: ', id);
-        axios.get('http://127.0.0.1:8000/api/room_type_rate/' + id).then(res =>{
+        axios.get('https://nativehotel.herokuapp.com/api/room_type_rate/' + id).then(res =>{
             this.setState({
                 giaLP: !res.data ? 'Chưa có giá' : res.data.giaLP + ' VND'
             })

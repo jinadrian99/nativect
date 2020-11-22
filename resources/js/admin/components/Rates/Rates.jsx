@@ -25,7 +25,7 @@ class Rates extends Component {
     }
 
     loadRates(){
-        axios.get('http://127.0.0.1:8000/api/rates').then( response => {
+        axios.get('https://nativehotel.herokuapp.com/api/rates').then( response => {
             this.setState({
                 rates: response.data
             })
@@ -38,7 +38,7 @@ class Rates extends Component {
 
     deleteRates(id){
         if(window.confirm('Are you sure?')){
-            axios.delete('http://127.0.0.1:8000/api/rates/'+id).then((response)=>{
+            axios.delete('https://nativehotel.herokuapp.com/api/rates/'+id).then((response)=>{
                 if(response.data!=null){
                     this.loadRates();
                 }

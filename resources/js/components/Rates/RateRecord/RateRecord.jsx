@@ -10,7 +10,7 @@ export default class RateRecord extends Component {
     }
     
     componentWillMount(){
-        axios.get('http://127.0.0.1:8000/api/room_type_rate/'+this.props.idLP).then( response => {
+        axios.get('https://nativehotel.herokuapp.com/api/room_type_rate/'+this.props.idLP).then( response => {
             // console.log(response.data);
             this.setState({
                 giaLP: !response.data?'Chưa có giá':response.data.giaLP+' VND',

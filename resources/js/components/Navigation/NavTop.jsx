@@ -38,7 +38,7 @@ export default class NavTop extends Component {
     }
 
     loadRoomTypes(){
-        axios.get('http://127.0.0.1:8000/api/room_types').then( response => {
+        axios.get('https://nativehotel.herokuapp.com/api/room_types').then( response => {
             this.setState({
                 roomTypes: response.data
             })

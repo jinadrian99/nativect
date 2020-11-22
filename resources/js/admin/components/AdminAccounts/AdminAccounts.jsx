@@ -19,7 +19,7 @@ class AdminAccounts extends Component {
     }
 
     loadAdminAccounts(){
-        axios.get('http://127.0.0.1:8000/api/admin_accounts').then( response => {
+        axios.get('https://nativehotel.herokuapp.com/api/admin_accounts').then( response => {
             this.setState({
                 adminAcc: response.data
             })
@@ -32,7 +32,7 @@ class AdminAccounts extends Component {
 
     deleteAdminAccount(id){
         if (window.confirm('Are you sure?')) {
-            axios.delete('http://127.0.0.1:8000/api/admin_accounts/'+id).then(res=>{
+            axios.delete('https://nativehotel.herokuapp.com/api/admin_accounts/'+id).then(res=>{
                 if (res.data != null) {
                     this.loadAdminAccounts();
                 }

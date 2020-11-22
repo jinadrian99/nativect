@@ -37,7 +37,7 @@ export default class Login extends Component {
             password: this.state.password,
             phanQuyen: 0
         }
-        axios.post('http://127.0.0.1:8000/api/admin_login', admin).then((res)=>{
+        axios.post('https://nativehotel.herokuapp.com/api/admin_login', admin).then((res)=>{
             console.log(res);
             if(res.status==200){
                 var objAdmin = {

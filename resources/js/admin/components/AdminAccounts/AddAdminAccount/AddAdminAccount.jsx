@@ -115,7 +115,7 @@ export default class AddAdminAccount extends Component {
                     phanQuyen: this.state.phanQuyen
                 }
                 console.log(adminAcc);
-                axios.post('http://127.0.0.1:8000/api/admin_accounts', adminAcc).then(res => {
+                axios.post('https://nativehotel.herokuapp.com/api/admin_accounts', adminAcc).then(res => {
                     if (res.data != null) {
                         this.resetForm();
                         this.notify();
