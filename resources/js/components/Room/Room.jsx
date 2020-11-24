@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, lazy, Suspense } from 'react'
 import NavTop from '../Navigation/NavTop';
 import Carousel from '../Carousel/CarouselImg';
-import Footer from '../Footer/Footer';
+// import Footer from '../Footer/Footer';
+const Footer = lazy(() => import('../Footer/Footer'));
 import RoomInfo from '../RoomInfo/RoomInfo';
 
 export default class Room extends Component {
@@ -42,7 +43,9 @@ export default class Room extends Component {
                     <Carousel/>
                 </div>
                 <RoomInfo idLP={this.state.idLP}/>
-                <Footer/>
+                <Suspense fallback={ <div>Loading...</div> }>
+                    <Footer/>
+                </Suspense>
             </>
         )
     }

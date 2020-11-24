@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 import NavTop from '../Navigation/NavTop';
 import Carousel from '../Carousel/CarouselImg';
 import SlickSlider from '../SlickSlider/SlickSlider';
 import Intro from '../Intro/Intro';
-import Footer from '../Footer/Footer';
+// import Footer from '../Footer/Footer';
+const Footer = lazy(() => import('../Footer/Footer'));
 
 export default class Home extends Component {
     constructor(props) {
@@ -45,7 +46,9 @@ export default class Home extends Component {
                 <SlickSlider onAddItemInShoppingCart = { this.addItemInShoppingCart } />
                 {/* <SlickSlider /> */}
                 <Intro />
-                <Footer />
+                <Suspense fallback={ <div>Loading...</div> }>
+                    <Footer/>
+                </Suspense>
             </div>
         )
     }

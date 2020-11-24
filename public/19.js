@@ -1,23 +1,23 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[19],{
 
-/***/ "./resources/js/admin/components/AdminAccounts/AddAdminAccount/AddAdminAccount.jsx":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/admin/components/AdminAccounts/AddAdminAccount/AddAdminAccount.jsx ***!
-  \*****************************************************************************************/
+/***/ "./resources/js/admin/components/Slides/AddSlide/AddSlide.jsx":
+/*!********************************************************************!*\
+  !*** ./resources/js/admin/components/Slides/AddSlide/AddSlide.jsx ***!
+  \********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AddAdminAccount; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Slide; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _Navigation_NavbarTop_NavbarTop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Navigation/NavbarTop/NavbarTop */ "./resources/js/admin/components/Navigation/NavbarTop/NavbarTop.jsx");
 /* harmony import */ var _Navigation_Sidebar_SidebarLeft__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Navigation/Sidebar/SidebarLeft */ "./resources/js/admin/components/Navigation/Sidebar/SidebarLeft.jsx");
-/* harmony import */ var react_icons_im__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-icons/im */ "./node_modules/react-icons/im/index.esm.js");
-/* harmony import */ var react_icons_ai__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-icons/ai */ "./node_modules/react-icons/ai/index.esm.js");
+/* harmony import */ var react_icons_ai__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-icons/ai */ "./node_modules/react-icons/ai/index.esm.js");
+/* harmony import */ var react_icons_im__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-icons/im */ "./node_modules/react-icons/im/index.esm.js");
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.js");
 /* harmony import */ var react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-toastify/dist/ReactToastify.css */ "./node_modules/react-toastify/dist/ReactToastify.css");
 /* harmony import */ var react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_8__);
@@ -58,33 +58,32 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var AddAdminAccount = /*#__PURE__*/function (_Component) {
-  _inherits(AddAdminAccount, _Component);
+var Slide = /*#__PURE__*/function (_Component) {
+  _inherits(Slide, _Component);
 
-  var _super = _createSuper(AddAdminAccount);
+  var _super = _createSuper(Slide);
 
-  function AddAdminAccount(props) {
+  function Slide(props) {
     var _this;
 
-    _classCallCheck(this, AddAdminAccount);
+    _classCallCheck(this, Slide);
 
     _this = _super.call(this, props);
     _this.state = {
-      username: '',
-      password: '',
-      phanQuyen: 1,
-      errors: {},
+      hinhAnh: '',
+      chooseImageUrl: false,
       tooltipOpen: false
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
-    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
-    _this.submitAdminAccount = _this.submitAdminAccount.bind(_assertThisInitialized(_this));
+    _this.submitSlide = _this.submitSlide.bind(_assertThisInitialized(_this));
+    _this.changeStateImage = _this.changeStateImage.bind(_assertThisInitialized(_this));
+    _this.chooseImageUrlOrDevice = _this.chooseImageUrlOrDevice.bind(_assertThisInitialized(_this));
+    _this.fileSelectHandle = _this.fileSelectHandle.bind(_assertThisInitialized(_this));
     _this.notify = _this.notify.bind(_assertThisInitialized(_this));
-    _this.resetForm = _this.resetForm.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(AddAdminAccount, [{
+  _createClass(Slide, [{
     key: "toggle",
     value: function toggle() {
       this.setState({
@@ -98,7 +97,7 @@ var AddAdminAccount = /*#__PURE__*/function (_Component) {
         style: {
           fontSize: '20px'
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ai__WEBPACK_IMPORTED_MODULE_6__["AiFillCheckCircle"], null), "  Th\xEAm th\xE0nh c\xF4ng"), {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ai__WEBPACK_IMPORTED_MODULE_5__["AiFillCheckCircle"], null), "  Th\xEAm th\xE0nh c\xF4ng"), {
         position: react_toastify__WEBPACK_IMPORTED_MODULE_7__["toast"].POSITION.BOTTOM_RIGHT,
         autoClose: 4000
       });
@@ -109,101 +108,93 @@ var AddAdminAccount = /*#__PURE__*/function (_Component) {
       this.setState(_defineProperty({}, e.target.name, e.target.value));
     }
   }, {
-    key: "handleClick",
-    value: function handleClick(v) {
-      if (v == 2) {
-        this.setState({
-          phanQuyen: 2
-        });
-      } else {
-        this.setState({
-          phanQuyen: 1
-        });
-      }
-    }
-  }, {
-    key: "resetForm",
-    value: function resetForm() {
+    key: "changeStateImage",
+    value: function changeStateImage() {
+      console.log(this.state.chooseImageUrl);
       this.setState({
-        idAdmin: '',
-        username: '',
-        password: '',
-        phanQuyen: ''
+        chooseImageUrl: !this.state.chooseImageUrl
       });
     }
   }, {
-    key: "submitAdminAccount",
-    value: function submitAdminAccount(e) {
+    key: "chooseImageUrlOrDevice",
+    value: function chooseImageUrlOrDevice() {
+      if (this.state.chooseImageUrl) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+          type: "file",
+          name: "hinhAnh",
+          onChange: this.fileSelectHandle,
+          required: true,
+          defaultValue: this.state.hinhAnh
+        });
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+          type: "text",
+          name: "hinhAnh",
+          onChange: this.handleChange,
+          required: true,
+          placeholder: "Vui l\xF2ng nh\u1EADp d\u1EEF li\u1EC7u h\xECnh \u1EA3nh",
+          defaultValue: this.state.hinhAnh
+        });
+      }
+    }
+  }, {
+    key: "fileSelectHandle",
+    value: function fileSelectHandle(e) {
+      this.setState({
+        hinhAnh: e.target.files[0]
+      }, console.log(this.state.hinhAnh));
+    }
+  }, {
+    key: "submitSlide",
+    value: function submitSlide(e) {
       var _this2 = this;
 
-      e.preventDefault();
-      var _this$state = this.state,
-          username = _this$state.username,
-          password = _this$state.password;
-      var isValidUsername = true;
-      var isValidPassword = true;
-      var errors = {};
+      e.preventDefault(); // move upload file 
 
-      if (username.trim().length < 6) {
-        errors.usernameLength = "Tên tài khoản phải đủ 6 kí tự trở lên";
-        isValidUsername = false;
-      }
-
-      if (password.trim().length < 6) {
-        errors.passwordLength = "Mật khẩu phải đủ 6 kí tự trở lên";
-        isValidPassword = false;
-      }
-
-      this.setState({
-        errors: errors
-      }, function () {
-        console.log(_this2.state.errors.usernameLength);
-        console.log(_this2.state.errors.passwordLength);
-
-        if (!isValidUsername || !isValidPassword) {
-          if (!isValidUsername) {
-            if (_this2.state.errors.usernameLength != "") {
-              react_toastify__WEBPACK_IMPORTED_MODULE_7__["toast"].error( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this2.state.errors.usernameLength), {
-                position: react_toastify__WEBPACK_IMPORTED_MODULE_7__["toast"].POSITION.BOTTOM_RIGHT,
-                autoClose: 4000
-              });
-            }
-          }
-
-          if (!isValidPassword) {
-            if (_this2.state.errors.passwordLength != "") {
-              react_toastify__WEBPACK_IMPORTED_MODULE_7__["toast"].error( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this2.state.errors.passwordLength), {
-                position: react_toastify__WEBPACK_IMPORTED_MODULE_7__["toast"].POSITION.BOTTOM_RIGHT,
-                autoClose: 4000
-              });
-            }
-          }
-
+      var file = this.state.hinhAnh;
+      var fd = new FormData();
+      console.log(file);
+      fd.append('data', file);
+      console.log('value fd: ', fd.get('data'));
+      axios__WEBPACK_IMPORTED_MODULE_9___default.a.post('https://nativehotel.herokuapp.com/api/slides_upload_file', fd, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }).then(function (res) {
+        if (res.data == "Không có hình") {
+          alert('không có hình');
           return;
         }
 
-        var adminAcc = {
-          username: _this2.state.username,
-          password: _this2.state.password,
-          phanQuyen: _this2.state.phanQuyen
-        };
-        console.log(adminAcc);
-        axios__WEBPACK_IMPORTED_MODULE_9___default.a.post('https://nativehotel.herokuapp.com/api/admin_accounts', adminAcc).then(function (res) {
-          if (res.data != null) {
-            _this2.resetForm();
+        console.log('có hình');
+        var img = '/image/' + res.data;
+        console.log(img);
 
-            _this2.notify();
-          }
+        _this2.setState({
+          hinhAnh: img
+        }, function () {
+          // upload to db
+          var slide = {
+            hinhAnh: _this2.state.hinhAnh
+          };
+          console.log(slide);
+          axios__WEBPACK_IMPORTED_MODULE_9___default.a.post('https://nativehotel.herokuapp.com/api/slides', slide).then(function (res) {
+            if (res.data != null) {
+              _this2.setState(_this2.state);
+
+              _this2.notify();
+            }
+          });
         });
+      })["catch"](function (err) {
+        console.log(err);
       });
     }
   }, {
     key: "render",
     value: function render() {
       var _ref,
-          _this3 = this,
-          _React$createElement,
-          _React$createElement2;
+          _this3 = this;
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navigation_NavbarTop_NavbarTop__WEBPACK_IMPORTED_MODULE_3__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         md: "2",
@@ -218,13 +209,13 @@ var AddAdminAccount = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: "/admin/admin_accounts"
+        to: "/admin/slides"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         outline: true,
         color: "red",
         className: "btn-add",
         id: "btnAdd"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_im__WEBPACK_IMPORTED_MODULE_5__["ImCancelCircle"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_im__WEBPACK_IMPORTED_MODULE_6__["ImCancelCircle"], {
         color: "#D0211C",
         className: "icon-top"
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], {
@@ -236,12 +227,12 @@ var AddAdminAccount = /*#__PURE__*/function (_Component) {
         }
       }, "H\u1EE7y b\u1ECF thao t\xE1c"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "text-center mt-2"
-      }, "\u0110I\u1EC0N TH\xCAM TH\xD4NG TIN T\xC0I KHO\u1EA2N ADMIN"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "\u0110I\u1EC0N TH\xCAM TH\xD4NG TIN SLIDE QU\u1EA2NG C\xC1O"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           height: '15px'
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], {
-        onSubmit: this.submitAdminAccount,
+        onSubmit: this.submitSlide,
         className: "text-center",
         style: {
           marginRight: '15%',
@@ -251,59 +242,26 @@ var AddAdminAccount = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], {
         row: true
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Label"], {
-        sm: 3
-      }, "Username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
-        sm: 9
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], (_React$createElement = {
-        type: "text",
-        name: "username",
-        placeholder: "\u0110i\u1EC1n t\xEAn t\xE0i kho\u1EA3n",
-        onChange: this.handleChange
-      }, _defineProperty(_React$createElement, "placeholder", "T\xEAn t\xE0i kho\u1EA3n 6 k\xED t\u1EF1 tr\u1EDF l\xEAn."), _defineProperty(_React$createElement, "autoComplete", "off"), _React$createElement)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], {
-        row: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Label"], {
-        sm: 3
-      }, "Password"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
-        sm: 9
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], (_React$createElement2 = {
-        type: "password",
-        name: "password",
-        placeholder: "\u0110i\u1EC1n m\u1EADt kh\u1EA9u",
-        onChange: this.handleChange
-      }, _defineProperty(_React$createElement2, "placeholder", "M\u1EADt kh\u1EA9u 6 k\xED t\u1EF1 tr\u1EDF l\xEAn."), _defineProperty(_React$createElement2, "autoComplete", "off"), _React$createElement2)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], {
-        row: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Label"], {
-        sm: 3
-      }, "Ph\xE2n quy\u1EC1n"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
-        sm: 9
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Label"], {
+        sm: 2
+      }, "Lo\u1EA1i h\xECnh \u1EA3nh "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Label"], {
         style: {
-          marginLeft: '-15%',
-          marginTop: '1.1%'
+          marginLeft: '4%',
+          lineHeight: '36.22px'
         },
         check: true
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
-        type: "radio",
-        onClick: function onClick(v) {
-          return _this3.handleClick(2);
-        },
-        defaultChecked: this.state.phanQuyen,
-        name: "phanQuyen",
-        value: "2"
-      }), "Nh\xE2n vi\xEAn ch\u0103m s\xF3c kh\xE1ch h\xE0ng"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Label"], {
+        type: "checkbox",
+        onClick: this.changeStateImage,
         style: {
-          marginLeft: '10%'
-        },
-        check: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
-        type: "radio",
-        onClick: function onClick(v) {
-          return _this3.handleClick(1);
-        },
-        defaultChecked: this.state.phanQuyen,
-        name: "phanQuyen",
-        value: "1"
-      }), "IT Admin (B\u1ED9 ph\u1EADn k\u1EF9 thu\u1EADt)"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          marginTop: '10px'
+        }
+      }), "Url/My Device")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], {
+        row: true
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Label"], {
+        sm: 2
+      }, "H\xECnh \u1EA3nh"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+        sm: 10
+      }, this.chooseImageUrlOrDevice())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           height: '10vh'
         }
@@ -325,7 +283,7 @@ var AddAdminAccount = /*#__PURE__*/function (_Component) {
     }
   }]);
 
-  return AddAdminAccount;
+  return Slide;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
