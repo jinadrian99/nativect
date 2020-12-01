@@ -176,7 +176,19 @@ var SlideForm = /*#__PURE__*/function (_Component) {
       var _this3 = this;
 
       if (this.state.hinhAnh !== this.state.hinhAnhCu) {
-        // move upload file 
+        // delete old file
+        var data = {
+          hinhAnhSlide: this.state.hinhAnhCu
+        };
+        console.log('data: ', data);
+        axios__WEBPACK_IMPORTED_MODULE_6___default.a.post('https://nativehotel.herokuapp.com/api/slides_delete_file', data).then(function (res) {
+          if (res.data) {
+            console.log('Đã xóa hình cũ');
+          } else {
+            console.log('Không có hình cũ');
+          }
+        }); // move upload file 
+
         var file = this.state.hinhAnh;
         var fd = new FormData();
         console.log(file);

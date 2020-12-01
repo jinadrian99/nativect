@@ -1,0 +1,14 @@
+.icon{
+    position: relative;
+    top: -2px;
+}
+.card-item-room{
+    border: 0px;
+    border-radius: 1vh;
+    margin: 1vh;
+    background-color: #B5A89A;
+}
+.slick-slide{
+    padding: 0 2vw;
+    padding-top: 3.5vh;
+}

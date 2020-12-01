@@ -6,6 +6,8 @@ import axios from 'axios';
 import NavbarTop from '../Navigation/NavbarTop/NavbarTop';
 import SidebarLeft from '../Navigation/Sidebar/SidebarLeft';
 import { Link } from 'react-router-dom';
+import { ImGift } from 'react-icons/im';
+import { FiCornerDownLeft } from 'react-icons/fi';
 
 class Slide extends Component {
     constructor(props) {
@@ -30,9 +32,22 @@ class Slide extends Component {
         this.loadSlides();
     }
 
-    deleteSlide(id){
+    deleteSlide(obj){
         if (window.confirm('Are you sure?')) {
-            axios.delete('https://nativehotel.herokuapp.com/api/slides/'+id).then(res=>{
+            // delete old file
+            var data = {
+                hinhAnhSlide: obj.img
+            };
+            console.log('img can xoa: ', data);
+            axios.post('https://nativehotel.herokuapp.com/api/slides_delete_file', data).then(res=>{
+                if (res.data) {
+                    console.log('Đã xóa hình cũ');
+                }
+                else {
+                    console.log('Không có hình cũ');
+                }
+            })
+            axios.delete('https://nativehotel.herokuapp.com/api/slides/'+obj.id).then(res=>{
                 if (res.data != null) {
                     this.loadSlides();
                 }

@@ -4,45 +4,53 @@ import Carousel from '../Carousel/CarouselImg';
 // import Footer from '../Footer/Footer';
 const Footer = lazy(() => import('../Footer/Footer'));
 import RoomInfo from '../RoomInfo/RoomInfo';
+import SlickSlider from '../SlickSlider/SlickSlider';
 
 export default class Room extends Component {
     constructor(props) {
         super(props);
         this.state={
             idLP: this.props.match.params.id,
+            slItemAddCart: localStorage.getItem('slItemsShoppingCart') ? parseInt(localStorage.getItem('slItemsShoppingCart'),10) : 0
         }
+        this.addItemInShoppingCart= this.addItemInShoppingCart.bind(this);
     }
-
-    // componentWillMount() {
-    //     // // Viết nhanh: ko tốn RAM/CPU cho match
-    //     var { match: {params} } = this.props;
-
-    //     // // Tạm nhanh: tốn RAM/CPU cho match
-    //     // var { match } = this.props;
-    //     // var { params } = match;
-
-    //     console.log('match: ', params.id);
-    //     this.setState({ idLP: params.id }, console.log(this.state.idLP));
-    // }
 
     static getDerivedStateFromProps(props, state){
         console.log('room click hook: ', props, state);
         return { idLP: props.match.params.id };
     }
-    
+
     componentDidMount() {
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0);
     }
+
+    addItemInShoppingCart(sl){
+        var sl_prev = localStorage.getItem('slItemsShoppingCart') ? parseInt(localStorage.getItem('slItemsShoppingCart'),10) : 0
+        var tongsl = sl_prev + sl ;
+        console.log(tongsl);
+        
+        this.setState({
+            slItemAddCart: tongsl
+        });
+    }
+
     render() {
         console.warn('room click: ',this.state.idLP);
         return (
             <>
-                <NavTop />
+                <NavTop 
+                    slItemAddCart = {this.state.slItemAddCart}
+                />
                 <div style={{ marginTop: "7vh" }}/>
                 <div className="another-page-carousel" style={{ height: '60vh', overflow: 'hidden'}}>
                     <Carousel/>
                 </div>
-                <RoomInfo idLP={this.state.idLP}/>
+                <RoomInfo 
+                    idLP={this.state.idLP}
+                    onAddItemInShoppingCart = { this.addItemInShoppingCart }
+                />
+                <SlickSlider />
                 <Suspense fallback={ <div>Loading...</div> }>
                     <Footer/>
                 </Suspense>

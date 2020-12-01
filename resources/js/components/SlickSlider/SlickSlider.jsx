@@ -14,7 +14,7 @@ export default class SlickSlider extends Component {
       }
       this.loadRoomTypes=this.loadRoomTypes.bind(this);
       this.showItems = this.showItems.bind(this);
-      this.addItemInShoppingCart = this.addItemInShoppingCart.bind(this);
+      // this.addItemInShoppingCart = this.addItemInShoppingCart.bind(this);
   }
   
   componentWillMount(){
@@ -29,10 +29,10 @@ export default class SlickSlider extends Component {
     });
   }
 
-  addItemInShoppingCart(sl){
-    // console.log(obj, ' in SlickSlider');
-    this.props.onAddItemInShoppingCart(sl);
-  }
+  // addItemInShoppingCart(sl){
+  //   // console.log(obj, ' in SlickSlider');
+  //   this.props.onAddItemInShoppingCart(sl);
+  // }
 
   showItems(){
     console.log(this.state.roomTypes);
@@ -44,7 +44,7 @@ export default class SlickSlider extends Component {
         hinhAnh  = {item.hinhAnh}
         moTa = {JSON.parse(item.moTa)}
         slPhongTrong = {item.slPhongTrong}
-        onAddItemInShoppingCart = { this.addItemInShoppingCart }
+        // onAddItemInShoppingCart = { this.addItemInShoppingCart }
       />
     );
     return lst;
@@ -86,7 +86,7 @@ export default class SlickSlider extends Component {
       };
       return (
         <div
-          className="container" style={{ marginTop: '8vh', marginBottom: '6vh' }}
+          className="container goToSlickSlider" style={{ marginTop: '8vh', marginBottom: '6vh' }}
         >
           <h1><b>Find your Native room.</b></h1>
           <p style={{fontSize:'1.2vw', marginBottom: '3vh' }}>We all have favourites, and that's ok. From a West End studio to a slick City penthouse, find your perfect pad.</p>

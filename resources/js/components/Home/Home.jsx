@@ -12,7 +12,7 @@ export default class Home extends Component {
         this.state={
             slItemAddCart: 0
         }
-        this.addItemInShoppingCart = this.addItemInShoppingCart.bind(this);
+        // this.addItemInShoppingCart = this.addItemInShoppingCart.bind(this);
     }
 
     componentWillMount(){
@@ -21,13 +21,13 @@ export default class Home extends Component {
         })
     }
 
-    addItemInShoppingCart(sl){
-        var tongsl = this.state.slItemAddCart + sl ;
+    // addItemInShoppingCart(sl){
+    //     var tongsl = this.state.slItemAddCart + sl ;
         
-        this.setState({
-            slItemAddCart: tongsl
-        });
-    }
+    //     this.setState({
+    //         slItemAddCart: tongsl
+    //     });
+    // }
     
     componentDidMount() {
         window.scrollTo(0, 0);
@@ -37,13 +37,17 @@ export default class Home extends Component {
     render() {
         return (
             <div style={{ overflow: 'hidden', width: '98.9vw' }}>
-                <NavTop slItemAddCart = {this.state.slItemAddCart} />
+                <NavTop 
+                    slItemAddCart = {this.state.slItemAddCart} 
+                />
                 {/* <NavTop /> */}
                 <div style={{ marginTop: "7vh" }}/>
                 <div className="home-page-carousel" style={{ height: '93vh', overflow: 'hidden' }}>
                     <Carousel />
                 </div>
-                <SlickSlider onAddItemInShoppingCart = { this.addItemInShoppingCart } />
+                <SlickSlider 
+                    // onAddItemInShoppingCart = { this.addItemInShoppingCart } 
+                />
                 {/* <SlickSlider /> */}
                 <Intro />
                 <Suspense fallback={ <div>Loading...</div> }>

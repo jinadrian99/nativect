@@ -6,8 +6,13 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
 
 export default class SlideRecord extends Component {
-    deleteSlide(id){
-        this.props.onSelectDelete(id);
+    deleteSlide(){
+        var obj = {
+            id: this.props.idSlide,
+            img: this.props.hinhAnh
+        }
+        console.log(obj);
+        this.props.onSelectDelete(obj);
     }
 
     render() {
@@ -21,7 +26,7 @@ export default class SlideRecord extends Component {
                 <td className="lh-90">
                     <Link to = {"/admin/form_slide/" + this.props.idSlide}><Button color="warning"><FaRegEdit/></Button></Link>
                     <div className="space-15"/>
-                    <Button color="danger" onClick = {(id)=>this.deleteSlide(this.props.idSlide)}><RiDeleteBin5Line /></Button>
+                    <Button color="danger" onClick = {()=>this.deleteSlide()}><RiDeleteBin5Line /></Button>
                 </td>
             </tr>
         );

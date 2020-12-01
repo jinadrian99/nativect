@@ -32,3 +32,37 @@
 .icon-shopping-cart {
     cursor: pointer;
 }
+
+.icon-shopping-cart .dropdown .btn-secondary{
+    background-color: #F8F8F8 !important;
+    color: black;
+    font-weight: lighter;
+    border: none !important;
+}
+
+.icon-shopping-cart .dropdown .dropdown-item:active{
+    background-color: white !important;
+}
+
+.icon-shopping-cart .dropdown-menu{
+    transform: translate3d(-13px, 44px, 0px);
+    width: 22.5vw;
+}
+
+.icon-top{
+    transition: 1s;
+}
+.icon-top:hover{
+    transform: rotate(180deg);
+}
+
+.button-GoBasket button{
+    color: white !important;
+    background-color: black;
+    transition: 0.5s;
+}
+
+.button-GoBasket button:hover{
+    color: black !important;
+    background-color: #F3F1EF;
+}

@@ -12,7 +12,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".lh-90{\r\n    line-height: 90px;\r\n}", ""]);
+exports.push([module.i, ".lh-90{\n    line-height: 90px;\n}", ""]);
 
 // exports
 
@@ -109,8 +109,13 @@ var SlideRecord = /*#__PURE__*/function (_Component) {
 
   _createClass(SlideRecord, [{
     key: "deleteSlide",
-    value: function deleteSlide(id) {
-      this.props.onSelectDelete(id);
+    value: function deleteSlide() {
+      var obj = {
+        id: this.props.idSlide,
+        img: this.props.hinhAnh
+      };
+      console.log(obj);
+      this.props.onSelectDelete(obj);
     }
   }, {
     key: "render",
@@ -137,8 +142,8 @@ var SlideRecord = /*#__PURE__*/function (_Component) {
         className: "space-15"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         color: "danger",
-        onClick: function onClick(id) {
-          return _this.deleteSlide(_this.props.idSlide);
+        onClick: function onClick() {
+          return _this.deleteSlide();
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ri__WEBPACK_IMPORTED_MODULE_4__["RiDeleteBin5Line"], null))));
     }
@@ -170,6 +175,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Navigation_NavbarTop_NavbarTop__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Navigation/NavbarTop/NavbarTop */ "./resources/js/admin/components/Navigation/NavbarTop/NavbarTop.jsx");
 /* harmony import */ var _Navigation_Sidebar_SidebarLeft__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Navigation/Sidebar/SidebarLeft */ "./resources/js/admin/components/Navigation/Sidebar/SidebarLeft.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_icons_im__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-icons/im */ "./node_modules/react-icons/im/index.esm.js");
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.esm.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -193,6 +200,8 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
 
 
 
@@ -241,11 +250,23 @@ var Slide = /*#__PURE__*/function (_Component) {
     }
   }, {
     key: "deleteSlide",
-    value: function deleteSlide(id) {
+    value: function deleteSlide(obj) {
       var _this3 = this;
 
       if (window.confirm('Are you sure?')) {
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a["delete"]('https://nativehotel.herokuapp.com/api/slides/' + id).then(function (res) {
+        // delete old file
+        var data = {
+          hinhAnhSlide: obj.img
+        };
+        console.log('img can xoa: ', data);
+        axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('https://nativehotel.herokuapp.com/api/slides_delete_file', data).then(function (res) {
+          if (res.data) {
+            console.log('Đã xóa hình cũ');
+          } else {
+            console.log('Không có hình cũ');
+          }
+        });
+        axios__WEBPACK_IMPORTED_MODULE_4___default.a["delete"]('https://nativehotel.herokuapp.com/api/slides/' + obj.id).then(function (res) {
           if (res.data != null) {
             _this3.loadSlides();
           }

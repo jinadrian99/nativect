@@ -100,6 +100,19 @@ export default class SlideForm extends Component {
 
     saveChange(e){
         if (this.state.hinhAnh !== this.state.hinhAnhCu) {
+            // delete old file
+            var data = {
+                hinhAnhSlide: this.state.hinhAnhCu
+            }
+            console.log('data: ', data);
+            axios.post('https://nativehotel.herokuapp.com/api/slides_delete_file', data).then(res => {
+                if (res.data) {
+                    console.log('Đã xóa hình cũ');
+                }
+                else {
+                    console.log('Không có hình cũ');
+                }
+            })
              // move upload file 
             var file = this.state.hinhAnh;
             var fd = new FormData();

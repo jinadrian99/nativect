@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Collapse, CardBody, Button, Card, Tooltip } from 'reactstrap';
+import { Container, Row, Col, Collapse, CardBody, Card, Tooltip } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { format, differenceInDays } from 'date-fns';
 
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { IoIosBed } from "react-icons/io";
-import { FaBath, FaHotel, FaRegHandshake } from "react-icons/fa";
+import { FaBath, FaHotel, FaRegHandshake, FaRegSadCry, FaRegSadTear } from "react-icons/fa";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { AiOutlineCheck, AiFillQuestionCircle, AiOutlineWifi } from "react-icons/ai";
+import { AiOutlineCheck, AiFillQuestionCircle, AiOutlineWifi, AiFillCheckCircle } from "react-icons/ai";
 import { SiClockify } from "react-icons/si";
 import { BsBucket } from "react-icons/bs";
 import { GrObjectUngroup } from "react-icons/gr";
@@ -22,19 +22,25 @@ import axios from 'axios';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { BiErrorAlt, BiHappyBeaming } from 'react-icons/bi';
+import { toast, ToastContainer } from 'react-toastify';
+import { Redirect } from 'react-router-dom';
 
 export default class RoomInfo extends Component {
     constructor(props) {
         super(props);
         this.state={
-            startDate: null,
-            endDate: null,
+            startDate: !localStorage.getItem('dateArriveCart') ? null : new Date(JSON.parse(localStorage.getItem('dateArriveCart')).startDate),
+            endDate: !localStorage.getItem('dateArriveCart') ? null : new Date(JSON.parse(localStorage.getItem('dateArriveCart')).endDate),
             roomType: [],
             moTa: '',
             hinhAnh: [],
             giaLP: '',
+
+            slPhongTrong: 0,
             isOpen: false,
-            tooltipOpen: false
+            tooltipOpen: false,
+            isGoToCartPage: false
         }
         this.changeStartDate = this.changeStartDate.bind(this);
         this.changeEndDate = this.changeEndDate.bind(this);
@@ -46,6 +52,8 @@ export default class RoomInfo extends Component {
     componentWillMount(){
         this.findRoomTypeByID(this.props.idLP);
         this.findRoomRateByID(this.props.idLP);
+        if(localStorage.getItem('dateArriveCart'))
+            console.log("ngày đặt: ", JSON.parse(localStorage.getItem('dateArriveCart')).startDate);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -141,7 +149,93 @@ export default class RoomInfo extends Component {
         })
     }
 
+    addItemInShoppingCart(){
+        if(localStorage.getItem('itemsShoppingCart')==null){
+            axios.get('https://nativehotel.herokuapp.com/api/room_types/' + this.state.roomType.idLP).then( res => {
+                if (res.data != null) {
+                    this.setState({
+                        slPhongTrong: res.data.slPhongTrong
+                    },()=>{
+                        if(this.state.startDate!=null&&this.state.giaLP!='Chưa có giá'&&this.state.slPhongTrong>0) {
+                            var sl = 1;
+                            var obj = {
+                                tenLP: this.state.roomType.tenLP,
+                                idLP: this.state.roomType.idLP,
+                                hinhAnh: this.state.hinhAnh[0],
+                                giaLP: this.state.giaLP,
+                            };
+                            console.log(obj);
+
+                            var date_cart = {
+                                startDate: format(this.state.startDate, 'yyyy/MM/dd'),
+                                endDate: format(this.state.endDate, 'yyyy/MM/dd'),
+                                days_diff: differenceInDays(this.state.endDate, this.state.startDate),
+                            }
+                            console.log(date_cart);
+                            this.props.onAddItemInShoppingCart(sl);
+
+                            // Nếu KH vào lại trang -> giỏ vẫn còn
+                            localStorage.setItem('dateArriveCart', JSON.stringify(date_cart));
+                            
+                            var arrItems = [];
+                            arrItems.push(obj);
+                            localStorage.setItem('itemsShoppingCart', JSON.stringify(arrItems));
+                            localStorage.setItem('slItemsShoppingCart', JSON.stringify(sl));
+                            // Dành cho đặt nhiều phòng
+                            // else {
+                            //     var arrItems = JSON.parse(localStorage.getItem('itemsShoppingCart'));
+                            //     arrItems.push(obj);
+                            //     var sl = parseInt(localStorage.getItem('slItemsShoppingCart'),10) + sl;
+                            //     localStorage.setItem('itemsShoppingCart', JSON.stringify(arrItems));
+                            //     localStorage.setItem('slItemsShoppingCart', JSON.stringify(sl));
+                            // }
+                                
+                            // var items = JSON.parse(localStorage.getItem('itemsShoppingCart'));
+                            // var sl = parseInt(localStorage.getItem('slItemsShoppingCart'),10);
+                            // console.log('in LS: ', items, sl);  
+
+                            toast.success(<div style={{fontSize:'20px'}}><span style={{fontSize:'28px'}}><BiHappyBeaming /></span> Add to cart success</div>, {
+                                position: toast.POSITION.BOTTOM_RIGHT,
+                                autoClose: 4000
+                            });
+                            setTimeout(()=>{
+                                this.setState({ isGoToCartPage: !this.state.isGoToCartPage });
+                            }, 4500);
+                        } else if(this.state.giaLP=='Chưa có giá' || this.state.slPhongTrong<=0) {
+                            toast.error(<div style={{fontSize:'20px'}}><span style={{fontSize:'28px'}}><FaRegSadCry /></span>  Phiền bạn chọn phòng khác</div>, {
+                                position: toast.POSITION.BOTTOM_RIGHT,
+                                autoClose: 4000
+                            });
+
+                            var vh = 5;
+                            var y_late = (window.innerHeight*vh)/100;
+                            var y = $(".goToSlickSlider").position().top - y_late;
+                            // alert(y.top);
+
+                            window.scrollTo(0, y);
+                        } else {
+                            toast.error(<div style={{fontSize:'20px'}}><BiErrorAlt/>  Bạn chưa chọn ngày</div>, {
+                                position: toast.POSITION.BOTTOM_RIGHT,
+                                autoClose: 4000
+                            });
+                        }
+                    })
+                } 
+            });
+        } else {
+            toast.error(<div style={{fontSize:'20px'}}><span style={{fontSize:'28px'}}><FaRegSadCry /></span>  Bạn đã chọn phòng rồi!</div>, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+                autoClose: 4000
+            });
+        }
+    }
+
     render() {
+        if(this.state.isGoToCartPage){
+            return (
+                <Redirect to="/your_basket" />
+            );
+        }
         console.warn('watch this room: ', this.state.idLP);
         const settings = {
             dots: true,
@@ -152,6 +246,7 @@ export default class RoomInfo extends Component {
         };
         return (
             <div style={{backgroundColor:'#FFFFFF'}}>
+                <ToastContainer />
                 <Container>
                     <div>
                         <Row  style={{padding:'5%'}}>
@@ -269,19 +364,14 @@ export default class RoomInfo extends Component {
                                     </Col>
                                 </Row>
                             </Col>
-                            <div style={{ height: '55vh', width: '18vw', overflow: 'hidden' }}>
+                            <div style={{ height: '55vh', width: '17.5vw'}}>
                                 <Col style={{border:'1px solid #B27440'}}>
                                     <Row style={{padding:'5%'}}>
                                         <Col style={{textAlign:'center'}}>
                                             <span style={{fontFamily:'Cambria', fontSize:'20px', fontWeight:'bold'}}>Stay Native</span>
                                         </Col>
                                     </Row>
-                                    {/* <Row>
-                                        <Col>ARRIVE</Col>
-                                    </Row>
-                                    <Row>
-                                        <Col>DEPART</Col>
-                                    </Row> */}
+                                    
                                     <div className='date-start-picker'>
                                         <DatePicker
                                             selected={this.state.startDate}
@@ -308,7 +398,12 @@ export default class RoomInfo extends Component {
 
                                     <Row style={{padding:'5%'}}>
                                         <Col style={{textAlign:'center'}}>
-                                            <button style={{backgroundColor:'#B27440', border:'none', width:'10vw', height:'auto'}}><b style={{color:'white'}}>Stay with us</b></button>
+                                            <button 
+                                                style={{backgroundColor:'#B27440', border:'none', width:'10vw', height:'auto'}} 
+                                                onClick={ ()=>this.addItemInShoppingCart() }
+                                            >
+                                                <b style={{color:'white'}}>Add to cart</b>
+                                            </button>
                                         </Col>
                                     </Row>
                                 </Col>

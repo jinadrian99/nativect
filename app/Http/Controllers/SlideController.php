@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Slide;
+use File;
 
 class SlideController extends Controller
 {
@@ -16,6 +17,14 @@ class SlideController extends Controller
             return $new_name;
         }
         return 'Không có hình';
+    }
+
+    public function deleteFile(Request $req){
+        if($req->hinhAnhSlide){
+            File::delete(public_path().$req->hinhAnhSlide);
+            return true;
+        }
+        return false;
     }
 
     public function index()

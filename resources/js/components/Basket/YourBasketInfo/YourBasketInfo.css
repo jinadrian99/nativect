@@ -1,0 +1,34 @@
+.icon{
+    position: relative;
+    top: -1px;
+}
+
+.iconBasket{
+    position: relative;
+    top: -8px;
+}
+
+.breadcrumb-nativeLink a:hover{
+    color: gray !important;
+    text-decoration: none;
+}
+
+.breadcrumb-nativeLink a{
+    color: black !important;
+    text-decoration: none;
+}
+
+.button-Continue button{
+    color: white !important;
+    background-color: black;
+    border: 1px solid black;
+    width: 11vw;
+    transition: 0.5s;
+}
+
+.button-Continue button:hover{
+    color: black !important;
+    background-color: #F3F1EF;
+    border: 1px solid black;
+    width: 11vw;
+}
