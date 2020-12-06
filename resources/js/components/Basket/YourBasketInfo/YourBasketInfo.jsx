@@ -13,6 +13,8 @@ import './YourBasketInfo.css';
 
 import { format } from 'date-fns';
 import { ImCancelCircle } from 'react-icons/im';
+import { toast, ToastContainer } from 'react-toastify';
+import { FaRegSadCry } from 'react-icons/fa';
 
 export default class YourBasketInfo extends Component {
     constructor(props) {
@@ -143,7 +145,20 @@ export default class YourBasketInfo extends Component {
                 });
             }
             else
-                this.setState({ goToBooking: !this.state.goToBooking }) 
+            {
+                axios.get('https://nativehotel.herokuapp.com/api/room_types/' + this.state.rooms[0].idLP).then( res => {
+                    if (res.data != null) {
+                        if(res.data.slPhongTrong>0){
+                            this.setState({ goToBooking: !this.state.goToBooking }) 
+                        } else {
+                            toast.error(<div style={{fontSize:'20px'}}><span style={{fontSize:'28px'}}><FaRegSadCry /></span>  Phiền bạn chọn phòng khác</div>, {
+                                position: toast.POSITION.BOTTOM_RIGHT,
+                                autoClose: 4000
+                            });
+                        }
+                    }
+                })
+            }
         }
     }
 
@@ -192,6 +207,7 @@ export default class YourBasketInfo extends Component {
         }
         return (
             <div style={{ paddingTop:'4%', backgroundColor:'#FFFFFF'}}>
+                <ToastContainer />
                 <Container>
                     <div style={{backgroundColor:'#FFFFFF', paddingBottom:'1%'}}>
                         <Row className="breadcrumb-nativeLink">
