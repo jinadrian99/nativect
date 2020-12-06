@@ -26,12 +26,8 @@ export default class Room extends Component {
     }
 
     addItemInShoppingCart(sl){
-        var sl_prev = localStorage.getItem('slItemsShoppingCart') ? parseInt(localStorage.getItem('slItemsShoppingCart'),10) : 0
-        var tongsl = sl_prev + sl ;
-        console.log(tongsl);
-        
         this.setState({
-            slItemAddCart: tongsl
+            slItemAddCart: sl
         });
     }
 

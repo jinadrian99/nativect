@@ -188,13 +188,8 @@ export default class RoomInfo extends Component {
                             localStorage.setItem('itemsShoppingCart', JSON.stringify(arrItems));
                             localStorage.setItem('slItemsShoppingCart', JSON.stringify(sl));
                         }
-                            
-                        // Check data trong LS dạng console
-                        // var items = JSON.parse(localStorage.getItem('itemsShoppingCart'));
-                        // var sl = parseInt(localStorage.getItem('slItemsShoppingCart'),10);
-                        // console.log('in LS: ', items, sl);  
-
-                        this.props.onAddItemInShoppingCart(localStorage.getItem('slItemsShoppingCart'));
+            
+                        this.props.onAddItemInShoppingCart(parseInt(localStorage.getItem('slItemsShoppingCart'),10));
                         toast.success(<div style={{fontSize:'20px'}}><span style={{fontSize:'28px'}}><BiHappyBeaming /></span> Add to cart success</div>, {
                             position: toast.POSITION.BOTTOM_RIGHT,
                             autoClose: 4000
