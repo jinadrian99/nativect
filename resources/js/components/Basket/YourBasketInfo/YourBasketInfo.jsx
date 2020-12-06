@@ -15,6 +15,7 @@ import { format } from 'date-fns';
 import { ImCancelCircle } from 'react-icons/im';
 import { toast, ToastContainer } from 'react-toastify';
 import { FaRegSadCry } from 'react-icons/fa';
+import { BiErrorAlt } from 'react-icons/bi';
 
 export default class YourBasketInfo extends Component {
     constructor(props) {
@@ -74,7 +75,7 @@ export default class YourBasketInfo extends Component {
             else 
                 localStorage.setItem('slItemsShoppingCart', JSON.stringify(this.state.slPhong));
 
-            this.props.onAddItemInShoppingCart(parseInt(localStorage.getItem('slItemsShoppingCart'),10));
+            this.props.onAddItemInShoppingCart(localStorage.getItem('slItemsShoppingCart')?parseInt(localStorage.getItem('slItemsShoppingCart'),10):0);
         });
     }
 
@@ -207,7 +208,6 @@ export default class YourBasketInfo extends Component {
         }
         return (
             <div style={{ paddingTop:'4%', backgroundColor:'#FFFFFF'}}>
-                <ToastContainer />
                 <Container>
                     <div style={{backgroundColor:'#FFFFFF', paddingBottom:'1%'}}>
                         <Row className="breadcrumb-nativeLink">
@@ -326,6 +326,7 @@ export default class YourBasketInfo extends Component {
                         </Col>
                     </Row>
                 </Container>
+                <ToastContainer />
             </div>
         )
     }
