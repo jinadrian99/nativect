@@ -72,7 +72,7 @@ export default class YourBasketInfo extends Component {
             else 
                 localStorage.setItem('slItemsShoppingCart', JSON.stringify(this.state.slPhong));
 
-            this.props.onAddItemInShoppingCart(localStorage.getItem('slItemsShoppingCart'));
+            this.props.onAddItemInShoppingCart(parseInt(localStorage.getItem('slItemsShoppingCart'),10));
         });
     }
 
