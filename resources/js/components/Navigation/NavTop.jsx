@@ -95,49 +95,26 @@ export default class NavTop extends Component {
         if(localStorage.getItem('itemsShoppingCart')){
             var diff = JSON.parse(localStorage.getItem('dateArriveCart')).days_diff;
             var startDate = format(new Date(JSON.parse(localStorage.getItem('dateArriveCart')).startDate), 'dd/MM/yyyy');
-            var room = JSON.parse(localStorage.getItem('itemsShoppingCart'))[0];
-            const deleteItemsLocalStorage = ()=>{
-                localStorage.removeItem('itemsShoppingCart');
-                localStorage.removeItem('slItemsShoppingCart');
-                this.setState({
-                    slItemAddCart: 0
-                }, ()=>{console.log('sl sau khi rm: ', this.state.slItemAddCart)});
-            }
+            var room = JSON.parse(localStorage.getItem('itemsShoppingCart'));
+            const showRooms = room.map((item,index) => 
+                <Row key={ index } style={{ lineHeight: '43px' }}>
+                    <Col>{ item.tenLP }</Col>
+                    <Col>{ item.giaLP }</Col>
+                </Row>
+            );
             return (
                 <DropdownMenu>
                     <DropdownItem className="text-center" disabled>{ diff } nights from { startDate }</DropdownItem>
                     <DropdownItem divider />
                     <DropdownItem text="true">
-                        <Row style={{ lineHeight: '43px' }}>
-                            <Col>{ room.tenLP }</Col>
-                            <Col>{ room.giaLP }</Col>
-                            <Col>
-                                <Button 
-                                    outline color="red" 
-                                    className="btn-add icon-top"
-                                    style={{padding: 0}} 
-                                    onClick={ deleteItemsLocalStorage }
-                                >
-                                    <ImCancelCircle style={{fontSize: '3vh'}} color="black" className="icon-top" />
-                                </Button>
-                            </Col>
-                        </Row>
+                        { showRooms }
                     </DropdownItem>
                     <DropdownItem divider />
                     <DropdownItem text="true">
-                        <Row style={{paddingBottom:'5%'}}>
-                            <Col style={{fontSize:'1.2vw'}}><b>Total (inc tax)</b></Col>
-                            <Col style={{fontSize:'1.2vw'}}><b>{ parseInt(room.giaLP,10) } VND</b></Col>
-                        </Row>
-                    </DropdownItem>
-                    <DropdownItem text="true">
                         <Row className="button-GoBasket">
                             <Button color="dark" style={{marginLeft: '7vw'}} 
-                                onClick={
-                                    ()=>{
-                                        this.setState({ isGoToCartPage: !this.state.isGoToCartPage });
-                                    }
-                            }><b>Go BASKET</b></Button>
+                                onClick={ ()=>{ this.setState({ isGoToCartPage: !this.state.isGoToCartPage }); } }
+                            ><b>Go BASKET</b></Button>
                         </Row>
                     </DropdownItem>
                 </DropdownMenu>

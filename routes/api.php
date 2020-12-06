@@ -33,7 +33,8 @@ Route::post('slides_upload_file', 'App\Http\Controllers\SlideController@uploadFi
 Route::resource('admin_accounts','App\Http\Controllers\AdminAccountController');
 Route::post('admin_login','App\Http\Controllers\AdminAccountController@login');
 
-
+Route::post('exist_mail','App\Http\Controllers\SendMailController@checkExistMail');
+Route::post('send_mail','App\Http\Controllers\SendMailController@sendMail');
 
 // Route::get('register','RegisterController@index');
 // Route::post('register','RegisterController@store');

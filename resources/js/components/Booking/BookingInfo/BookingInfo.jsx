@@ -6,7 +6,21 @@ import { FaHotel } from "react-icons/fa";
 
 import './BookingInfo.css';
 
+import { format } from 'date-fns';
+
 export default class BookingInfo extends Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            startDate: !localStorage.getItem('dateArriveCart') ? null : new Date(JSON.parse(localStorage.getItem('dateArriveCart')).startDate),
+            endDate: !localStorage.getItem('dateArriveCart') ? null : new Date(JSON.parse(localStorage.getItem('dateArriveCart')).endDate),
+            tenLP: localStorage.getItem('itemsShoppingCart') ? JSON.parse(localStorage.getItem('itemsShoppingCart'))[0].tenLP : '',
+            hinhAnh: localStorage.getItem('itemsShoppingCart') ? JSON.parse(localStorage.getItem('itemsShoppingCart'))[0].hinhAnh : '',
+            giaLP: localStorage.getItem('itemsShoppingCart') ? JSON.parse(localStorage.getItem('itemsShoppingCart'))[0].giaLP : '',
+            diff: localStorage.getItem('dateArriveCart') ? JSON.parse(localStorage.getItem('dateArriveCart')).days_diff : ''
+        }
+    }
+
     render() {
         return (
             <div style={{ paddingTop:'4%', backgroundColor:'#FFFFFF'}}>
@@ -120,37 +134,37 @@ export default class BookingInfo extends Component {
                                     </Row>
                                     <Row  style={{ paddingTop:'5%'}}>
                                         <Col>
-                                            <span>30/11 - 9/11, 9 nights</span>
+                                            <span>{format(this.state.startDate,"dd/MM")} - {format(this.state.endDate,"dd/MM")}, {this.state.diff} {this.state.diff > 1 ? 'nights' : 'night'}</span>
                                             <hr/>
                                         </Col>
                                     </Row>
                                     <Row>
                                         <Col>
-                                            <span>BLUE ROOM X 1</span><br/>
-                                            <span>$930</span>
+                                            <span>{this.state.tenLP} X 1</span><br/>
+                                            <span>{parseInt(this.state.giaLP,10)}</span>
                                             <hr/>
                                         </Col>
                                     </Row>
                                     <Row>
                                         <Col>
                                             <span>Total cost</span><br/>
-                                            <span>1 room for 9 nights</span>
+                                            <span>1 room for {this.state.diff} {this.state.diff > 1 ? 'nights' : 'night'}</span>
                                         </Col>
                                     </Row>
                                     <Row style={{paddingBottom:'5%'}}>
                                         <Col>
-                                            <span style={{fontWeight:'bold', fontSize:'2vw', fontFamily:'Georgia'}}>$930</span>
+                                            <span style={{fontWeight:'bold', fontSize:'2vw', fontFamily:'Georgia'}}>{parseInt(this.state.giaLP,10) * this.state.diff} VND</span>
                                         </Col>
                                     </Row>
                                 </Col>
                             </Row>
-                            <Row style={{paddingTop:'10%'}}>
+                            <Row style={{paddingTop:'15%'}}>
                                 <Col style={{fontSize:'1.4vw', fontFamily:'Georgia', textAlign:'center'}}>
                                     <Row>
                                         <Col><span>Total booking cost</span><hr/></Col>
                                     </Row>
                                     <Row>
-                                        <Col><span style={{fontWeight:'bold', fontSize:'2vw'}}>$930</span></Col>
+                                        <Col><span style={{fontWeight:'bold', fontSize:'2vw'}}>{parseInt(this.state.giaLP,10) * this.state.diff} VND</span></Col>
                                     </Row>
                                     <Row style={{ paddingTop:'7%'}} className="button-BookNow">
                                         <Col>

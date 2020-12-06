@@ -26,7 +26,7 @@ export default class AddRates extends Component {
         this.state={
             giaLP: '',
             timeApDung: '',
-            idLP: 2,
+            idLP: '',
 
             roomType:[],
             tooltipOpen: false
@@ -71,12 +71,20 @@ export default class AddRates extends Component {
         this.setState({
             giaLP: '',
             timeApDung: '',
-            idLP: 2
+            idLP: ''
         })
     }
 
     saveChange(e){
         e.preventDefault();
+        if(this.state.idLP == '')
+        {
+            toast.error(<div style={{fontSize:'20px'}}><BiErrorAlt/>  Bạn chưa chọn Phòng</div>, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+                autoClose: 4000
+            });
+            return;
+        }
         var rates = {
             giaLP: this.state.giaLP,
             timeApDung: this.state.timeApDung,

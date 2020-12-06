@@ -32,3 +32,25 @@
     border: 1px solid black;
     width: 11vw;
 }
+
+.btn-del-spin:hover .icon-spin{
+    transition: 1s;
+}
+
+.btn-del-spin:hover .icon-spin{
+    transform: rotate(180deg);
+}
+
+.hover-pointer{
+    cursor: pointer;
+}
+
+.hover-underline:hover{
+    text-decoration: underline;
+}
+
+.modalDate{
+    width: 30vw;
+    top: 40%;
+    transform: translateY(-50%);
+}

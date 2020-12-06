@@ -23,8 +23,9 @@ export default class Footer extends Component {
                         <Row><div style={{ height: '8vh' }} /></Row>
                         <Row>
                             <Col xs="4">
-                                <Row>
-                                    <img style={{padding: '5%', paddingBottom: '12vh' }} src='/image/footer-logo.png' alt="footer logo"/>
+                                <Row className="navbar-text-footer">
+                                    <img style={{padding: '5%', paddingBottom: '2vh' }} src='/image/footer-logo.png' alt="footer logo"/>
+                                    <span style={{ paddingLeft: '1.7vw', paddingBottom: '7vh', fontSize: '2.4vh' }}>nativehotelct@gmail.com</span>
                                 </Row>
                                 <Row>
                                     <RiFacebookCircleLine style={{color:'white', fontSize:'3vw', margin: '1vh 1vw'}}/>
@@ -40,9 +41,9 @@ export default class Footer extends Component {
                             </Col>
                             <Col xs="4">
                                 <Row><Link to="" className="navbar-text nav-link navbar-text-footer arrow-right-footer"><span>Stay</span><div></div></Link></Row>
-                                <Row><Link to="" className="navbar-text nav-link navbar-text-footer arrow-right-footer"><span>About</span><div></div></Link></Row>
-                                <Row><Link to="" className="navbar-text nav-link navbar-text-footer arrow-right-footer"><span>Room Rates</span><div></div></Link></Row>
-                                <Row><Link to="" className="navbar-text nav-link navbar-text-footer arrow-right-footer"><span>Rooms</span><div></div></Link></Row>
+                                <Row><Link to="/about" className="navbar-text nav-link navbar-text-footer arrow-right-footer"><span>About</span><div></div></Link></Row>
+                                <Row><Link to="/room_rates" className="navbar-text nav-link navbar-text-footer arrow-right-footer"><span>Room Rates</span><div></div></Link></Row>
+                                <Row><Link to="/" className="navbar-text nav-link navbar-text-footer arrow-right-footer"><span>Rooms</span><div></div></Link></Row>
                                 <Row className="text-center" style={{ color: 'whitesmoke', marginTop: '1vh', paddingBottom: '6vh', paddingTop: '9vh'  }}>
                                     <Col>© 2020 Native</Col>
                                     <Col>T&Cs</Col>
@@ -67,7 +68,7 @@ export default class Footer extends Component {
                                     <Col><Link to="" className="navbar-text nav-link navbar-text-footer"><i>INVESTORS</i></Link></Col>
                                 </Row>
                                 <Row>
-                                    <Col> </Col>
+                                    <Col></Col>
                                     <Col>
                                         <img src="https://www.nativeplaces.com/wp-content/themes/native/dist/img/asap-logo.png" width="100" height="70" />
                                     </Col>
