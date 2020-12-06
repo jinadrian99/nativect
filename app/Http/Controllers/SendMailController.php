@@ -23,7 +23,7 @@ class SendMailController extends Controller
         $mail = new PHPMailer(true);
 
         try {
-            $mail->SMTPDebug = 2;                     
+            $mail->SMTPDebug = 0;                     
             $mail->isSMTP();                                           
             $mail->Host       = 'smtp.gmail.com';                    
             $mail->SMTPAuth   = true;                                   
@@ -133,9 +133,10 @@ class SendMailController extends Controller
             $mail->Body    = $textBody;
 
             $mail->send();
-            echo 'Message has been sent';
+            return 'sent: success';
         } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            // return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            return 'sent: fail';
         }
     }
 }
