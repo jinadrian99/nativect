@@ -12,7 +12,7 @@ class SendMailController extends Controller
 {
     public function checkExistMail(Request $request){
         $real = app(EmailChecker::class)->checkEmail($request->email);
-        return $real["success"]? 'true': 'false';
+        return $real["success"]? true : false;
     }
     public function sendMail(Request $request)
     {
@@ -44,7 +44,7 @@ class SendMailController extends Controller
                 <body style="font-family: Arial, Helvetica, sans-serif; color: black">
                     <table style="margin: 0 auto;">
                         <tr>
-                            <td width="350">
+                            <td width="320">
                                 <img
                                 width="42"
                                 height="42"
@@ -63,38 +63,42 @@ class SendMailController extends Controller
                         </tr>
                         <tr>
                             <td>
-                                Your name: '. $request->hoTen .'
+                                Name: '. $request->tenKH .'
                             </td>
                             <td>
-                                Ngày booking: '. $request->dateBooking .'
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Your Email: '. $request->email .'
-                            </td>
-                            <td>
-                                ID Booking: '. $request->idDP .'
+                                Date Booking: '. $request->ngayDat .'
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Phone num: '. $request->sdt .'
+                                Email: '. $request->email .'
+                            </td>
+                            <td>
+                                ID Booking: '. $request->idBooking .'
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Phone: '. $request->sdt .'
                             </td>
                             <td>
                                 Room: '. $request->tenLP .'
                             </td>
                         </tr>
                         <tr>
-                            <td></td>
                             <td>
-                                Arrive: '. $request->startDate .'
+                                Bank: '. (($request->loaiThe==0) ? 'VISA' : (($request->loaiThe==1) ? 'MasterCard' : (($request->loaiThe==2) ? 'Domestic' : ''))) .'_'. (($request->nganHang==0) ? 'BIDV' : (($request->nganHang==1) ? 'Eximbank' : '')) .'
+                            </td>
+                            <td>
+                                Arrive: '. $request->ngayDen .'
                             </td>
                         </tr>
                         <tr>
-                            <td></td>
                             <td>
-                                Depart: '. $request->endDate .'
+                                ID CARD: '. $request->soThe .'
+                            </td>
+                            <td>
+                                Depart: '. $request->ngayDi .'
                             </td>
                         </tr>
                         <tr>
@@ -103,7 +107,7 @@ class SendMailController extends Controller
                         <tr>
                             <td colspan="2" style="text-align: center; padding-top: 20px">
                                 <h3>
-                                    Total Price: <span>'. $request->totalPrice .' VND</span>
+                                    Total Price: <span>'. $request->tongTien .' VND</span>
                                 </h3> 
                             </td>
                         </tr>
@@ -133,10 +137,10 @@ class SendMailController extends Controller
             $mail->Body    = $textBody;
 
             $mail->send();
-            return 'sent: success';
+            return true;
         } catch (Exception $e) {
             // return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            return 'sent: fail';
+            return false;
         }
     }
 }

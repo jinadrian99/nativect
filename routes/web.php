@@ -19,6 +19,7 @@ Route::get('/about', function(){ return view('welcome'); });
 Route::get('/room/{any}', function(){ return view('welcome'); });
 Route::get('/your_basket', function(){ return view('welcome'); });
 Route::get('/booking', function(){ return view('welcome'); });
+// Route::get('/login_register', function(){ return view('welcome'); });
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', function () {

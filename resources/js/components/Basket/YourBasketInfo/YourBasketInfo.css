@@ -8,6 +8,11 @@
     top: -8px;
 }
 
+.iconCalendar{
+    position: relative;
+    top: -3px;
+}
+
 .breadcrumb-nativeLink a:hover{
     color: gray !important;
     text-decoration: none;
@@ -51,6 +56,18 @@
 
 .modalDate{
     width: 30vw;
-    top: 40%;
+    top: 30%;
     transform: translateY(-50%);
+}
+
+.date-start-picker input, .date-end-picker input{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 2.5vh;
+    border: none;
+    line-height: 30px;
+    border-bottom: 1px solid rgba(169, 169, 169, 0.823);
+    outline: none;
+}
+.date-start-picker, .date-end-picker{
+    margin-bottom: 2.5vh;
 }

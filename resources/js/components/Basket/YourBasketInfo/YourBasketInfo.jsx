@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { Container, Row, Col, Button, ModalHeader, ModalBody, ModalFooter, Modal } from 'reactstrap'
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { format, differenceInDays } from 'date-fns';
+import { toast, ToastContainer } from 'react-toastify';
+
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosStarOutline } from "react-icons/io";
 import { RiCoinsLine } from "react-icons/ri";
@@ -8,14 +13,13 @@ import { GiCarKey } from "react-icons/gi";
 import { TiShoppingCart } from "react-icons/ti";
 import { GrDocumentLocked } from "react-icons/gr";
 import { RiShoppingBasket2Line } from "react-icons/ri";
+import { BsCalendar } from 'react-icons/bs';
+import { FaRegSadCry } from 'react-icons/fa';
+import { BiErrorAlt } from 'react-icons/bi';
+import { ImCancelCircle } from 'react-icons/im';
 
 import './YourBasketInfo.css';
 
-import { format } from 'date-fns';
-import { ImCancelCircle } from 'react-icons/im';
-import { toast, ToastContainer } from 'react-toastify';
-import { FaRegSadCry } from 'react-icons/fa';
-import { BiErrorAlt } from 'react-icons/bi';
 
 export default class YourBasketInfo extends Component {
     constructor(props) {
@@ -27,11 +31,16 @@ export default class YourBasketInfo extends Component {
             diff: '',
             rooms: [],
             totalPrice: '',
+	        tempSD: null,
+            tempED: null,
+            tempDiff: '',
 
             modalDate: false,
             goToBooking: false,
             goToHome: false
         }
+	    this.changeStartDate = this.changeStartDate.bind(this);
+        this.changeEndDate = this.changeEndDate.bind(this);
     }
 
     componentWillMount(){
@@ -41,6 +50,8 @@ export default class YourBasketInfo extends Component {
             endDate: !localStorage.getItem('dateArriveCart') ? null : new Date(JSON.parse(localStorage.getItem('dateArriveCart')).endDate),
             diff: localStorage.getItem('dateArriveCart') ? JSON.parse(localStorage.getItem('dateArriveCart')).days_diff : '',
             rooms: localStorage.getItem('itemsShoppingCart') ? JSON.parse(localStorage.getItem('itemsShoppingCart')) : null,
+	        tempSD: !localStorage.getItem('dateArriveCart') ? null : new Date(JSON.parse(localStorage.getItem('dateArriveCart')).startDate),
+            tempED: !localStorage.getItem('dateArriveCart') ? null : new Date(JSON.parse(localStorage.getItem('dateArriveCart')).endDate)
         },()=>{
             if(this.state.rooms!=null){
                 var ttp=0;
@@ -94,7 +105,6 @@ export default class YourBasketInfo extends Component {
                         </Row>
                     </Col>
                     <Col xs="3" style={{fontSize:'1.2vw', fontFamily:'Georgia'}}>
-                        
                         <Row>
                             <Col>
                                 <Button 
@@ -115,51 +125,157 @@ export default class YourBasketInfo extends Component {
         return lst;
     }
 
-    showModalDate(){
+    changeStartDate(e){
+        var date = new Date(e);
+        if(format(new Date(), 'yyyy/MM/dd')>format(date, 'yyyy/MM/dd')){
+            alert('Chọn nhầm ngày trong quá khứ');
+            return;
+        } 
+        else {
+            // console.log('today', new Date());
+            // console.log('e: ', e);
+            this.setState({
+                tempSD: date,
+            })
+            date = format(date, 'yyyy/MM/dd');
+            // console.log('start date: ', date);
+        }
+        
+    }
 
+    changeEndDate(e){
+        if(this.state.startDate===null){
+            alert('Bạn chưa chọn ngày bắt đầu');
+            return;
+        } 
+        else{
+            var date = new Date(e);
+            // console.log('today', new Date());
+            // console.log('e: ', e);
+            this.setState({
+                tempED: date,
+            }, ()=>{
+                date = format(date, 'yyyy/MM/dd');
+                // console.log('end date: ', date);
+                console.log('start date: ', this.state.tempSD);
+                console.log('end date: ', this.state.tempED);
+                var days_diff = differenceInDays(this.state.tempED, this.state.tempSD);
+                console.log('days diff: ', days_diff);
+                this.setState({
+                    tempDiff: days_diff
+                })
+            })
+        }
+    }
+
+    saveChangeDatePicker(){
+        this.setState({
+            startDate: this.state.tempSD,
+            endDate: this.state.tempED,
+            diff: this.state.tempDiff
+        },()=>{
+            if(this.state.rooms!=null){
+                var ttp=0;
+                this.state.rooms.forEach(room => {
+                    ttp += parseInt(room.giaLP,10) * this.state.diff;
+                });
+                this.setState({ totalPrice: ttp });
+            }
+        });
+
+        var date_cart = {
+            startDate: format(this.state.tempSD, 'yyyy/MM/dd'),
+            endDate: format(this.state.tempED, 'yyyy/MM/dd'),
+            days_diff: this.state.tempDiff
+        }
+        localStorage.setItem('dateArriveCart', JSON.stringify(date_cart));
+        this.setState({
+            modalDate: !this.state.modalDate
+        })
+    }
+
+    showModalDate(){
         return (
             <>
-                <ModalHeader toggle={ ()=>{ this.setState({ modalDate: !this.state.modalDate }) } }>Change Date</ModalHeader>
+                <ModalHeader style={{fontFamily:'Georgia', fontSize:'2.5vh'}} toggle={ ()=>{ this.setState({ modalDate: !this.state.modalDate }) } }>Change Date &nbsp;&nbsp;<BsCalendar className="iconCalendar"/></ModalHeader>
                 <ModalBody>
                     {/* DatePicker */}
+                    <Row>
+                        <Col xs="3" style={{fontSize:'2.5vh', fontFamily:'Georgia', paddingTop:'1%'}}>Arrive:</Col>
+                        <Col xs="9">
+                            <div className='date-start-picker'>
+                                <DatePicker
+                                    selected={this.state.tempSD}
+                                    onChange={this.changeStartDate}
+                                    selectsStart
+                                    startDate={this.state.startDate}
+                                    endDate={this.state.endDate}
+                                    dateFormat='dd/MM/yyyy'
+                                />
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs="3" style={{fontSize:'2.5vh', fontFamily:'Georgia', paddingTop:'1%'}}>Depart:</Col>
+                        <Col xs="9">
+                            <div className='date-end-picker'>
+                                <DatePicker
+                                    selected={this.state.tempED}
+                                    onChange={this.changeEndDate}
+                                    selectsEnd
+                                    startDate={this.state.startDate}
+                                    endDate={this.state.endDate}
+                                    minDate={this.state.startDate}
+                                    dateFormat='dd/MM/yyyy'
+                                />
+                            </div>
+                        </Col>
+                    </Row>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="dark">Save change</Button>
+                    <Button color="dark" onClick={()=>this.saveChangeDatePicker()}>Save change</Button>
                 </ModalFooter>
             </>
         );
     }
 
     onGoToBooking(){
-        if(this.state.slPhong<=0)
-        {
-            toast.error(<div style={{fontSize:'20px'}}><BiErrorAlt/>  Bạn chưa chọn phòng</div>, {
+        if(format(new Date(), 'yyyy/MM/dd')<=format(this.state.startDate, 'yyyy/MM/dd')){
+            if(this.state.slPhong<=0)
+            {
+                toast.error(<div style={{fontSize:'20px'}}><BiErrorAlt/>  Bạn chưa chọn phòng</div>, {
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                    autoClose: 4000
+                }); 
+                this.setState({ goToHome: !this.state.goToHome })           
+            } else {
+                if(this.state.slPhong>1) {
+                    toast.error(<div style={{fontSize:'20px'}}><BiErrorAlt/>  Bạn chỉ được chọn 1 phòng</div>, {
+                        position: toast.POSITION.BOTTOM_RIGHT,
+                        autoClose: 4000
+                    });
+                }
+                else
+                {
+                    axios.get('https://nativehotel.herokuapp.com/api/room_types/' + this.state.rooms[0].idLP).then( res => {
+                        if (res.data != null) {
+                            if(res.data.slPhongTrong>0){
+                                this.setState({ goToBooking: !this.state.goToBooking }) 
+                            } else {
+                                toast.error(<div style={{fontSize:'20px'}}><span style={{fontSize:'28px'}}><FaRegSadCry /></span>  Phiền bạn chọn phòng khác</div>, {
+                                    position: toast.POSITION.BOTTOM_RIGHT,
+                                    autoClose: 4000
+                                });
+                            }
+                        }
+                    })
+                }
+            }   
+        } else {
+            toast.error(<div style={{fontSize:'20px'}}><BiErrorAlt/>  Ngày đi của bạn đã trong quá khứ</div>, {
                 position: toast.POSITION.BOTTOM_RIGHT,
                 autoClose: 4000
             }); 
-            this.setState({ goToHome: !this.state.goToHome })           
-        } else {
-            if(this.state.slPhong>1) {
-                toast.error(<div style={{fontSize:'20px'}}><BiErrorAlt/>  Bạn chỉ được chọn 1 phòng</div>, {
-                    position: toast.POSITION.BOTTOM_RIGHT,
-                    autoClose: 4000
-                });
-            }
-            else
-            {
-                axios.get('https://nativehotel.herokuapp.com/api/room_types/' + this.state.rooms[0].idLP).then( res => {
-                    if (res.data != null) {
-                        if(res.data.slPhongTrong>0){
-                            this.setState({ goToBooking: !this.state.goToBooking }) 
-                        } else {
-                            toast.error(<div style={{fontSize:'20px'}}><span style={{fontSize:'28px'}}><FaRegSadCry /></span>  Phiền bạn chọn phòng khác</div>, {
-                                position: toast.POSITION.BOTTOM_RIGHT,
-                                autoClose: 4000
-                            });
-                        }
-                    }
-                })
-            }
         }
     }
 

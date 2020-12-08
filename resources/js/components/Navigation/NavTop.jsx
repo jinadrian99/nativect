@@ -18,6 +18,7 @@ import {  RiPhoneLine } from 'react-icons/ri';
 import './NavTop.css';
 import { format } from 'date-fns';
 import { ImCancelCircle } from 'react-icons/im';
+import { AiOutlineUser } from 'react-icons/ai';
 
 export default class NavTop extends Component {
     constructor(props) {
@@ -29,11 +30,15 @@ export default class NavTop extends Component {
             dropdownOpen: false,
 
             toggleCart: false,
-            isGoToCartPage: false
+            toggleAccount: false,
+
+            isGoToCartPage: false,
+            // isGoToLoginRegister: false
         };
         this.toggleRooms = this.toggleRooms.bind(this); 
         this.loadRoomTypes = this.loadRoomTypes.bind(this);
         this.showToggleCart = this.showToggleCart.bind(this);
+        // this.showToggleAcc = this.showToggleAcc.bind(this);
     }
 
     componentWillMount(){
@@ -120,14 +125,34 @@ export default class NavTop extends Component {
                 </DropdownMenu>
             );
         }
-        
     }
+
+    // showToggleAcc(){
+    //     <DropdownMenu>
+    //         <DropdownItem text="true">
+    //             { showRooms }
+    //         </DropdownItem>
+    //         <DropdownItem divider />
+    //         <DropdownItem text="true">
+    //             <Row className="button-GoBasket">
+    //                 <Button color="dark" style={{marginLeft: '7vw'}} 
+    //                     onClick={ ()=>{ this.setState({ isGoToCartPage: !this.state.isGoToCartPage }); } }
+    //                 ><b>Go BASKET</b></Button>
+    //             </Row>
+    //         </DropdownItem>
+    //     </DropdownMenu>
+    // }
 
     render() {
         if(this.state.isGoToCartPage){
             return (
                 <Redirect to="/your_basket" />
             );
+        }
+        if(this.state.isGoToLoginRegister){
+            return (
+                <Redirect to="/login_register" />
+            )
         }
         return (
             <div className="nav-on-top">
@@ -163,7 +188,35 @@ export default class NavTop extends Component {
                                 { this.showToggleCart() }
                             </Dropdown>
                         </NavbarText>
-                        <NavbarText><RiPhoneLine style={{fontSize:"23px", fontWeight: "bold"}} className="icon"/><b style={{fontSize:"20px"}}>025548203</b></NavbarText>  
+                        <NavbarText>
+                            <RiPhoneLine style={{fontSize:"23px", fontWeight: "bold", color: "black"}} className="icon"/>
+                            <b style={{ color: 'black', fontSize: '18px' }}>025548203</b>
+                        </NavbarText>  
+                        {/* <NavbarText className="icon-shopping-cart">
+                            <Dropdown 
+                                isOpen={this.state.toggleAccount} 
+                                toggle={ 
+                                    ()=>{
+                                        if(localStorage.getItem('infoAcc')&&JSON.parse(localStorage.getItem('infoAcc'))!=null)
+                                            this.setState({toggleAccount: !this.state.toggleAccount})
+                                    }
+                                }
+                            >
+                                <DropdownToggle>
+                                    <AiOutlineUser 
+                                        style={{fontSize:"23px", fontWeight: "bold"}} 
+                                        className="icon" 
+                                        onClick={ 
+                                            () => {
+                                                if(!localStorage.getItem('infoAcc')||JSON.parse(localStorage.getItem('infoAcc'))==null)
+                                                    this.setState({ isGoToLoginRegister: !this.state.isGoToLoginRegister })
+                                            }
+                                        }    
+                                    />
+                                </DropdownToggle>
+                                { this.showToggleAcc() }
+                            </Dropdown>
+                        </NavbarText> */}
                     {/* </Collapse> */}
                 </Navbar>
             </div>

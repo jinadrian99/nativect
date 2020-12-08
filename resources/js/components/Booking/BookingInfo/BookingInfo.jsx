@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Container, Row, Col } from 'reactstrap'
+import { format } from 'date-fns';
+
 import { IoIosArrowForward } from "react-icons/io";
 import { FaHotel } from "react-icons/fa";
+import { BiErrorAlt } from 'react-icons/bi';
+import { AiFillCheckCircle } from 'react-icons/ai';
 
 import './BookingInfo.css';
 
-import { format } from 'date-fns';
 
 export default class BookingInfo extends Component {
     constructor(props) {
@@ -17,11 +23,306 @@ export default class BookingInfo extends Component {
             tenLP: localStorage.getItem('itemsShoppingCart') ? JSON.parse(localStorage.getItem('itemsShoppingCart'))[0].tenLP : '',
             hinhAnh: localStorage.getItem('itemsShoppingCart') ? JSON.parse(localStorage.getItem('itemsShoppingCart'))[0].hinhAnh : '',
             giaLP: localStorage.getItem('itemsShoppingCart') ? JSON.parse(localStorage.getItem('itemsShoppingCart'))[0].giaLP : '',
-            diff: localStorage.getItem('dateArriveCart') ? JSON.parse(localStorage.getItem('dateArriveCart')).days_diff : ''
+            diff: localStorage.getItem('dateArriveCart') ? JSON.parse(localStorage.getItem('dateArriveCart')).days_diff : '',
+            tenKH: '',
+            email: '',
+            emailAgain: '',
+            sdt: '',
+            loaiThe: 0,
+            nganHang: 0,
+            tenThe: '',
+            soThe: '',
+            ngayHetHan: null,
+            errors: {},
+            slPhong: 0,
+            roomType: [],
+
+            isGoToHomePage: false,
+            isGoToBasketPage: false
+        }
+        this.handleChange = this.handleChange.bind(this);
+        this.submitBookNow = this.submitBookNow.bind(this);
+        this.notify = this.notify.bind(this);
+        this.resetForm = this.resetForm.bind(this);
+        this.chooseTypeCard = this.chooseTypeCard.bind(this);
+    }
+
+    componentWillMount(){
+        var idPhongDat = JSON.parse(localStorage.getItem('itemsShoppingCart'))[0].idLP;
+        var arriveDate = new Date(JSON.parse(localStorage.getItem('dateArriveCart')).startDate);
+        axios.get('https://nativehotel.herokuapp.com/api/room_types/' + idPhongDat).then(res => {
+            if (res.data != null) {
+                this.setState({
+                    slPhong: res.data.slPhongTrong
+                }, () => {
+                    if (parseInt(this.state.slPhong,10) <= 0) {
+                        localStorage.removeItem('itemsShoppingCart');
+                        localStorage.removeItem('slItemsShoppingCart');
+                        localStorage.removeItem('dateArriveCart');
+                        toast.error(<div style={{fontSize:'20px'}}><BiErrorAlt/>  Số lượng phòng đã hết</div>,{
+                            position: toast.POSITION.BOTTOM_CENTER,
+                            autoClose: 4000
+                        })
+                        setTimeout(()=>{
+                            this.setState({ isGoToHomePage: !this.state.isGoToHomePage });
+                        }, 4000);
+                    }
+                })
+            }
+        })
+        if (format(new Date(), 'yyyy/MM/dd') > format(arriveDate, 'yyyy/MM/dd')) {
+            toast.error(<div style={{fontSize:'16px'}}><BiErrorAlt/>  Bạn chọn nhầm ngày trong quá khứ</div>,{
+                position: toast.POSITION.BOTTOM_CENTER,
+                autoClose: 4000
+            })
+            setTimeout(()=>{
+                this.setState({ isGoToBasketPage: !this.state.isGoToBasketPage });
+            }, 4000);
         }
     }
 
+    notify(){
+        toast.success(<div style={{fontSize:'20px'}}><AiFillCheckCircle/>  Đặt phòng của bạn với NATIVE đã được xác nhận.</div>, {
+            position: toast.POSITION.BOTTOM_RIGHT,
+            autoClose: 4000
+        });
+    }
+
+    handleChange(e){
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
+    resetForm(){
+        this.setState({
+            tenKH: '',
+            email: '',
+            emailAgain: '',
+            sdt: '',
+            loaiThe: 0,
+            nganHang: 0,
+            tenThe: '',
+            soThe: '',
+            ngayHetHan: '',
+        })
+    }
+
+    chooseTypeCard(){
+        if (this.state.loaiThe == 2) {
+            return
+        }
+        else {
+            return <input type="text" name="ngayHetHan" placeholder="EXPIRY DATE* yyyy/MM/dd" onChange={this.handleChange} style={{width:'100%'}}/>
+        }
+    }
+
+    submitBookNow(e){
+        e.preventDefault();
+        const {tenKH, email, emailAgain, sdt, tenThe, soThe} = this.state;
+        let isValidFullName = true;
+        let isValidPhone = true;
+        let isValidCardName = true;
+        let isValidCardNumber = true;
+        let isValidEmailAgain = true;
+        const errors = {};
+        if (tenKH.trim().length < 4) {
+            errors.nameLength = "Họ tên phải đủ 4 kí tự trở lên";
+            isValidFullName = false;
+        }
+        if (sdt.trim().length < 8) {
+            errors.phoneLength = "Số điện thoại không phù hợp";
+            isValidPhone = false;
+        }
+        if (tenThe.trim().length < 4) {
+            errors.cardNameLength = "Tên thẻ phải đủ 4 kí tự trở lên";
+            isValidCardName = false;
+        }
+        if (soThe.trim().length < 16) {
+            errors.cardNumberLength = "Số thẻ phải đủ 16 kí tự trở lên";
+            isValidCardNumber = false;
+        }
+        if (emailAgain != email) {
+            errors.emailAgainLength = "Email nhập lại không trùng khớp";
+            isValidEmailAgain = false;
+        }
+        this.setState({errors},
+            ()=>{
+                console.log(this.state.errors.nameLength)
+                console.log(this.state.errors.phoneLength)
+                console.log(this.state.errors.cardNameLength)
+                console.log(this.state.errors.cardNumberLength)
+                console.log(this.state.errors.emailAgainLength)
+                if(!isValidFullName || !isValidPhone || !isValidCardName || !isValidCardNumber || !isValidEmailAgain){
+                    if (!isValidFullName) {
+                        if(this.state.errors.nameLength != ""){
+                            toast.error(<div>{this.state.errors.nameLength}</div>,{
+                                position: toast.POSITION.BOTTOM_RIGHT,
+                                autoClose: 4000
+                            })
+                        }
+                    }
+                    if(!isValidPhone){
+                        if(this.state.errors.phoneLength != ""){
+                            toast.error(<div>{this.state.errors.phoneLength}</div>,{
+                                position: toast.POSITION.BOTTOM_RIGHT,
+                                autoClose: 4000
+                            })
+                        }
+                    } 
+                    if(!isValidCardName){
+                        if(this.state.errors.cardNameLength != ""){
+                            toast.error(<div>{this.state.errors.cardNameLength}</div>,{
+                                position: toast.POSITION.BOTTOM_RIGHT,
+                                autoClose: 4000
+                            })
+                        }
+                    } 
+                    if(!isValidCardNumber){
+                        if(this.state.errors.cardNumberLength != ""){
+                            toast.error(<div>{this.state.errors.cardNumberLength}</div>,{
+                                position: toast.POSITION.BOTTOM_RIGHT,
+                                autoClose: 4000
+                            })
+                        }
+                    } 
+                    if(!isValidEmailAgain){
+                        if(this.state.errors.emailAgainLength != ""){
+                            toast.error(<div>{this.state.errors.emailAgainLength}</div>,{
+                                position: toast.POSITION.BOTTOM_RIGHT,
+                                autoClose: 4000
+                            })
+                        }
+                    } 
+                    return;
+                }
+                console.warn('send mail', this.state.email);
+                // axios de xet email co ton tai ko gui qua api existmail
+                var checkEmail = {
+                    email: this.state.email
+                }
+                axios.post('https://nativehotel.herokuapp.com/api/exist_mail', checkEmail).then(res =>{
+                    if (res.data) {
+                        console.warn('check mail');
+                        var id = JSON.parse(localStorage.getItem('itemsShoppingCart'))[0].idLP;
+                        axios.get('https://nativehotel.herokuapp.com/api/room_types/' + id).then( res => {
+                            console.warn('check sl LP');
+                            if (res.data != null) {
+                                this.setState({
+                                    roomType: res.data
+                                }, () => {
+                                    console.log('roomType: ', this.state.roomType);
+                                    const room = {
+                                        idLP: this.state.roomType.idLP,
+                                        tenLP: this.state.roomType.tenLP,
+                                        hinhAnh: this.state.roomType.hinhAnh,
+                                        moTa: this.state.roomType.moTa,
+                                        slPhongTrong: parseInt(this.state.roomType.slPhongTrong,10)-1
+                                    }
+                                    console.log('room: ', room);
+                                    axios.put('https://nativehotel.herokuapp.com/api/room_types/'+room.idLP, room).then(res => {
+                                        console.warn('upd sl Trong');
+                                        if (res.data != null) {
+                                            var customer = {
+                                                tenKH: this.state.tenKH,
+                                                email: this.state.email,
+                                                sdt: this.state.sdt,
+                                                loaiThe: this.state.loaiThe,
+                                                nganHang: this.state.nganHang,
+                                                tenThe: this.state.tenThe,
+                                                soThe: this.state.soThe,
+                                                ngayHetHan: this.state.ngayHetHan!=null ? format(new Date(this.state.ngayHetHan), 'yyyy-MM-dd') : null
+                                            }
+                                            console.log(customer);
+                                            axios.post('https://nativehotel.herokuapp.com/api/customer', customer).then(res => {
+                                                console.warn('add cus');
+                                                if (res.data != null) {
+                                                    customer = { idKH: res.data.idKH }
+                                                    var booking = {
+                                                        idLP: id,
+                                                        idKH: customer.idKH,
+                                                        ngayDen: format(this.state.startDate, 'yyyy-MM-dd'),
+                                                        ngayDi: format(this.state.endDate, 'yyyy-MM-dd'),
+                                                        soDem: this.state.diff,
+                                                        tongTien: parseInt(this.state.giaLP,10) * this.state.diff
+                                                    }
+                                                    console.log(booking);
+                                                    axios.post('https://nativehotel.herokuapp.com/api/bookings', booking).then(res => {
+                                                        console.warn('add booking');
+                                                        if (res.data != null) {
+                                                            //tao var data_obj de gui qua api sendmail de lay data lam form de gui mail cho kh
+                                                            booking = { idDP: res.data.idDP }
+                                                            var data_obj = {
+                                                                tenKH: this.state.tenKH,
+                                                                email: this.state.email,
+                                                                sdt: this.state.sdt,
+                                                                loaiThe: this.state.loaiThe,
+                                                                nganHang: this.state.nganHang,
+                                                                soThe: this.state.soThe,
+                                                                ngayDat: format(new Date(), 'dd/MM/yyyy'),
+                                                                idBooking: booking.idDP,
+                                                                tenLP: this.state.roomType.tenLP,
+                                                                ngayDen: format(this.state.startDate, 'dd/MM/yyyy'),
+                                                                ngayDi: format(this.state.endDate, 'dd/MM/yyyy'),
+                                                                tongTien: new Intl.NumberFormat().format(parseInt(this.state.giaLP,10) * this.state.diff)
+                                                            }
+                                                            axios.post('https://nativehotel.herokuapp.com/api/send_mail', data_obj).then(res => {
+                                                                console.warn('send mail');
+                                                                if (res.data == true) {
+                                                                    this.notify();
+                                                                    toast.success(<div style={{fontSize:'20px'}}>Vui lòng kiểm tra lại email của bạn</div>, {
+                                                                        position: toast.POSITION.BOTTOM_RIGHT,
+                                                                        autoClose: 4000
+                                                                    });
+                                                                    localStorage.removeItem('itemsShoppingCart');
+                                                                    localStorage.removeItem('slItemsShoppingCart');
+                                                                    localStorage.removeItem('dateArriveCart');
+                                                                    setTimeout(()=>{
+                                                                        this.setState({ isGoToHomePage: !this.state.isGoToHomePage });
+                                                                    }, 8000);
+                                                                }
+                                                                else {
+                                                                    toast.error(<div style={{fontSize:'16px'}}><BiErrorAlt/>  Đang có sự cố trên mail server, vui lòng đợi 15 giây sau</div>, {
+                                                                        position: toast.POSITION.BOTTOM_RIGHT,
+                                                                        autoClose: 4000
+                                                                    }); 
+                                                                }
+                                                            })
+                                                        }
+                                                    })
+                                                }
+                                            });
+                                        }
+                                    })
+                                })
+                            } 
+                        });
+                    }
+                    else {
+                        toast.error(<div style={{fontSize:'20px'}}><BiErrorAlt/>  Email không tồn tại</div>, {
+                            position: toast.POSITION.BOTTOM_RIGHT,
+                            autoClose: 4000
+                        }); 
+                    }
+                })
+                  
+                
+                
+            }
+        )
+    }
+
     render() {
+        if (this.state.isGoToHomePage) {
+            return(
+                <Redirect to="/" />
+            )
+        }
+        if (this.state.isGoToBasketPage) {
+            return(
+                <Redirect to="/your_basket" />
+            )
+        }
         return (
             <div style={{ paddingTop:'4%', backgroundColor:'#FFFFFF'}}>
                 <Container>
@@ -55,7 +356,7 @@ export default class BookingInfo extends Component {
                                 <Col xs="7">
                                     <Row className="formPersonalDetails">
                                         <Col xs="4">
-                                            <select style={{paddingTop:'4%'}}>
+                                            <select style={{paddingTop:'4%', width:'100%'}}>
                                                 <option>MR.</option>
                                                 <option>MRS.</option>
                                                 <option>MISS.</option>
@@ -65,20 +366,20 @@ export default class BookingInfo extends Component {
                                             </select>
                                         </Col>
                                         <Col xs="8">
-                                            <input type="text" placeholder="FULLNAME*" required style={{width:'100%'}}/>
+                                            <input type="text" name="tenKH" placeholder="FULLNAME*" required onChange={this.handleChange} autoComplete="off" style={{width:'100%'}}/>
                                         </Col>
                                     </Row>
                                     <Row style={{ paddingTop:'5%'}} className="formPersonalDetails">
                                         <Col xs="6">
-                                            <input type="email" placeholder="EMAIL*" required />
+                                            <input type="email" name="email" placeholder="EMAIL*" required onChange={this.handleChange} autoComplete="off" style={{width:'100%'}}/>
                                         </Col>
                                         <Col xs="6">
-                                            <input type="email" placeholder="CONFIRM EMAIL*" required style={{width:'100%'}}/>
+                                            <input type="email" name="emailAgain" placeholder="CONFIRM EMAIL*" required onChange={this.handleChange} autoComplete="off" style={{width:'100%'}}/>
                                         </Col>
                                     </Row>
                                     <Row style={{ paddingTop:'5%'}} className="formPersonalDetails">
                                         <Col>
-                                            <input type="number" placeholder="TELEPHONE*" required style={{width:'100%'}}/>
+                                            <input type="number" name="sdt" placeholder="TELEPHONE*" required onChange={this.handleChange} autoComplete="off" style={{width:'100%'}}/>
                                         </Col>
                                     </Row>
                                 </Col>
@@ -98,26 +399,33 @@ export default class BookingInfo extends Component {
                                         <Col xs="3"><img src="image/eximbank.png" style={{width:'5vw', height:'auto'}}/></Col>
                                     </Row>
                                     <Row className="formPersonalDetails" style={{ paddingTop:'5%'}}>
-                                        <Col xs="4">
-                                            <select style={{paddingTop:'4%'}}>
-                                                <option>VISA</option>
-                                                <option>MASTERCARD</option>
-                                                <option>BIDV</option>
-                                                <option>EXIMBANK</option>
+                                        <Col xs="6">
+                                            <select name="loaiThe" onChange={this.handleChange} style={{paddingTop:'4%', width:'100%'}}>
+                                                <option value="0">VISA</option>
+                                                <option value="1">MASTERCARD</option>
+                                                <option value="2">DOMESTIC</option>
                                             </select>
                                         </Col>
-                                        <Col xs="8">
-                                            <input type="text" placeholder="NAME ON CARD*" required style={{width:'100%'}}/>
+                                        <Col xs="6">
+                                            <select name="nganHang" onChange={this.handleChange} style={{paddingTop:'4%', width:'100%'}}>
+                                                <option value="0">BIDV</option>
+                                                <option value="1">EXIMBANK</option>
+                                            </select>
                                         </Col>
                                     </Row>
                                     <Row style={{ paddingTop:'5%'}} className="formPersonalDetails">
                                         <Col>
-                                            <input type="number" placeholder="CARD NUMBER*" required style={{width:'100%'}}/>
+                                            <input type="text" name="tenThe" placeholder="NAME ON CARD*" required onChange={this.handleChange} autoComplete="off" style={{width:'100%'}}/>
                                         </Col>
                                     </Row>
                                     <Row style={{ paddingTop:'5%'}} className="formPersonalDetails">
                                         <Col>
-                                            <input type="text" placeholder="EXPIRY DATE*" onfocus="(this.type='date')" style={{width:'100%'}}/>
+                                            <input type="number" name="soThe" placeholder="CARD NUMBER*" required onChange={this.handleChange} autoComplete="off" style={{width:'100%'}}/>
+                                        </Col>
+                                    </Row>
+                                    <Row style={{ paddingTop:'5%'}} className="formPersonalDetails">
+                                        <Col>
+                                            {this.chooseTypeCard()}
                                         </Col>
                                     </Row>
                                 </Col>
@@ -153,7 +461,7 @@ export default class BookingInfo extends Component {
                                     </Row>
                                     <Row style={{paddingBottom:'5%'}}>
                                         <Col>
-                                            <span style={{fontWeight:'bold', fontSize:'2vw', fontFamily:'Georgia'}}>{parseInt(this.state.giaLP,10) * this.state.diff} VND</span>
+                                            <span style={{fontWeight:'bold', fontSize:'2vw', fontFamily:'Georgia'}}>{new Intl.NumberFormat().format(parseInt(this.state.giaLP,10) * this.state.diff)} VND</span>
                                         </Col>
                                     </Row>
                                 </Col>
@@ -164,13 +472,11 @@ export default class BookingInfo extends Component {
                                         <Col><span>Total booking cost</span><hr/></Col>
                                     </Row>
                                     <Row>
-                                        <Col><span style={{fontWeight:'bold', fontSize:'2vw'}}>{parseInt(this.state.giaLP,10) * this.state.diff} VND</span></Col>
+                                        <Col><span style={{fontWeight:'bold', fontSize:'2vw'}}>{new Intl.NumberFormat().format(parseInt(this.state.giaLP,10) * this.state.diff)} VND</span></Col>
                                     </Row>
                                     <Row style={{ paddingTop:'7%'}} className="button-BookNow">
                                         <Col>
-                                            <Link to="/booking">
-                                                <button><b>BOOK NOW</b></button>
-                                            </Link>
+                                            <button onClick={this.submitBookNow}><b>BOOK NOW</b></button>
                                         </Col>
                                     </Row>
                                 </Col>
@@ -178,6 +484,7 @@ export default class BookingInfo extends Component {
                         </Col>
                     </Row>
                 </Container>
+                <ToastContainer/>
             </div>
         )
     }
