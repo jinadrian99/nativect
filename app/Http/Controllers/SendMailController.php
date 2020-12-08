@@ -8,9 +8,30 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use Aman\EmailVerifier\EmailChecker;
 
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
+
 class SendMailController extends Controller
 {
     public function checkExistMail(Request $request){
+        // $validator = Validator::make( $request->all(),[
+        //     'email'=>'required|min:3',
+        //     'tenKH'=>'required'
+        // ],[
+        //     'email.required'=>'thiếu chữ',
+        //     'email.min' => 'ít nhất 3 chữ',
+        //     'tenKH.required'=>'thiếu tên'
+        // ]);
+        
+        // if($validator->fails()){
+        //     $err=[];
+        //     foreach ($validator->errors()->messages() as $key => $value) {
+        //         $err[]=$value[0];
+        //     }
+        //     var_dump($err);
+        // }
+        // return;
+
         $real = app(EmailChecker::class)->checkEmail($request->email);
         return $real["success"]? true : false;
     }

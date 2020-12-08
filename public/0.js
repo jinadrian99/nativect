@@ -138,8 +138,8 @@ var Register = /*#__PURE__*/function (_Component) {
       customers: [],
       tooltipOpen: false
     };
-    _this.showObjectCustomers = _this.showObjectCustomers.bind(_assertThisInitialized(_this));
-    _this.deleteCustomer = _this.deleteCustomer.bind(_assertThisInitialized(_this));
+    _this.showObjectCustomers = _this.showObjectCustomers.bind(_assertThisInitialized(_this)); // this.deleteCustomer = this.deleteCustomer.bind(this);
+
     return _this;
   }
 
@@ -165,36 +165,34 @@ var Register = /*#__PURE__*/function (_Component) {
     key: "componentWillMount",
     value: function componentWillMount() {
       this.loadCustomers();
-    }
-  }, {
-    key: "deleteCustomer",
-    value: function deleteCustomer(id) {
-      var _this3 = this;
+    } // deleteCustomer(id){
+    //     if(window.confirm('Are you sure?')){
+    //         axios.delete('https://nativehotel.herokuapp.com/api/customer/'+id).then((response)=>{
+    //             if(response.data!=null){
+    //                 this.loadCustomers();
+    //             }
+    //         })
+    //         .catch(error => console.log(error));
+    //     }
+    // }
 
-      if (window.confirm('Are you sure?')) {
-        axios__WEBPACK_IMPORTED_MODULE_3___default.a["delete"]('https://nativehotel.herokuapp.com/api/customer/' + id).then(function (response) {
-          if (response.data != null) {
-            _this3.loadCustomers();
-          }
-        })["catch"](function (error) {
-          return console.log(error);
-        });
-      }
-    }
   }, {
     key: "showObjectCustomers",
     value: function showObjectCustomers() {
-      var _this4 = this;
-
       console.log(this.state);
       var lst = this.state.customers.map(function (item, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RecordCustomer_RecordCustomer__WEBPACK_IMPORTED_MODULE_2__["default"], {
           key: index,
           idKH: item.idKH,
           tenKH: item.tenKH,
-          soThe: item.soThe,
-          ngayHetHan: item.ngayHetHan,
-          onSelectDelete: _this4.deleteCustomer
+          email: item.email,
+          sdt: item.sdt,
+          loaiThe: item.loaiThe,
+          nganHang: item.nganHang,
+          soThe: item.soThe // tenThe = { item.tenThe } 
+          // ngayHetHan = { item.ngayHetHan } 
+          // onSelectDelete = { this.deleteCustomer }
+
         });
       });
       return lst;
@@ -203,7 +201,7 @@ var Register = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var _ref,
-          _this5 = this;
+          _this3 = this;
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navigation_NavbarTop_NavbarTop__WEBPACK_IMPORTED_MODULE_4__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         md: "2",
@@ -231,7 +229,7 @@ var Register = /*#__PURE__*/function (_Component) {
         isOpen: this.state.tooltipOpen,
         target: "btnAdd",
         toggle: function toggle() {
-          return _this5.toggle();
+          return _this3.toggle();
         }
       }, "Th\xEAm kh\xE1ch h\xE0ng"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "text-center mt-2"
@@ -239,7 +237,7 @@ var Register = /*#__PURE__*/function (_Component) {
         striped: true
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", {
         className: "text-center"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "id"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "H\u1ECD t\xEAn"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "S\u1ED1 th\u1EBB t\xEDn d\u1EE5ng"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ng\xE0y h\u1EBFt h\u1EA1n th\u1EBB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Thao t\xE1c"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "id"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "H\u1ECD t\xEAn"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "S\u1ED1 \u0110T"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Lo\u1EA1i th\u1EBB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ng\xE2n H\xE0ng"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "S\u1ED1 th\u1EBB t\xEDn d\u1EE5ng"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", {
         className: "text-center"
       }, this.showObjectCustomers()))))));
     }
@@ -339,15 +337,11 @@ var RecordRegister = /*#__PURE__*/function (_Component) {
   }
 
   _createClass(RecordRegister, [{
-    key: "deleteCustomer",
-    value: function deleteCustomer(id) {
-      this.props.onSelectDelete(id);
-    }
-  }, {
     key: "render",
+    // deleteCustomer(id){
+    //     this.props.onSelectDelete(id);
+    // }
     value: function render() {
-      var _this = this;
-
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
         className: "info-rec",
         style: {
@@ -370,25 +364,35 @@ var RecordRegister = /*#__PURE__*/function (_Component) {
           paddingTop: '0',
           paddingBottom: '0'
         }
-      }, this.props.soThe), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      }, this.props.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "info-rec",
         style: {
           lineHeight: '61px',
           paddingTop: '0',
           paddingBottom: '0'
         }
-      }, this.props.ngayHetHan), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: "/admin/form_customer/" + this.props.idKH
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-        color: "warning"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_5__["FaRegEdit"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "space-15"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-        color: "danger",
-        onClick: function onClick(id) {
-          return _this.deleteCustomer(_this.props.idKH);
+      }, this.props.sdt), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "info-rec",
+        style: {
+          lineHeight: '61px',
+          paddingTop: '0',
+          paddingBottom: '0'
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ri__WEBPACK_IMPORTED_MODULE_4__["RiDeleteBin5Line"], null))));
+      }, this.props.loaiThe), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "info-rec",
+        style: {
+          lineHeight: '61px',
+          paddingTop: '0',
+          paddingBottom: '0'
+        }
+      }, this.props.nganHang), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "info-rec",
+        style: {
+          lineHeight: '61px',
+          paddingTop: '0',
+          paddingBottom: '0'
+        }
+      }, this.props.soThe));
     }
   }]);
 

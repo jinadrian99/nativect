@@ -31,7 +31,7 @@ class NavbarTop extends Component {
     }
 
     componentWillMount(){
-        var user = JSON.parse(sessionStorage.getItem('objAdmin'));
+        var user = sessionStorage.getItem('objAdmin') ? JSON.parse(sessionStorage.getItem('objAdmin')) : '';
         this.setState({
             idAdmin: user.idAdmin,
             username: user.username,

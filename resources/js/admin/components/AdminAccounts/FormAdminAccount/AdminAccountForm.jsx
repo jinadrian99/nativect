@@ -148,7 +148,7 @@ export default class AdminAccountForm extends Component {
                                                 <Label style={{ marginLeft: '-15%', marginTop:'1.1%' }} check>
                                                 <Input 
                                                     type="radio" 
-                                                    onClick={(v)=>this.handleClick(2)} 
+                                                    onClick={(v)=>this.handleClick(1)} 
                                                     name="phanQuyen"
                                                     value={this.state.phanQuyen}
                                                 />
@@ -157,11 +157,11 @@ export default class AdminAccountForm extends Component {
                                                 <Label style={{ marginLeft: '10%' }} check>
                                                 <Input 
                                                     type="radio" 
-                                                    onClick={(v)=>this.handleClick(1)} 
+                                                    onClick={(v)=>this.handleClick(2)} 
                                                     name="phanQuyen" 
                                                     value={this.state.phanQuyen}
                                                 />
-                                                    IT Admin (Bộ phận kỹ thuật)
+                                                    Quản lý
                                                 </Label>
                                             </Col>
                                             

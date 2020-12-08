@@ -285,7 +285,7 @@ var AddAdminAccount = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
         type: "radio",
         onClick: function onClick(v) {
-          return _this3.handleClick(2);
+          return _this3.handleClick(1);
         },
         defaultChecked: this.state.phanQuyen,
         name: "phanQuyen",
@@ -298,12 +298,12 @@ var AddAdminAccount = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
         type: "radio",
         onClick: function onClick(v) {
-          return _this3.handleClick(1);
+          return _this3.handleClick(2);
         },
         defaultChecked: this.state.phanQuyen,
         name: "phanQuyen",
         value: "1"
-      }), "IT Admin (B\u1ED9 ph\u1EADn k\u1EF9 thu\u1EADt)"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), "Qu\u1EA3n l\xFD"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           height: '10vh'
         }

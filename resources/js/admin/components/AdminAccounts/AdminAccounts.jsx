@@ -21,7 +21,7 @@ class AdminAccounts extends Component {
     loadAdminAccounts(){
         axios.get('https://nativehotel.herokuapp.com/api/admin_accounts').then( response => {
             this.setState({
-                adminAcc: response.data
+                adminAcc: response.data.filter((obj) => obj.phanQuyen!=3)
             })
         });
     }

@@ -18,7 +18,7 @@ export class Register extends Component {
             tooltipOpen: false,
         };
         this.showObjectCustomers = this.showObjectCustomers.bind(this);
-        this.deleteCustomer = this.deleteCustomer.bind(this);
+        // this.deleteCustomer = this.deleteCustomer.bind(this);
     }
 
     toggle(){
@@ -39,16 +39,16 @@ export class Register extends Component {
         this.loadCustomers();
     }
 
-    deleteCustomer(id){
-        if(window.confirm('Are you sure?')){
-            axios.delete('https://nativehotel.herokuapp.com/api/customer/'+id).then((response)=>{
-                if(response.data!=null){
-                    this.loadCustomers();
-                }
-            })
-            .catch(error => console.log(error));
-        }
-    }
+    // deleteCustomer(id){
+    //     if(window.confirm('Are you sure?')){
+    //         axios.delete('https://nativehotel.herokuapp.com/api/customer/'+id).then((response)=>{
+    //             if(response.data!=null){
+    //                 this.loadCustomers();
+    //             }
+    //         })
+    //         .catch(error => console.log(error));
+    //     }
+    // }
 
     showObjectCustomers(){
         console.log(this.state);
@@ -57,9 +57,14 @@ export class Register extends Component {
                 key = { index } 
                 idKH = { item.idKH }
                 tenKH = { item.tenKH }
-                soThe = { item.soThe }
-                ngayHetHan = { item.ngayHetHan }
-                onSelectDelete = { this.deleteCustomer }
+                email = { item.email }
+                sdt = { item.sdt }
+                loaiThe = { item.loaiThe }
+                nganHang = { item.nganHang }
+                soThe = { item.soThe } 
+                // tenThe = { item.tenThe } 
+                // ngayHetHan = { item.ngayHetHan } 
+                // onSelectDelete = { this.deleteCustomer }
             />
         );
         return lst;
@@ -93,9 +98,11 @@ export class Register extends Component {
                                     <tr>
                                         <th>id</th>
                                         <th>Họ tên</th>
+                                        <th>Email</th>
+                                        <th>Số ĐT</th>
+                                        <th>Loại thẻ</th>
+                                        <th>Ngân Hàng</th>
                                         <th>Số thẻ tín dụng</th>
-                                        <th>Ngày hết hạn thẻ</th>
-                                        <th>Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody className="text-center">

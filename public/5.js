@@ -79,7 +79,9 @@ var AdminAccounts = /*#__PURE__*/function (_Component) {
 
       axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('https://nativehotel.herokuapp.com/api/admin_accounts').then(function (response) {
         _this2.setState({
-          adminAcc: response.data
+          adminAcc: response.data.filter(function (obj) {
+            return obj.phanQuyen != 3;
+          })
         });
       });
     }

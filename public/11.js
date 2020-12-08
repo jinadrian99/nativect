@@ -239,7 +239,7 @@ var AdminAccountForm = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
         type: "radio",
         onClick: function onClick(v) {
-          return _this4.handleClick(2);
+          return _this4.handleClick(1);
         },
         name: "phanQuyen",
         value: this.state.phanQuyen
@@ -251,11 +251,11 @@ var AdminAccountForm = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
         type: "radio",
         onClick: function onClick(v) {
-          return _this4.handleClick(1);
+          return _this4.handleClick(2);
         },
         name: "phanQuyen",
         value: this.state.phanQuyen
-      }), "IT Admin (B\u1ED9 ph\u1EADn k\u1EF9 thu\u1EADt)"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), "Qu\u1EA3n l\xFD"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           height: '10vh'
         }

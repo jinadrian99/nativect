@@ -169,12 +169,12 @@ export default class AddAdminAccount extends Component {
                                             <Label sm={3}>Phân quyền</Label>
                                             <Col sm={9}>
                                                 <Label style={{ marginLeft: '-15%', marginTop:'1.1%' }} check>
-                                                <Input type="radio" onClick={(v)=>this.handleClick(2)} defaultChecked={this.state.phanQuyen} name="phanQuyen" value="2" />
+                                                <Input type="radio" onClick={(v)=>this.handleClick(1)} defaultChecked={this.state.phanQuyen} name="phanQuyen" value="2" />
                                                     Nhân viên chăm sóc khách hàng
                                                 </Label>
                                                 <Label style={{ marginLeft: '10%' }} check>
-                                                <Input type="radio" onClick={(v)=>this.handleClick(1)} defaultChecked={this.state.phanQuyen} name="phanQuyen" value="1"/>
-                                                    IT Admin (Bộ phận kỹ thuật)
+                                                <Input type="radio" onClick={(v)=>this.handleClick(2)} defaultChecked={this.state.phanQuyen} name="phanQuyen" value="1"/>
+                                                    Quản lý
                                                 </Label>
                                             </Col>
                                         </FormGroup>
