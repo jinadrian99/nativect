@@ -12,6 +12,9 @@ import { Link } from 'react-router-dom';
 import { CgShoppingCart } from 'react-icons/cg';
 import { HiOutlineUserGroup } from 'react-icons/hi';
 import './ItemSlick.css';
+import { link } from '../../../link';
+
+const http = link;
 
 export default class ItemSlick extends Component {
     constructor(props) {
@@ -33,7 +36,7 @@ export default class ItemSlick extends Component {
     }
 
     loadPriceRoomTypes(id){
-        axios.get('https://nativehotel.herokuapp.com/api/room_type_rate/'+id).then( response => {
+        axios.get(http + '/api/room_type_rate/'+id).then( response => {
             this.setState({
                 giaLP: response.data
             },()=>{

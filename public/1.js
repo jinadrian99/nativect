@@ -177,6 +177,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_icons_im__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-icons/im */ "./node_modules/react-icons/im/index.esm.js");
 /* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.esm.js");
+/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../link */ "./resources/js/link.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -212,6 +213,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+var http = _link__WEBPACK_IMPORTED_MODULE_10__["link"];
+
 var Slide = /*#__PURE__*/function (_Component) {
   _inherits(Slide, _Component);
 
@@ -237,7 +240,7 @@ var Slide = /*#__PURE__*/function (_Component) {
     value: function loadSlides() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('https://nativehotel.herokuapp.com/api/slides').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get(http + '/api/slides').then(function (response) {
         _this2.setState({
           slide: response.data
         });
@@ -259,14 +262,14 @@ var Slide = /*#__PURE__*/function (_Component) {
           hinhAnhSlide: obj.img
         };
         console.log('img can xoa: ', data);
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('https://nativehotel.herokuapp.com/api/slides_delete_file', data).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_4___default.a.post(http + '/api/slides_delete_file', data).then(function (res) {
           if (res.data) {
             console.log('Đã xóa hình cũ');
           } else {
             console.log('Không có hình cũ');
           }
         });
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a["delete"]('https://nativehotel.herokuapp.com/api/slides/' + obj.id).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_4___default.a["delete"](http + '/api/slides/' + obj.id).then(function (res) {
           if (res.data != null) {
             _this3.loadSlides();
           }

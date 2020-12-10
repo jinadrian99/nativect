@@ -12,6 +12,8 @@ import {
 import NavbarTop from '../../Navigation/NavbarTop/NavbarTop';
 import SidebarLeft from '../../Navigation/Sidebar/SidebarLeft';
 import axios from 'axios';
+import { link } from '../../../../link';
+const http = link;
 
 export default class FromCustomer extends Component {
     constructor(props) {
@@ -37,7 +39,7 @@ export default class FromCustomer extends Component {
     }
 
     findCustomerByID(idCustomer){
-        axios.get('https://nativehotel.herokuapp.com/api/customer/'+idCustomer).then( response => {
+        axios.get(http + '/api/customer/'+idCustomer).then( response => {
             if(response!=null){
                 this.setState({
                     idKH: response.data.idKH,
@@ -66,7 +68,7 @@ export default class FromCustomer extends Component {
         var customer = this.state;
         if(window.confirm('Are you sure?')){
             console.log(customer);
-            axios.put('https://nativehotel.herokuapp.com/api/customer/'+customer.idKH,customer).then(response => {
+            axios.put(http + '/api/customer/'+customer.idKH,customer).then(response => {
                 if(response.data!=null){
                     // đợi tí để data fetch cái r vào thì mới nhận data mới 
                     setTimeout(()=>this.undoPages(),1000);

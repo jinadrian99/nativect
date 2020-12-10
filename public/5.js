@@ -19,6 +19,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Navigation_NavbarTop_NavbarTop__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Navigation/NavbarTop/NavbarTop */ "./resources/js/admin/components/Navigation/NavbarTop/NavbarTop.jsx");
 /* harmony import */ var _Navigation_Sidebar_SidebarLeft__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Navigation/Sidebar/SidebarLeft */ "./resources/js/admin/components/Navigation/Sidebar/SidebarLeft.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../link */ "./resources/js/link.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -52,6 +53,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+var http = _link__WEBPACK_IMPORTED_MODULE_8__["link"];
+
 var AdminAccounts = /*#__PURE__*/function (_Component) {
   _inherits(AdminAccounts, _Component);
 
@@ -77,7 +80,7 @@ var AdminAccounts = /*#__PURE__*/function (_Component) {
     value: function loadAdminAccounts() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('https://nativehotel.herokuapp.com/api/admin_accounts').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get(http + '/api/admin_accounts').then(function (response) {
         _this2.setState({
           adminAcc: response.data.filter(function (obj) {
             return obj.phanQuyen != 3;
@@ -96,7 +99,7 @@ var AdminAccounts = /*#__PURE__*/function (_Component) {
       var _this3 = this;
 
       if (window.confirm('Are you sure?')) {
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a["delete"]('https://nativehotel.herokuapp.com/api/admin_accounts/' + id).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_4___default.a["delete"](http + '/api/admin_accounts/' + id).then(function (res) {
           if (res.data != null) {
             _this3.loadAdminAccounts();
           }
@@ -266,13 +269,7 @@ var AdminAccountsRecord = /*#__PURE__*/function (_Component) {
           paddingTop: '0',
           paddingBottom: '0'
         }
-      }, this.props.phanQuyen), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: "/admin/form_admin_account/" + this.props.idAdmin
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-        color: "warning"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_4__["FaRegEdit"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "space-15"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      }, this.props.phanQuyen), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         color: "danger",
         onClick: function onClick(id) {
           return _this.deleteAdminAccount(_this.props.idAdmin);

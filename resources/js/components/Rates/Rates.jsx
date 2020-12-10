@@ -9,6 +9,9 @@ import 'aos/dist/aos.css';
 
 import './Rates.css';
 import RateRecord from './RateRecord/RateRecord';
+import { link } from '../../link';
+
+const http = link;
 
 export default class Rates extends Component {
     constructor(props) {
@@ -21,7 +24,7 @@ export default class Rates extends Component {
     }
 
     loadRoomTypes(){
-        axios.get('https://nativehotel.herokuapp.com/api/room_types').then( response => {
+        axios.get(http + '/api/room_types').then( response => {
             this.setState({
                 roomType: response.data
             })

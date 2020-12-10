@@ -18,6 +18,8 @@ import { Link } from 'react-router-dom';
 import { AiFillCheckCircle } from "react-icons/ai";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { link } from '../../../link';
+const http = link;
 
 export default class OwnAccountForm extends Component {
     constructor(props) {
@@ -169,7 +171,7 @@ export default class OwnAccountForm extends Component {
                 console.log(OwnAcc);
                 if (window.confirm('Are you sure ?')) {
                     console.log(OwnAcc);
-                    axios.put('https://nativehotel.herokuapp.com/api/admin_accounts/'+OwnAcc.idAdmin, OwnAcc).then(res => {
+                    axios.put(http + '/api/admin_accounts/'+OwnAcc.idAdmin, OwnAcc).then(res => {
                         if (res.data != null) {
                             this.resetForm();
                             this.notify();

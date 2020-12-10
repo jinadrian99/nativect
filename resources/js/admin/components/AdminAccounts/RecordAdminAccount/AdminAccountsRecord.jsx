@@ -17,8 +17,8 @@ export default class AdminAccountsRecord extends Component {
                 <td style={{lineHeight: '61px', paddingTop: '0', paddingBottom: '0'}}>{ this.props.username }</td>
                 <td style={{lineHeight: '61px', paddingTop: '0', paddingBottom: '0'}}>{ this.props.phanQuyen}</td>
                 <td>
-                    <Link to = {"/admin/form_admin_account/" + this.props.idAdmin}><Button color="warning"><FaRegEdit/></Button></Link>
-                    <div className="space-15"/>
+                    {/* <Link to = {"/admin/form_admin_account/" + this.props.idAdmin}><Button color="warning"><FaRegEdit/></Button></Link>
+                    <div className="space-15"/> */}
                     <Button color="danger" onClick = {(id)=>this.deleteAdminAccount(this.props.idAdmin)}><RiDeleteBin5Line /></Button>
                 </td>
             </tr>

@@ -31,6 +31,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return RateRecord; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../link */ "./resources/js/link.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -55,6 +56,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+var http = _link__WEBPACK_IMPORTED_MODULE_1__["link"];
+
 var RateRecord = /*#__PURE__*/function (_Component) {
   _inherits(RateRecord, _Component);
 
@@ -78,7 +81,7 @@ var RateRecord = /*#__PURE__*/function (_Component) {
     value: function componentWillMount() {
       var _this2 = this;
 
-      axios.get('https://nativehotel.herokuapp.com/api/room_type_rate/' + this.props.idLP).then(function (response) {
+      axios.get(http + '/api/room_type_rate/' + this.props.idLP).then(function (response) {
         // console.log(response.data);
         _this2.setState({
           giaLP: !response.data ? 'Chưa có giá' : response.data.giaLP + ' VND',
@@ -155,6 +158,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Rates_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Rates.css */ "./resources/js/components/Rates/Rates.css");
 /* harmony import */ var _Rates_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_Rates_css__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _RateRecord_RateRecord__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./RateRecord/RateRecord */ "./resources/js/components/Rates/RateRecord/RateRecord.jsx");
+/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../link */ "./resources/js/link.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -190,6 +194,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+var http = _link__WEBPACK_IMPORTED_MODULE_10__["link"];
+
 var Rates = /*#__PURE__*/function (_Component) {
   _inherits(Rates, _Component);
 
@@ -214,7 +220,7 @@ var Rates = /*#__PURE__*/function (_Component) {
     value: function loadRoomTypes() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_5___default.a.get('https://nativehotel.herokuapp.com/api/room_types').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_5___default.a.get(http + '/api/room_types').then(function (response) {
         _this2.setState({
           roomType: response.data
         });

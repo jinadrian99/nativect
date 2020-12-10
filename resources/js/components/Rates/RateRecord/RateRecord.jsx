@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { link } from '../../../link';
+const http = link;
 
 export default class RateRecord extends Component {
     constructor(props) {
@@ -10,7 +12,7 @@ export default class RateRecord extends Component {
     }
     
     componentWillMount(){
-        axios.get('https://nativehotel.herokuapp.com/api/room_type_rate/'+this.props.idLP).then( response => {
+        axios.get(http + '/api/room_type_rate/'+this.props.idLP).then( response => {
             // console.log(response.data);
             this.setState({
                 giaLP: !response.data?'Chưa có giá':response.data.giaLP+' VND',

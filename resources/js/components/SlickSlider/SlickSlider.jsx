@@ -5,6 +5,8 @@ import axios from 'axios';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ItemSlick from './ItemSlick/ItemSlick';
+import { link } from '../../link';
+const http = link;
 
 export default class SlickSlider extends Component {
   constructor(props) {
@@ -22,7 +24,7 @@ export default class SlickSlider extends Component {
   }
 
   loadRoomTypes(){
-    axios.get('https://nativehotel.herokuapp.com/api/room_types').then( response => {
+    axios.get(http + '/api/room_types').then( response => {
         this.setState({
             roomTypes: response.data
         })

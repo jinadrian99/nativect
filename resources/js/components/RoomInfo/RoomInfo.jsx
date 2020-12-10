@@ -25,6 +25,8 @@ import "slick-carousel/slick/slick-theme.css";
 import { BiErrorAlt, BiHappyBeaming } from 'react-icons/bi';
 import { toast, ToastContainer } from 'react-toastify';
 import { Redirect } from 'react-router-dom';
+import { link } from '../../link';
+const http = link;
 
 export default class RoomInfo extends Component {
     constructor(props) {
@@ -64,7 +66,7 @@ export default class RoomInfo extends Component {
 
     findRoomTypeByID(id){
         console.log('idRoomType: ', id);
-        axios.get('https://nativehotel.herokuapp.com/api/room_types/' + id).then( res => {
+        axios.get(http + '/api/room_types/' + id).then( res => {
             if (res.data != null) {
                 this.setState({
                     roomType: res.data,
@@ -77,7 +79,7 @@ export default class RoomInfo extends Component {
 
     findRoomRateByID(id){
         console.log('idRoomRate: ', id);
-        axios.get('https://nativehotel.herokuapp.com/api/room_type_rate/' + id).then(res =>{
+        axios.get(http + '/api/room_type_rate/' + id).then(res =>{
             this.setState({
                 giaLP: !res.data ? 'Chưa có giá' : res.data.giaLP + ' VND'
             })
@@ -151,7 +153,7 @@ export default class RoomInfo extends Component {
 
     addItemInShoppingCart(){
         // if(localStorage.getItem('itemsShoppingCart')==null){
-        axios.get('https://nativehotel.herokuapp.com/api/room_types/' + this.state.roomType.idLP).then( res => {
+        axios.get(http + '/api/room_types/' + this.state.roomType.idLP).then( res => {
             if (res.data != null) {
                 this.setState({
                     slPhongTrong: res.data.slPhongTrong

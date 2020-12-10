@@ -19,8 +19,6 @@ import { FaRegMoneyBillAlt } from 'react-icons/fa';
 import { BsCollection } from "react-icons/bs";
 import { RiAdminFill } from "react-icons/ri";
 import { BsCardChecklist } from "react-icons/bs";
-
-
 import './SidebarLeft.css';
 
 export default class SidebarLeft extends Component {

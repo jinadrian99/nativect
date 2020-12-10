@@ -4,6 +4,8 @@ import BookingRecord from './RecordBooking/BookingRecord';
 import axios from 'axios';
 import NavbarTop from '../Navigation/NavbarTop/NavbarTop';
 import SidebarLeft from '../Navigation/Sidebar/SidebarLeft';
+import { link } from '../../../link';
+const http = link;
 
 class Booking extends Component {
     constructor(props) {
@@ -15,7 +17,7 @@ class Booking extends Component {
     }
 
     loadBooking(){
-        axios.get('https://nativehotel.herokuapp.com/api/bookings').then( response => {
+        axios.get(http + '/api/bookings').then( response => {
             this.setState({
                 booking: response.data
             })

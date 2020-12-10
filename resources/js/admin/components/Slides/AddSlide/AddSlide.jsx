@@ -18,6 +18,8 @@ import { ImCancelCircle } from "react-icons/im";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import { link } from '../../../../link';
+const http = link;
 
 export default class Slide extends Component {
     constructor(props) {
@@ -85,7 +87,7 @@ export default class Slide extends Component {
         console.log(file);
         fd.append('data', file);
         console.log('value fd: ', fd.get('data'));
-        axios.post('https://nativehotel.herokuapp.com/api/slides_upload_file', fd, {
+        axios.post(http + '/api/slides_upload_file', fd, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -108,7 +110,7 @@ export default class Slide extends Component {
                     hinhAnh : this.state.hinhAnh
                 }
                 console.log(slide);
-                axios.post('https://nativehotel.herokuapp.com/api/slides', slide)
+                axios.post(http + '/api/slides', slide)
                 .then(res => {
                     if (res.data != null) {
                         this.setState(this.state);

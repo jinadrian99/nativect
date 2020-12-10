@@ -5,6 +5,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import { BiErrorAlt } from 'react-icons/bi';
 import axios from 'axios';
 import './Login.css';
+import { link } from '../../../link';
+const http = link;
 
 export default class Login extends Component {
     constructor(props) {
@@ -37,7 +39,7 @@ export default class Login extends Component {
             password: this.state.password,
             phanQuyen: 0
         }
-        axios.post('https://nativehotel.herokuapp.com/api/admin_login', admin).then((res)=>{
+        axios.post(http + '/api/admin_login', admin).then((res)=>{
             console.log(res);
             if(res.status==200){
                 var objAdmin = {

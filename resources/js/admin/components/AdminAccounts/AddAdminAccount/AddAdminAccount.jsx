@@ -18,6 +18,8 @@ import { AiFillCheckCircle } from "react-icons/ai";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import { link } from '../../../../link';
+const http = link;
 
 export default class AddAdminAccount extends Component {
     constructor(props) {
@@ -115,7 +117,7 @@ export default class AddAdminAccount extends Component {
                     phanQuyen: this.state.phanQuyen
                 }
                 console.log(adminAcc);
-                axios.post('https://nativehotel.herokuapp.com/api/admin_accounts', adminAcc).then(res => {
+                axios.post(http + '/api/admin_accounts', adminAcc).then(res => {
                     if (res.data != null) {
                         this.resetForm();
                         this.notify();

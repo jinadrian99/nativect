@@ -15,6 +15,8 @@ import NavbarTop from '../../Navigation/NavbarTop/NavbarTop';
 import SidebarLeft from '../../Navigation/Sidebar/SidebarLeft';
 import { ImCancelCircle } from "react-icons/im";
 import axios from 'axios';
+import { link } from '../../../../link';
+const http = link;
 
 export default class AddRoomType extends Component {
     constructor(props) {
@@ -124,7 +126,7 @@ export default class AddRoomType extends Component {
         //     fd.append('data[]', file);
         // }
         // console.log(fd.getAll('data[]'));
-        // axios.post('https://nativehotel.herokuapp.com/api/room_types_upload_file', fd, {
+        // axios.post(http + '/api/room_types_upload_file', fd, {
         //     headers: {
         //         "Content-Type": "multipart/form-data",
         //     }
@@ -160,7 +162,7 @@ export default class AddRoomType extends Component {
             fd.append('data[]', file);
         }
         console.log('value fd: ',fd.getAll('data[]'));
-        axios.post('https://nativehotel.herokuapp.com/api/room_types_upload_file', fd, {
+        axios.post(http + '/api/room_types_upload_file', fd, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -204,7 +206,7 @@ export default class AddRoomType extends Component {
                     slPhongTrong: this.state.slPhongTrong
                 }
                 console.log('value room: ',roomType);
-                axios.post('https://nativehotel.herokuapp.com/api/room_types', roomType).then(res => {
+                axios.post(http + '/api/room_types', roomType).then(res => {
                     if (res.data != null) {
                         this.resetForm();
                         alert("Thêm loại phòng thành công");

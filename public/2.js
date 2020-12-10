@@ -165,6 +165,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_icons_ai__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-icons/ai */ "./node_modules/react-icons/ai/index.esm.js");
 /* harmony import */ var _BookingInfo_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./BookingInfo.css */ "./resources/js/components/Booking/BookingInfo/BookingInfo.css");
 /* harmony import */ var _BookingInfo_css__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_BookingInfo_css__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../link */ "./resources/js/link.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -201,6 +202,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+var http = _link__WEBPACK_IMPORTED_MODULE_12__["link"];
 
 var BookingInfo = /*#__PURE__*/function (_Component) {
   _inherits(BookingInfo, _Component);
@@ -250,7 +253,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
 
       var idPhongDat = JSON.parse(localStorage.getItem('itemsShoppingCart'))[0].idLP;
       var arriveDate = new Date(JSON.parse(localStorage.getItem('dateArriveCart')).startDate);
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('https://nativehotel.herokuapp.com/api/room_types/' + idPhongDat).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(http + '/api/room_types/' + idPhongDat).then(function (res) {
         if (res.data != null) {
           _this2.setState({
             slPhong: res.data.slPhongTrong
@@ -450,11 +453,11 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
         var checkEmail = {
           email: _this3.state.email
         };
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('https://nativehotel.herokuapp.com/api/exist_mail', checkEmail).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(http + '/api/exist_mail', checkEmail).then(function (res) {
           if (res.data) {
             console.warn('check mail');
             var id = JSON.parse(localStorage.getItem('itemsShoppingCart'))[0].idLP;
-            axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('https://nativehotel.herokuapp.com/api/room_types/' + id).then(function (res) {
+            axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(http + '/api/room_types/' + id).then(function (res) {
               console.warn('check sl LP');
 
               if (res.data != null) {
@@ -470,7 +473,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
                     slPhongTrong: parseInt(_this3.state.roomType.slPhongTrong, 10) - 1
                   };
                   console.log('room: ', room);
-                  axios__WEBPACK_IMPORTED_MODULE_2___default.a.put('https://nativehotel.herokuapp.com/api/room_types/' + room.idLP, room).then(function (res) {
+                  axios__WEBPACK_IMPORTED_MODULE_2___default.a.put(http + '/api/room_types/' + room.idLP, room).then(function (res) {
                     console.warn('upd sl Trong');
 
                     if (res.data != null) {
@@ -485,7 +488,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
                         ngayHetHan: _this3.state.ngayHetHan != null ? Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(new Date(_this3.state.ngayHetHan), 'yyyy-MM-dd') : null
                       };
                       console.log(customer);
-                      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('https://nativehotel.herokuapp.com/api/customer', customer).then(function (res) {
+                      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(http + '/api/customer', customer).then(function (res) {
                         console.warn('add cus');
 
                         if (res.data != null) {
@@ -501,7 +504,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
                             tongTien: parseInt(_this3.state.giaLP, 10) * _this3.state.diff
                           };
                           console.log(booking);
-                          axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('https://nativehotel.herokuapp.com/api/bookings', booking).then(function (res) {
+                          axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(http + '/api/bookings', booking).then(function (res) {
                             console.warn('add booking');
 
                             if (res.data != null) {
@@ -523,7 +526,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
                                 ngayDi: Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(_this3.state.endDate, 'dd/MM/yyyy'),
                                 tongTien: new Intl.NumberFormat().format(parseInt(_this3.state.giaLP, 10) * _this3.state.diff)
                               };
-                              axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('https://nativehotel.herokuapp.com/api/send_mail', data_obj).then(function (res) {
+                              axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(http + '/api/send_mail', data_obj).then(function (res) {
                                 console.warn('send mail');
 
                                 if (res.data == true) {

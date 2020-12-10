@@ -23,6 +23,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../link */ "./resources/js/link.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -57,6 +58,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+var http = _link__WEBPACK_IMPORTED_MODULE_10__["link"];
 
 var Slide = /*#__PURE__*/function (_Component) {
   _inherits(Slide, _Component);
@@ -156,7 +159,7 @@ var Slide = /*#__PURE__*/function (_Component) {
       console.log(file);
       fd.append('data', file);
       console.log('value fd: ', fd.get('data'));
-      axios__WEBPACK_IMPORTED_MODULE_9___default.a.post('https://nativehotel.herokuapp.com/api/slides_upload_file', fd, {
+      axios__WEBPACK_IMPORTED_MODULE_9___default.a.post(http + '/api/slides_upload_file', fd, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
@@ -178,7 +181,7 @@ var Slide = /*#__PURE__*/function (_Component) {
             hinhAnh: _this2.state.hinhAnh
           };
           console.log(slide);
-          axios__WEBPACK_IMPORTED_MODULE_9___default.a.post('https://nativehotel.herokuapp.com/api/slides', slide).then(function (res) {
+          axios__WEBPACK_IMPORTED_MODULE_9___default.a.post(http + '/api/slides', slide).then(function (res) {
             if (res.data != null) {
               _this2.setState(_this2.state);
 

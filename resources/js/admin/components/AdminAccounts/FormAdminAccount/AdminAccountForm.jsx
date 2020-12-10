@@ -15,6 +15,8 @@ import SidebarLeft from '../../Navigation/Sidebar/SidebarLeft';
 import { ImCancelCircle } from "react-icons/im";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { link } from '../../../../link';
+const http = link;
 
 export default class AdminAccountForm extends Component {
     constructor(props) {
@@ -44,7 +46,7 @@ export default class AdminAccountForm extends Component {
     }
 
     findAdminAccountByID(idAdminAcc){
-        axios.get('https://nativehotel.herokuapp.com/api/admin_accounts/' + idAdminAcc).then(res => {
+        axios.get(http + '/api/admin_accounts/' + idAdminAcc).then(res => {
             if (res.data != null) {
                 this.setState({
                     idAdmin: res.data.idAdmin,

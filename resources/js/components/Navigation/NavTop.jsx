@@ -19,6 +19,9 @@ import './NavTop.css';
 import { format } from 'date-fns';
 import { ImCancelCircle } from 'react-icons/im';
 import { AiOutlineUser } from 'react-icons/ai';
+import { link } from '../../link';
+
+const http = link;
 
 export default class NavTop extends Component {
     constructor(props) {
@@ -46,7 +49,7 @@ export default class NavTop extends Component {
     }
 
     loadRoomTypes(){
-        axios.get('https://nativehotel.herokuapp.com/api/room_types').then( response => {
+        axios.get(http + '/api/room_types').then( response => {
             this.setState({
                 roomTypes: response.data,
                 slItemAddCart: localStorage.getItem('slItemsShoppingCart') ? parseInt(localStorage.getItem('slItemsShoppingCart'),10) : 0

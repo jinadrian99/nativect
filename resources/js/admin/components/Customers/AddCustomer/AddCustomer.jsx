@@ -15,6 +15,8 @@ import NavbarTop from '../../Navigation/NavbarTop/NavbarTop';
 import SidebarLeft from '../../Navigation/Sidebar/SidebarLeft';
 import { ImCancelCircle } from "react-icons/im";
 import axios from 'axios';
+import { link } from '../../../../link';
+const http = link;
 
 export default class AddCustomer extends Component {
     constructor(props) {
@@ -52,7 +54,7 @@ export default class AddCustomer extends Component {
             ngayHetHan: this.state.ngayHetHan
         }
         console.log(customer);
-        axios.post('https://nativehotel.herokuapp.com/api/customer', customer).then(res => {
+        axios.post(http + '/api/customer', customer).then(res => {
             if (res.data != null) {
                 this.setState(this.state);
                 alert("Thêm khách hàng thành công");

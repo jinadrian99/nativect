@@ -6,6 +6,8 @@ import axios from 'axios';
 import NavbarTop from '../Navigation/NavbarTop/NavbarTop';
 import SidebarLeft from '../Navigation/Sidebar/SidebarLeft';
 import { Link } from 'react-router-dom';
+import { link } from '../../../link';
+const http = link;
 
 class AdminAccounts extends Component {
     constructor(props) {
@@ -19,7 +21,7 @@ class AdminAccounts extends Component {
     }
 
     loadAdminAccounts(){
-        axios.get('https://nativehotel.herokuapp.com/api/admin_accounts').then( response => {
+        axios.get(http + '/api/admin_accounts').then( response => {
             this.setState({
                 adminAcc: response.data.filter((obj) => obj.phanQuyen!=3)
             })
@@ -32,7 +34,7 @@ class AdminAccounts extends Component {
 
     deleteAdminAccount(id){
         if (window.confirm('Are you sure?')) {
-            axios.delete('https://nativehotel.herokuapp.com/api/admin_accounts/'+id).then(res=>{
+            axios.delete(http + '/api/admin_accounts/'+id).then(res=>{
                 if (res.data != null) {
                     this.loadAdminAccounts();
                 }

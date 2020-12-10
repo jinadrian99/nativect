@@ -12,6 +12,8 @@ import {
 import NavbarTop from '../../Navigation/NavbarTop/NavbarTop';
 import SidebarLeft from '../../Navigation/Sidebar/SidebarLeft';
 import axios from 'axios';
+import { link } from '../../../../link';
+const http = link;
 
 export default class FromRates extends Component {
     constructor(props) {
@@ -43,7 +45,7 @@ export default class FromRates extends Component {
     }
 
     findRatesByID(id){
-        axios.get('https://nativehotel.herokuapp.com/api/rates/'+id).then( response => {
+        axios.get(http + '/api/rates/'+id).then( response => {
             if(response!=null){
                 this.setState({
                     idBG: response.data.idBG,
@@ -58,7 +60,7 @@ export default class FromRates extends Component {
     }
 
     loadRoomTypes(){
-        axios.get('https://nativehotel.herokuapp.com/api/room_types').then( response => {
+        axios.get(http + '/api/room_types').then( response => {
             if(response.data != null){
                 this.setState({
                     roomType: response.data
@@ -92,7 +94,7 @@ export default class FromRates extends Component {
         rates.idLP = parseInt(rates.idLP);
         if(window.confirm('Are you sure?')){
             console.log(rates);
-            axios.put('https://nativehotel.herokuapp.com/api/rates/'+rates.idBG,rates).then(response => {
+            axios.put(http + '/api/rates/'+rates.idBG,rates).then(response => {
                 if(response.data!=null){
                     // đợi tí để data fetch cái r vào thì mới nhận data mới 
                     setTimeout(()=>this.undoPages(),1000);

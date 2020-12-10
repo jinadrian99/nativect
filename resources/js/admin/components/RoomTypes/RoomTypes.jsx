@@ -5,7 +5,9 @@ import axios from 'axios';
 import NavbarTop from '../Navigation/NavbarTop/NavbarTop';
 import SidebarLeft from '../Navigation/Sidebar/SidebarLeft';
 import { Link } from 'react-router-dom';
-import { GrAdd } from "react-icons/gr"
+import { GrAdd } from "react-icons/gr";
+import { link } from '../../../link';
+const http = link;
 
 class RoomTypes extends Component {
     constructor(props) {
@@ -19,7 +21,7 @@ class RoomTypes extends Component {
     }
 
     loadRoomTypes(){
-        axios.get('https://nativehotel.herokuapp.com/api/room_types').then( response => {
+        axios.get(http + '/api/room_types').then( response => {
             this.setState({
                 roomType: response.data
             })
@@ -37,13 +39,13 @@ class RoomTypes extends Component {
                 imgRaws: obj.imgRaw,
             };
             console.log('img cần xóa',data);
-            axios.post('https://nativehotel.herokuapp.com/api/room_types_delete_file',data).then(res=>{
+            axios.post(http + '/api/room_types_delete_file',data).then(res=>{
                 if(res.data)
                     console.log('Đã xóa hình cũ');
                 else
                     console.log('Không có hình cũ');
             })
-            axios.delete('https://nativehotel.herokuapp.com/api/room_types/'+obj.id).then(res=>{
+            axios.delete(http + '/api/room_types/'+obj.id).then(res=>{
                 if (res.data != null) {
                     this.loadRoomTypes();
                 }

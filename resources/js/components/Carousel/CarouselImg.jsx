@@ -4,6 +4,8 @@ import {
 } from 'reactstrap';
 import './CarouselImg.css';
 import axios from 'axios';
+import { link } from '../../link';
+const http = link;
 
 export default class CarouselImg extends Component {
   constructor(props) {
@@ -20,7 +22,7 @@ export default class CarouselImg extends Component {
   }
 
   loadSlides(){
-    axios.get('https://nativehotel.herokuapp.com/api/slides').then(res => {
+    axios.get(http + '/api/slides').then(res => {
       var data = res.data;
       var formatdata = [];
       for(var i=0; i < data.length; i++){

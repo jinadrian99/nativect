@@ -5,8 +5,9 @@ import axios from 'axios';
 import NavbarTop from '../Navigation/NavbarTop/NavbarTop';
 import SidebarLeft from '../Navigation/Sidebar/SidebarLeft';
 import { Link } from 'react-router-dom';
-
 import { GrAdd } from 'react-icons/gr';
+import { link } from '../../../link';
+const http = link;
 
 class Rates extends Component {
     constructor(props) {
@@ -25,7 +26,7 @@ class Rates extends Component {
     }
 
     loadRates(){
-        axios.get('https://nativehotel.herokuapp.com/api/rates').then( response => {
+        axios.get(http + '/api/rates').then( response => {
             this.setState({
                 rates: response.data
             })
@@ -38,7 +39,7 @@ class Rates extends Component {
 
     deleteRates(id){
         if(window.confirm('Are you sure?')){
-            axios.delete('https://nativehotel.herokuapp.com/api/rates/'+id).then((response)=>{
+            axios.delete(http + '/api/rates/'+id).then((response)=>{
                 if(response.data!=null){
                     this.loadRates();
                 }

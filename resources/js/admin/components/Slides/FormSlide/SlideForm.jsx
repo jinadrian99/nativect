@@ -18,6 +18,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { link } from '../../../../link';
+const http = link;
 
 export default class SlideForm extends Component {
     constructor(props) {
@@ -56,7 +58,7 @@ export default class SlideForm extends Component {
     }
 
     findSlideByID(idSlide){
-        axios.get('https://nativehotel.herokuapp.com/api/slides/' + idSlide).then(res => {
+        axios.get(http + '/api/slides/' + idSlide).then(res => {
             if (res.data != null) {
                 this.setState({
                     idSlide: res.data.idSlide,
@@ -105,7 +107,7 @@ export default class SlideForm extends Component {
                 hinhAnhSlide: this.state.hinhAnhCu
             }
             console.log('data: ', data);
-            axios.post('https://nativehotel.herokuapp.com/api/slides_delete_file', data).then(res => {
+            axios.post(http + '/api/slides_delete_file', data).then(res => {
                 if (res.data) {
                     console.log('Đã xóa hình cũ');
                 }
@@ -119,7 +121,7 @@ export default class SlideForm extends Component {
             console.log(file);
             fd.append('data', file);
             console.log('value fd: ', fd.get('data'));
-            axios.post('https://nativehotel.herokuapp.com/api/slides_upload_file', fd, {
+            axios.post(http + '/api/slides_upload_file', fd, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 }
@@ -145,7 +147,7 @@ export default class SlideForm extends Component {
                     console.log(slide);
                     if (window.confirm('Are you sure ?')) {
                         console.log(slide);
-                        axios.put('https://nativehotel.herokuapp.com/api/slides/'+slide.idSlide, slide).then(res => {
+                        axios.put(http + '/api/slides/'+slide.idSlide, slide).then(res => {
                             if (res.data != null) {
                                 setTimeout(()=>this.undoPages(),1000);
                             }

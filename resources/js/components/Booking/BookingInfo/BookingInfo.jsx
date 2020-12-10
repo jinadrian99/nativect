@@ -12,6 +12,8 @@ import { BiErrorAlt } from 'react-icons/bi';
 import { AiFillCheckCircle } from 'react-icons/ai';
 
 import './BookingInfo.css';
+import { link } from '../../../link';
+const http = link;
 
 
 export default class BookingInfo extends Component {
@@ -50,7 +52,7 @@ export default class BookingInfo extends Component {
     componentWillMount(){
         var idPhongDat = JSON.parse(localStorage.getItem('itemsShoppingCart'))[0].idLP;
         var arriveDate = new Date(JSON.parse(localStorage.getItem('dateArriveCart')).startDate);
-        axios.get('https://nativehotel.herokuapp.com/api/room_types/' + idPhongDat).then(res => {
+        axios.get(http + '/api/room_types/' + idPhongDat).then(res => {
             if (res.data != null) {
                 this.setState({
                     slPhong: res.data.slPhongTrong
@@ -201,11 +203,11 @@ export default class BookingInfo extends Component {
                 var checkEmail = {
                     email: this.state.email
                 }
-                axios.post('https://nativehotel.herokuapp.com/api/exist_mail', checkEmail).then(res =>{
+                axios.post(http + '/api/exist_mail', checkEmail).then(res =>{
                     if (res.data) {
                         console.warn('check mail');
                         var id = JSON.parse(localStorage.getItem('itemsShoppingCart'))[0].idLP;
-                        axios.get('https://nativehotel.herokuapp.com/api/room_types/' + id).then( res => {
+                        axios.get(http + '/api/room_types/' + id).then( res => {
                             console.warn('check sl LP');
                             if (res.data != null) {
                                 this.setState({
@@ -220,7 +222,7 @@ export default class BookingInfo extends Component {
                                         slPhongTrong: parseInt(this.state.roomType.slPhongTrong,10)-1
                                     }
                                     console.log('room: ', room);
-                                    axios.put('https://nativehotel.herokuapp.com/api/room_types/'+room.idLP, room).then(res => {
+                                    axios.put(http + '/api/room_types/'+room.idLP, room).then(res => {
                                         console.warn('upd sl Trong');
                                         if (res.data != null) {
                                             var customer = {
@@ -234,7 +236,7 @@ export default class BookingInfo extends Component {
                                                 ngayHetHan: this.state.ngayHetHan!=null ? format(new Date(this.state.ngayHetHan), 'yyyy-MM-dd') : null
                                             }
                                             console.log(customer);
-                                            axios.post('https://nativehotel.herokuapp.com/api/customer', customer).then(res => {
+                                            axios.post(http + '/api/customer', customer).then(res => {
                                                 console.warn('add cus');
                                                 if (res.data != null) {
                                                     customer = { idKH: res.data.idKH }
@@ -247,7 +249,7 @@ export default class BookingInfo extends Component {
                                                         tongTien: parseInt(this.state.giaLP,10) * this.state.diff
                                                     }
                                                     console.log(booking);
-                                                    axios.post('https://nativehotel.herokuapp.com/api/bookings', booking).then(res => {
+                                                    axios.post(http + '/api/bookings', booking).then(res => {
                                                         console.warn('add booking');
                                                         if (res.data != null) {
                                                             //tao var data_obj de gui qua api sendmail de lay data lam form de gui mail cho kh
@@ -266,7 +268,7 @@ export default class BookingInfo extends Component {
                                                                 ngayDi: format(this.state.endDate, 'dd/MM/yyyy'),
                                                                 tongTien: new Intl.NumberFormat().format(parseInt(this.state.giaLP,10) * this.state.diff)
                                                             }
-                                                            axios.post('https://nativehotel.herokuapp.com/api/send_mail', data_obj).then(res => {
+                                                            axios.post(http + '/api/send_mail', data_obj).then(res => {
                                                                 console.warn('send mail');
                                                                 if (res.data == true) {
                                                                     this.notify();

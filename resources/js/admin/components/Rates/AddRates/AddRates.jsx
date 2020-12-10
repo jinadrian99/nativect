@@ -19,6 +19,8 @@ import './toast.css';
 import { ImCancelCircle } from "react-icons/im";
 import { MdVerifiedUser } from 'react-icons/md';
 import axios from 'axios';
+import { link } from '../../../../link';
+const http = link;
 
 export default class AddRates extends Component {
     constructor(props) {
@@ -44,7 +46,7 @@ export default class AddRates extends Component {
     }
 
     loadRoomTypes(){
-        axios.get('https://nativehotel.herokuapp.com/api/room_types').then( response => {
+        axios.get(http + '/api/room_types').then( response => {
             if(response.data != null){
                 this.setState({
                     roomType: response.data
@@ -99,7 +101,7 @@ export default class AddRates extends Component {
         if(window.confirm('Are you sure?')){
             console.log(rates);
             this.resetForm();
-            axios.post('https://nativehotel.herokuapp.com/api/rates', rates).then(response => {
+            axios.post(http + '/api/rates', rates).then(response => {
                 if(response.data!=null){
                     this.resetForm();
                     toast.success(

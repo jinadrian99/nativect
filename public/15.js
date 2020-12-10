@@ -17,6 +17,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Navigation_Sidebar_SidebarLeft__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Navigation/Sidebar/SidebarLeft */ "./resources/js/admin/components/Navigation/Sidebar/SidebarLeft.jsx");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../link */ "./resources/js/link.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -46,6 +47,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+var http = _link__WEBPACK_IMPORTED_MODULE_5__["link"];
 
 var FromRates = /*#__PURE__*/function (_Component) {
   _inherits(FromRates, _Component);
@@ -90,7 +93,7 @@ var FromRates = /*#__PURE__*/function (_Component) {
     value: function findRatesByID(id) {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('https://nativehotel.herokuapp.com/api/rates/' + id).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get(http + '/api/rates/' + id).then(function (response) {
         if (response != null) {
           _this2.setState({
             idBG: response.data.idBG,
@@ -108,7 +111,7 @@ var FromRates = /*#__PURE__*/function (_Component) {
     value: function loadRoomTypes() {
       var _this3 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('https://nativehotel.herokuapp.com/api/room_types').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get(http + '/api/room_types').then(function (response) {
         if (response.data != null) {
           _this3.setState({
             roomType: response.data
@@ -150,7 +153,7 @@ var FromRates = /*#__PURE__*/function (_Component) {
 
       if (window.confirm('Are you sure?')) {
         console.log(rates);
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.put('https://nativehotel.herokuapp.com/api/rates/' + rates.idBG, rates).then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_4___default.a.put(http + '/api/rates/' + rates.idBG, rates).then(function (response) {
           if (response.data != null) {
             // đợi tí để data fetch cái r vào thì mới nhận data mới 
             setTimeout(function () {

@@ -44,6 +44,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_icons_md__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-icons/md */ "./node_modules/react-icons/md/index.esm.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../link */ "./resources/js/link.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -79,6 +80,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+var http = _link__WEBPACK_IMPORTED_MODULE_11__["link"];
 
 var AddRates = /*#__PURE__*/function (_Component) {
   _inherits(AddRates, _Component);
@@ -116,7 +119,7 @@ var AddRates = /*#__PURE__*/function (_Component) {
     value: function loadRoomTypes() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_10___default.a.get('https://nativehotel.herokuapp.com/api/room_types').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_10___default.a.get(http + '/api/room_types').then(function (response) {
         if (response.data != null) {
           _this2.setState({
             roomType: response.data
@@ -183,7 +186,7 @@ var AddRates = /*#__PURE__*/function (_Component) {
       if (window.confirm('Are you sure?')) {
         console.log(rates);
         this.resetForm();
-        axios__WEBPACK_IMPORTED_MODULE_10___default.a.post('https://nativehotel.herokuapp.com/api/rates', rates).then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_10___default.a.post(http + '/api/rates', rates).then(function (response) {
           if (response.data != null) {
             _this3.resetForm();
 

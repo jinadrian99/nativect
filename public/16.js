@@ -19,6 +19,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_icons_im__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-icons/im */ "./node_modules/react-icons/im/index.esm.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../link */ "./resources/js/link.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -50,6 +51,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+var http = _link__WEBPACK_IMPORTED_MODULE_7__["link"];
 
 var AddRoomType = /*#__PURE__*/function (_Component) {
   _inherits(AddRoomType, _Component);
@@ -195,7 +198,7 @@ var AddRoomType = /*#__PURE__*/function (_Component) {
       //     fd.append('data[]', file);
       // }
       // console.log(fd.getAll('data[]'));
-      // axios.post('https://nativehotel.herokuapp.com/api/room_types_upload_file', fd, {
+      // axios.post(http + '/api/room_types_upload_file', fd, {
       //     headers: {
       //         "Content-Type": "multipart/form-data",
       //     }
@@ -234,7 +237,7 @@ var AddRoomType = /*#__PURE__*/function (_Component) {
       }
 
       console.log('value fd: ', fd.getAll('data[]'));
-      axios__WEBPACK_IMPORTED_MODULE_6___default.a.post('https://nativehotel.herokuapp.com/api/room_types_upload_file', fd, {
+      axios__WEBPACK_IMPORTED_MODULE_6___default.a.post(http + '/api/room_types_upload_file', fd, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
@@ -277,7 +280,7 @@ var AddRoomType = /*#__PURE__*/function (_Component) {
             slPhongTrong: _this2.state.slPhongTrong
           };
           console.log('value room: ', roomType);
-          axios__WEBPACK_IMPORTED_MODULE_6___default.a.post('https://nativehotel.herokuapp.com/api/room_types', roomType).then(function (res) {
+          axios__WEBPACK_IMPORTED_MODULE_6___default.a.post(http + '/api/room_types', roomType).then(function (res) {
             if (res.data != null) {
               _this2.resetForm();
 

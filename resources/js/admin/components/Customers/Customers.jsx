@@ -5,10 +5,10 @@ import axios from 'axios';
 import NavbarTop from '../Navigation/NavbarTop/NavbarTop';
 import SidebarLeft from '../Navigation/Sidebar/SidebarLeft';
 import { Link } from 'react-router-dom';
-
 import { GrAdd } from 'react-icons/gr';
-
 import './Customers.css'; 
+import { link } from '../../../link';
+const http = link;
 
 export class Register extends Component {
     constructor(props) {
@@ -28,7 +28,7 @@ export class Register extends Component {
     }
 
     loadCustomers(){
-        axios.get('https://nativehotel.herokuapp.com/api/customer').then( response => {
+        axios.get(http + '/api/customer').then( response => {
             this.setState({
                 customers: response.data
             })
@@ -41,7 +41,7 @@ export class Register extends Component {
 
     // deleteCustomer(id){
     //     if(window.confirm('Are you sure?')){
-    //         axios.delete('https://nativehotel.herokuapp.com/api/customer/'+id).then((response)=>{
+    //         axios.delete(http + '/api/customer/'+id).then((response)=>{
     //             if(response.data!=null){
     //                 this.loadCustomers();
     //             }

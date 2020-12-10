@@ -161,6 +161,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Navigation_Sidebar_SidebarLeft__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Navigation/Sidebar/SidebarLeft */ "./resources/js/admin/components/Navigation/Sidebar/SidebarLeft.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_icons_gr__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-icons/gr */ "./node_modules/react-icons/gr/index.esm.js");
+/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../link */ "./resources/js/link.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -194,6 +195,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+var http = _link__WEBPACK_IMPORTED_MODULE_8__["link"];
+
 var RoomTypes = /*#__PURE__*/function (_Component) {
   _inherits(RoomTypes, _Component);
 
@@ -219,7 +222,7 @@ var RoomTypes = /*#__PURE__*/function (_Component) {
     value: function loadRoomTypes() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('https://nativehotel.herokuapp.com/api/room_types').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.get(http + '/api/room_types').then(function (response) {
         _this2.setState({
           roomType: response.data
         });
@@ -241,10 +244,10 @@ var RoomTypes = /*#__PURE__*/function (_Component) {
           imgRaws: obj.imgRaw
         };
         console.log('img cần xóa', data);
-        axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('https://nativehotel.herokuapp.com/api/room_types_delete_file', data).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.post(http + '/api/room_types_delete_file', data).then(function (res) {
           if (res.data) console.log('Đã xóa hình cũ');else console.log('Không có hình cũ');
         });
-        axios__WEBPACK_IMPORTED_MODULE_3___default.a["delete"]('https://nativehotel.herokuapp.com/api/room_types/' + obj.id).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a["delete"](http + '/api/room_types/' + obj.id).then(function (res) {
           if (res.data != null) {
             _this3.loadRoomTypes();
           }

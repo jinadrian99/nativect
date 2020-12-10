@@ -90,6 +90,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_icons_gr__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-icons/gr */ "./node_modules/react-icons/gr/index.esm.js");
 /* harmony import */ var _Customers_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Customers.css */ "./resources/js/admin/components/Customers/Customers.css");
 /* harmony import */ var _Customers_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_Customers_css__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../link */ "./resources/js/link.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -123,6 +124,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+var http = _link__WEBPACK_IMPORTED_MODULE_9__["link"];
 var Register = /*#__PURE__*/function (_Component) {
   _inherits(Register, _Component);
 
@@ -155,7 +158,7 @@ var Register = /*#__PURE__*/function (_Component) {
     value: function loadCustomers() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('https://nativehotel.herokuapp.com/api/customer').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.get(http + '/api/customer').then(function (response) {
         _this2.setState({
           customers: response.data
         });
@@ -167,7 +170,7 @@ var Register = /*#__PURE__*/function (_Component) {
       this.loadCustomers();
     } // deleteCustomer(id){
     //     if(window.confirm('Are you sure?')){
-    //         axios.delete('https://nativehotel.herokuapp.com/api/customer/'+id).then((response)=>{
+    //         axios.delete(http + '/api/customer/'+id).then((response)=>{
     //             if(response.data!=null){
     //                 this.loadCustomers();
     //             }
