@@ -501,7 +501,8 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
                             ngayDen: Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(_this3.state.startDate, 'yyyy-MM-dd'),
                             ngayDi: Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(_this3.state.endDate, 'yyyy-MM-dd'),
                             soDem: _this3.state.diff,
-                            tongTien: parseInt(_this3.state.giaLP, 10) * _this3.state.diff
+                            tongTien: parseInt(_this3.state.giaLP, 10) * _this3.state.diff,
+                            status: 1
                           };
                           console.log(booking);
                           axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(http + '/api/bookings', booking).then(function (res) {

@@ -246,7 +246,8 @@ export default class BookingInfo extends Component {
                                                         ngayDen: format(this.state.startDate, 'yyyy-MM-dd'),
                                                         ngayDi: format(this.state.endDate, 'yyyy-MM-dd'),
                                                         soDem: this.state.diff,
-                                                        tongTien: parseInt(this.state.giaLP,10) * this.state.diff
+                                                        tongTien: parseInt(this.state.giaLP,10) * this.state.diff,
+                                                        status: 1
                                                     }
                                                     console.log(booking);
                                                     axios.post(http + '/api/bookings', booking).then(res => {

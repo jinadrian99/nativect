@@ -12,6 +12,7 @@ export default class BookingRecord extends Component {
                 <td>{ this.props.ngayDi }</td>
                 <td>{ this.props.soDem }</td>
                 <td>{ this.props.tongTien }</td>
+                <td>{ this.props.status==1 ? 'Confirmed' : (this.props.status==2 ? 'Completed' : 'Cancelled')}</td>
             </tr>
         );
     }
