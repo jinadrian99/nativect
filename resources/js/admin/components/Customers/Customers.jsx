@@ -84,14 +84,14 @@ export class Register extends Component {
                     </Col>
                     <Col md="10" style={{paddingLeft: '0'}}>
                         <div className="container">
-                            <Link to="/admin/add_customer">
+                            {/* <Link to="/admin/add_customer">
                                 <Button outline color="secondary" className="btn-add" id="btnAdd">
                                     <GrAdd className="icon-top" />
                                 </Button>
                             </Link>
                             <Tooltip placement="right" isOpen={this.state.tooltipOpen} target="btnAdd" toggle={()=>this.toggle()}>
                                 Thêm khách hàng
-                            </Tooltip>
+                            </Tooltip> */}
                             <h3 className="text-center mt-2">THÔNG TIN KHÁCH HÀNG</h3>
                             <Table striped>
                                 <thead className="text-center">
