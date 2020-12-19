@@ -49,7 +49,7 @@ class SendMailController extends Controller
             $mail->Host       = 'smtp.gmail.com';                    
             $mail->SMTPAuth   = true;                                   
             $mail->Username   = 'nativehotelct@gmail.com';                    
-            $mail->Password   = 'nh@123456';                              
+            $mail->Password   = 'Nh@123456';                              
             $mail->SMTPSecure = 'tls';    
             $mail->Port       = 587; 
 
