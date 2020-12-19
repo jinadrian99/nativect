@@ -35,6 +35,7 @@ class Booking extends Component {
                 idDatPhong = {item.idDP}
                 idLoaiPhong = {item.idLP}
                 idKhachHang = {item.idKH}
+                slPhong = {item.slPhong}
                 ngayDen = {item.ngayDen}
                 ngayDi = {item.ngayDi}
                 soDem = {item.soDem}
@@ -65,6 +66,7 @@ class Booking extends Component {
                                         <th>id</th>
                                         <th>id loại phòng</th>
                                         <th>id khách hàng</th>
+                                        <th>Số lượng phòng đặt</th>
                                         <th>Ngày đến</th>
                                         <th>Ngày đi</th>
                                         <th>Số đêm</th>

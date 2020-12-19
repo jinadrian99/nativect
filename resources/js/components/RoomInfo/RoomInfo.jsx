@@ -38,12 +38,14 @@ export default class RoomInfo extends Component {
             moTa: '',
             hinhAnh: [],
             giaLP: '',
+            slPhong: 1,
 
             slPhongTrong: 0,
             isOpen: false,
             tooltipOpen: false,
             isGoToCartPage: false
         }
+        this.handleChange = this.handleChange.bind(this);
         this.changeStartDate = this.changeStartDate.bind(this);
         this.changeEndDate = this.changeEndDate.bind(this);
         this.showImages = this.showImages.bind(this);
@@ -99,6 +101,12 @@ export default class RoomInfo extends Component {
             </div>
         );
         return lst;
+    }
+
+    handleChange(e){
+        this.setState({
+            [e.target.name]: e.target.value
+        });
     }
 
     changeStartDate(e){
@@ -158,13 +166,14 @@ export default class RoomInfo extends Component {
                 this.setState({
                     slPhongTrong: res.data.slPhongTrong
                 },()=>{
-                    if(this.state.startDate!=null&&this.state.giaLP!='Chưa có giá'&&this.state.slPhongTrong>0) {
-                        var sl = 1;
+                    if(this.state.startDate!=null&&this.state.giaLP!='Chưa có giá'&&this.state.slPhongTrong>=this.state.slPhong) {
+                        var sl = parseInt(this.state.slPhong,10);
                         var obj = {
                             tenLP: this.state.roomType.tenLP,
                             idLP: this.state.roomType.idLP,
                             hinhAnh: this.state.hinhAnh[0],
                             giaLP: this.state.giaLP,
+                            slPhong: parseInt(this.state.slPhong,10)
                         };
                         console.log(obj);
 
@@ -185,9 +194,18 @@ export default class RoomInfo extends Component {
                             localStorage.setItem('slItemsShoppingCart', JSON.stringify(sl));
                         } else {
                             var arrItems = JSON.parse(localStorage.getItem('itemsShoppingCart'));
-                            arrItems.push(obj);
-                            var sl = parseInt(localStorage.getItem('slItemsShoppingCart'),10) + sl;
+                            var found = arrItems.find((object) => object.tenLP == obj.tenLP);
+                            if(found){
+                                var index = arrItems.findIndex((object) => object.tenLP == obj.tenLP); 
+                                obj.slPhong += parseInt(arrItems[index].slPhong,10); 
+                                arrItems[index] = obj;
+                                // console.log(arrItems);
+                            } else {
+                                arrItems.push(obj);
+                            }
                             localStorage.setItem('itemsShoppingCart', JSON.stringify(arrItems));
+
+                            var sl = parseInt(localStorage.getItem('slItemsShoppingCart'),10) + sl;
                             localStorage.setItem('slItemsShoppingCart', JSON.stringify(sl));
                         }
             
@@ -247,7 +265,7 @@ export default class RoomInfo extends Component {
                 <ToastContainer />
                 <Container>
                     <div>
-                        <Row  style={{padding:'5%'}}>
+                        <Row style={{padding:'5%'}}>
                             <Col xs="3"></Col>
                             <Col xs="6">
                                 <p style={{fontFamily:'Cambria', fontSize:'18px', textAlign:'center'}}>{ this.state.moTa[1] }</p>
@@ -282,12 +300,12 @@ export default class RoomInfo extends Component {
                                         <FaBath style={{width:'4vw', height:'4vh'}}/>{ this.state.moTa[4] }
                                     </Col>
                                     <Col xs="3">
-                                        <select style={{height:'4vh'}}>
-                                            <option>1 room</option>
-                                            <option>2 rooms</option>
-                                            <option>3 rooms</option>
-                                            <option>4 rooms</option>
-                                            <option>5 rooms</option>
+                                        <select name="slPhong" onChange={ this.handleChange } style={{height:'4vh'}}>
+                                            <option value="1">1 room</option>
+                                            <option value="2">2 rooms</option>
+                                            <option value="3">3 rooms</option>
+                                            <option value="4">4 rooms</option>
+                                            <option value="5">5 rooms</option>
                                         </select>
                                     </Col>
                                 </Row>

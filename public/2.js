@@ -159,13 +159,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/index.js");
-/* harmony import */ var react_icons_io__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-icons/io */ "./node_modules/react-icons/io/index.esm.js");
-/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
-/* harmony import */ var react_icons_bi__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-icons/bi */ "./node_modules/react-icons/bi/index.esm.js");
-/* harmony import */ var react_icons_ai__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-icons/ai */ "./node_modules/react-icons/ai/index.esm.js");
-/* harmony import */ var _BookingInfo_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./BookingInfo.css */ "./resources/js/components/Booking/BookingInfo/BookingInfo.css");
-/* harmony import */ var _BookingInfo_css__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_BookingInfo_css__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../link */ "./resources/js/link.jsx");
+/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../link */ "./resources/js/link.jsx");
+/* harmony import */ var react_icons_io__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-icons/io */ "./node_modules/react-icons/io/index.esm.js");
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
+/* harmony import */ var react_icons_bi__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-icons/bi */ "./node_modules/react-icons/bi/index.esm.js");
+/* harmony import */ var react_icons_ai__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-icons/ai */ "./node_modules/react-icons/ai/index.esm.js");
+/* harmony import */ var _BookingInfo_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./BookingInfo.css */ "./resources/js/components/Booking/BookingInfo/BookingInfo.css");
+/* harmony import */ var _BookingInfo_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_BookingInfo_css__WEBPACK_IMPORTED_MODULE_12__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -198,12 +198,12 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+var http = _link__WEBPACK_IMPORTED_MODULE_7__["link"];
 
 
 
 
 
-var http = _link__WEBPACK_IMPORTED_MODULE_12__["link"];
 
 var BookingInfo = /*#__PURE__*/function (_Component) {
   _inherits(BookingInfo, _Component);
@@ -223,6 +223,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
       hinhAnh: localStorage.getItem('itemsShoppingCart') ? JSON.parse(localStorage.getItem('itemsShoppingCart'))[0].hinhAnh : '',
       giaLP: localStorage.getItem('itemsShoppingCart') ? JSON.parse(localStorage.getItem('itemsShoppingCart'))[0].giaLP : '',
       diff: localStorage.getItem('dateArriveCart') ? JSON.parse(localStorage.getItem('dateArriveCart')).days_diff : '',
+      slPhongDat: localStorage.getItem('slItemsShoppingCart') ? JSON.parse(localStorage.getItem('slItemsShoppingCart')) : '',
       tenKH: '',
       email: '',
       emailAgain: '',
@@ -266,7 +267,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
                 style: {
                   fontSize: '20px'
                 }
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_9__["BiErrorAlt"], null), "  S\u1ED1 l\u01B0\u1EE3ng ph\xF2ng \u0111\xE3 h\u1EBFt"), {
+              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_10__["BiErrorAlt"], null), "  S\u1ED1 l\u01B0\u1EE3ng ph\xF2ng \u0111\xE3 h\u1EBFt"), {
                 position: react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].POSITION.BOTTOM_CENTER,
                 autoClose: 4000
               });
@@ -285,7 +286,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
           style: {
             fontSize: '16px'
           }
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_9__["BiErrorAlt"], null), "  B\u1EA1n ch\u1ECDn nh\u1EA7m ng\xE0y trong qu\xE1 kh\u1EE9"), {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_10__["BiErrorAlt"], null), "  B\u1EA1n ch\u1ECDn nh\u1EA7m ng\xE0y trong qu\xE1 kh\u1EE9"), {
           position: react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].POSITION.BOTTOM_CENTER,
           autoClose: 4000
         });
@@ -303,7 +304,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
         style: {
           fontSize: '20px'
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ai__WEBPACK_IMPORTED_MODULE_10__["AiFillCheckCircle"], null), "  \u0110\u1EB7t ph\xF2ng c\u1EE7a b\u1EA1n v\u1EDBi NATIVE \u0111\xE3 \u0111\u01B0\u1EE3c x\xE1c nh\u1EADn."), {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ai__WEBPACK_IMPORTED_MODULE_11__["AiFillCheckCircle"], null), "  \u0110\u1EB7t ph\xF2ng c\u1EE7a b\u1EA1n v\u1EDBi NATIVE \u0111\xE3 \u0111\u01B0\u1EE3c x\xE1c nh\u1EADn."), {
         position: react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].POSITION.BOTTOM_RIGHT,
         autoClose: 4000
       });
@@ -446,20 +447,16 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
           }
 
           return;
-        }
+        } // axios de xet email co ton tai ko gui qua api existmail
 
-        console.warn('send mail', _this3.state.email); // axios de xet email co ton tai ko gui qua api existmail
 
         var checkEmail = {
           email: _this3.state.email
         };
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(http + '/api/exist_mail', checkEmail).then(function (res) {
           if (res.data) {
-            console.warn('check mail');
             var id = JSON.parse(localStorage.getItem('itemsShoppingCart'))[0].idLP;
             axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(http + '/api/room_types/' + id).then(function (res) {
-              console.warn('check sl LP');
-
               if (res.data != null) {
                 _this3.setState({
                   roomType: res.data
@@ -470,12 +467,10 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
                     tenLP: _this3.state.roomType.tenLP,
                     hinhAnh: _this3.state.roomType.hinhAnh,
                     moTa: _this3.state.roomType.moTa,
-                    slPhongTrong: parseInt(_this3.state.roomType.slPhongTrong, 10) - 1
+                    slPhongTrong: parseInt(_this3.state.roomType.slPhongTrong, 10) - parseInt(_this3.state.slPhongDat, 10)
                   };
                   console.log('room: ', room);
                   axios__WEBPACK_IMPORTED_MODULE_2___default.a.put(http + '/api/room_types/' + room.idLP, room).then(function (res) {
-                    console.warn('upd sl Trong');
-
                     if (res.data != null) {
                       var customer = {
                         tenKH: _this3.state.tenKH,
@@ -489,8 +484,6 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
                       };
                       console.log(customer);
                       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(http + '/api/customer', customer).then(function (res) {
-                        console.warn('add cus');
-
                         if (res.data != null) {
                           customer = {
                             idKH: res.data.idKH
@@ -501,13 +494,12 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
                             ngayDen: Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(_this3.state.startDate, 'yyyy-MM-dd'),
                             ngayDi: Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(_this3.state.endDate, 'yyyy-MM-dd'),
                             soDem: _this3.state.diff,
-                            tongTien: parseInt(_this3.state.giaLP, 10) * _this3.state.diff,
-                            status: 1
+                            tongTien: parseInt(_this3.state.giaLP, 10) * _this3.state.diff * parseInt(_this3.state.slPhongDat, 10),
+                            status: 1,
+                            slPhong: _this3.state.slPhongDat
                           };
                           console.log(booking);
                           axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(http + '/api/bookings', booking).then(function (res) {
-                            console.warn('add booking');
-
                             if (res.data != null) {
                               //tao var data_obj de gui qua api sendmail de lay data lam form de gui mail cho kh
                               booking = {
@@ -525,10 +517,11 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
                                 tenLP: _this3.state.roomType.tenLP,
                                 ngayDen: Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(_this3.state.startDate, 'dd/MM/yyyy'),
                                 ngayDi: Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(_this3.state.endDate, 'dd/MM/yyyy'),
-                                tongTien: new Intl.NumberFormat().format(parseInt(_this3.state.giaLP, 10) * _this3.state.diff)
+                                tongTien: new Intl.NumberFormat().format(parseInt(_this3.state.giaLP, 10) * _this3.state.diff * parseInt(_this3.state.slPhongDat, 10)),
+                                slPhong: _this3.state.slPhongDat
                               };
                               axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(http + '/api/send_mail', data_obj).then(function (res) {
-                                console.warn('send mail');
+                                console.warn(res.data);
 
                                 if (res.data == true) {
                                   _this3.notify();
@@ -550,13 +543,37 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
                                     });
                                   }, 8000);
                                 } else {
-                                  react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].error( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-                                    style: {
-                                      fontSize: '16px'
+                                  axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(http + '/api/room_types/' + id).then(function (res) {
+                                    if (res.data != null) {
+                                      var room2 = {
+                                        idLP: _this3.state.roomType.idLP,
+                                        tenLP: _this3.state.roomType.tenLP,
+                                        hinhAnh: _this3.state.roomType.hinhAnh,
+                                        moTa: _this3.state.roomType.moTa,
+                                        slPhongTrong: parseInt(res.data.slPhongTrong, 10) + parseInt(_this3.state.slPhongDat, 10)
+                                      };
+                                      console.log('room2: ', room2);
+                                      axios__WEBPACK_IMPORTED_MODULE_2___default.a.put(http + '/api/room_types/' + room2.idLP, room2).then(function (res) {
+                                        if (res.data != null) {
+                                          axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"](http + '/api/bookings/' + booking.idDP).then(function (res) {
+                                            if (res.data != null) {
+                                              axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"](http + '/api/customer/' + customer.idKH).then(function (res) {
+                                                if (res.data != null) {
+                                                  react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].error( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+                                                    style: {
+                                                      fontSize: '16px'
+                                                    }
+                                                  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_10__["BiErrorAlt"], null), "  \u0110ang c\xF3 s\u1EF1 c\u1ED1 tr\xEAn mail server, vui l\xF2ng \u0111\u1EE3i 15 gi\xE2y sau"), {
+                                                    position: react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].POSITION.BOTTOM_RIGHT,
+                                                    autoClose: 4000
+                                                  });
+                                                }
+                                              });
+                                            }
+                                          });
+                                        }
+                                      });
                                     }
-                                  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_9__["BiErrorAlt"], null), "  \u0110ang c\xF3 s\u1EF1 c\u1ED1 tr\xEAn mail server, vui l\xF2ng \u0111\u1EE3i 15 gi\xE2y sau"), {
-                                    position: react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].POSITION.BOTTOM_RIGHT,
-                                    autoClose: 4000
                                   });
                                 }
                               });
@@ -574,7 +591,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
               style: {
                 fontSize: '20px'
               }
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_9__["BiErrorAlt"], null), "  Email kh\xF4ng t\u1ED3n t\u1EA1i"), {
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_bi__WEBPACK_IMPORTED_MODULE_10__["BiErrorAlt"], null), "  Email kh\xF4ng t\u1ED3n t\u1EA1i"), {
               position: react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].POSITION.BOTTOM_RIGHT,
               autoClose: 4000
             });
@@ -611,7 +628,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
         className: "breadcrumb-nativeLink"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "NATIVE")), "\xA0 ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_io__WEBPACK_IMPORTED_MODULE_7__["IoIosArrowForward"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "NATIVE")), "\xA0 ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_io__WEBPACK_IMPORTED_MODULE_8__["IoIosArrowForward"], {
         className: "icon"
       }), "\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "PAYMENT"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
@@ -632,7 +649,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
           fontWeight: 'bold',
           fontFamily: 'Georgia'
         }
-      }, "Almost there."), "\xA0\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_8__["FaHotel"], {
+      }, "Almost there."), "\xA0\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_9__["FaHotel"], {
         style: {
           width: '4vw',
           height: '4vh'
@@ -871,7 +888,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
         style: {
           paddingTop: '5%'
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(this.state.startDate, "dd/MM"), " - ", Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(this.state.endDate, "dd/MM"), ", ", this.state.diff, " ", this.state.diff > 1 ? 'nights' : 'night'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, this.state.tenLP, " X 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, parseInt(this.state.giaLP, 10)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Total cost"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "1 room for ", this.state.diff, " ", this.state.diff > 1 ? 'nights' : 'night'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(this.state.startDate, "dd/MM"), " - ", Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(this.state.endDate, "dd/MM"), ", ", this.state.diff, " ", this.state.diff > 1 ? 'nights' : 'night'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, this.state.tenLP, " X ", this.state.slPhongDat), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, parseInt(this.state.giaLP, 10) * parseInt(this.state.slPhongDat)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Total cost"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, this.state.slPhongDat, " ", this.state.slPhongDat > 1 ? 'rooms' : 'room', " for ", this.state.diff, " ", this.state.diff > 1 ? 'nights' : 'night'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], {
         style: {
           paddingBottom: '5%'
         }
@@ -881,7 +898,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
           fontSize: '2vw',
           fontFamily: 'Georgia'
         }
-      }, new Intl.NumberFormat().format(parseInt(this.state.giaLP, 10) * this.state.diff), " VND"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], {
+      }, new Intl.NumberFormat().format(parseInt(this.state.giaLP, 10) * this.state.diff * parseInt(this.state.slPhongDat)), " VND"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], {
         style: {
           paddingTop: '15%'
         }
@@ -896,7 +913,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
           fontWeight: 'bold',
           fontSize: '2vw'
         }
-      }, new Intl.NumberFormat().format(parseInt(this.state.giaLP, 10) * this.state.diff), " VND"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], {
+      }, new Intl.NumberFormat().format(parseInt(this.state.giaLP, 10) * this.state.diff * parseInt(this.state.slPhongDat)), " VND"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], {
         style: {
           paddingTop: '7%'
         },

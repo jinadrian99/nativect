@@ -12,6 +12,7 @@ class Booking extends Model
     protected $fillable=[
         'idLP',
         'idKH',
+        'slPhong',
         'ngayDen',
         'ngayDi',
         'soDem',

@@ -5,6 +5,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Container, Row, Col } from 'reactstrap'
 import { format } from 'date-fns';
+import { link } from '../../../link';
+const http = link;
 
 import { IoIosArrowForward } from "react-icons/io";
 import { FaHotel } from "react-icons/fa";
@@ -12,8 +14,6 @@ import { BiErrorAlt } from 'react-icons/bi';
 import { AiFillCheckCircle } from 'react-icons/ai';
 
 import './BookingInfo.css';
-import { link } from '../../../link';
-const http = link;
 
 
 export default class BookingInfo extends Component {
@@ -26,6 +26,7 @@ export default class BookingInfo extends Component {
             hinhAnh: localStorage.getItem('itemsShoppingCart') ? JSON.parse(localStorage.getItem('itemsShoppingCart'))[0].hinhAnh : '',
             giaLP: localStorage.getItem('itemsShoppingCart') ? JSON.parse(localStorage.getItem('itemsShoppingCart'))[0].giaLP : '',
             diff: localStorage.getItem('dateArriveCart') ? JSON.parse(localStorage.getItem('dateArriveCart')).days_diff : '',
+            slPhongDat: localStorage.getItem('slItemsShoppingCart') ? JSON.parse(localStorage.getItem('slItemsShoppingCart')) : '',
             tenKH: '',
             email: '',
             emailAgain: '',
@@ -198,17 +199,14 @@ export default class BookingInfo extends Component {
                     } 
                     return;
                 }
-                console.warn('send mail', this.state.email);
                 // axios de xet email co ton tai ko gui qua api existmail
                 var checkEmail = {
                     email: this.state.email
                 }
                 axios.post(http + '/api/exist_mail', checkEmail).then(res =>{
                     if (res.data) {
-                        console.warn('check mail');
                         var id = JSON.parse(localStorage.getItem('itemsShoppingCart'))[0].idLP;
                         axios.get(http + '/api/room_types/' + id).then( res => {
-                            console.warn('check sl LP');
                             if (res.data != null) {
                                 this.setState({
                                     roomType: res.data
@@ -219,11 +217,10 @@ export default class BookingInfo extends Component {
                                         tenLP: this.state.roomType.tenLP,
                                         hinhAnh: this.state.roomType.hinhAnh,
                                         moTa: this.state.roomType.moTa,
-                                        slPhongTrong: parseInt(this.state.roomType.slPhongTrong,10)-1
+                                        slPhongTrong: parseInt(this.state.roomType.slPhongTrong,10) - parseInt(this.state.slPhongDat,10)
                                     }
                                     console.log('room: ', room);
                                     axios.put(http + '/api/room_types/'+room.idLP, room).then(res => {
-                                        console.warn('upd sl Trong');
                                         if (res.data != null) {
                                             var customer = {
                                                 tenKH: this.state.tenKH,
@@ -237,7 +234,6 @@ export default class BookingInfo extends Component {
                                             }
                                             console.log(customer);
                                             axios.post(http + '/api/customer', customer).then(res => {
-                                                console.warn('add cus');
                                                 if (res.data != null) {
                                                     customer = { idKH: res.data.idKH }
                                                     var booking = {
@@ -246,12 +242,12 @@ export default class BookingInfo extends Component {
                                                         ngayDen: format(this.state.startDate, 'yyyy-MM-dd'),
                                                         ngayDi: format(this.state.endDate, 'yyyy-MM-dd'),
                                                         soDem: this.state.diff,
-                                                        tongTien: parseInt(this.state.giaLP,10) * this.state.diff,
-                                                        status: 1
+                                                        tongTien: parseInt(this.state.giaLP,10) * this.state.diff * parseInt(this.state.slPhongDat,10),
+                                                        status: 1,
+                                                        slPhong: this.state.slPhongDat
                                                     }
                                                     console.log(booking);
                                                     axios.post(http + '/api/bookings', booking).then(res => {
-                                                        console.warn('add booking');
                                                         if (res.data != null) {
                                                             //tao var data_obj de gui qua api sendmail de lay data lam form de gui mail cho kh
                                                             booking = { idDP: res.data.idDP }
@@ -267,10 +263,11 @@ export default class BookingInfo extends Component {
                                                                 tenLP: this.state.roomType.tenLP,
                                                                 ngayDen: format(this.state.startDate, 'dd/MM/yyyy'),
                                                                 ngayDi: format(this.state.endDate, 'dd/MM/yyyy'),
-                                                                tongTien: new Intl.NumberFormat().format(parseInt(this.state.giaLP,10) * this.state.diff)
+                                                                tongTien: new Intl.NumberFormat().format(parseInt(this.state.giaLP,10) * this.state.diff * parseInt(this.state.slPhongDat,10)),
+                                                                slPhong: this.state.slPhongDat
                                                             }
                                                             axios.post(http + '/api/send_mail', data_obj).then(res => {
-                                                                console.warn('send mail');
+                                                                console.warn(res.data);
                                                                 if (res.data == true) {
                                                                     this.notify();
                                                                     toast.success(<div style={{fontSize:'20px'}}>Vui lòng kiểm tra lại email của bạn</div>, {
@@ -283,12 +280,35 @@ export default class BookingInfo extends Component {
                                                                     setTimeout(()=>{
                                                                         this.setState({ isGoToHomePage: !this.state.isGoToHomePage });
                                                                     }, 8000);
-                                                                }
-                                                                else {
-                                                                    toast.error(<div style={{fontSize:'16px'}}><BiErrorAlt/>  Đang có sự cố trên mail server, vui lòng đợi 15 giây sau</div>, {
-                                                                        position: toast.POSITION.BOTTOM_RIGHT,
-                                                                        autoClose: 4000
-                                                                    }); 
+                                                                } else {
+                                                                    axios.get(http + '/api/room_types/' + id).then( res => {
+                                                                        if (res.data != null) {
+                                                                            const room2 = {
+                                                                                idLP: this.state.roomType.idLP,
+                                                                                tenLP: this.state.roomType.tenLP,
+                                                                                hinhAnh: this.state.roomType.hinhAnh,
+                                                                                moTa: this.state.roomType.moTa,
+                                                                                slPhongTrong: parseInt(res.data.slPhongTrong,10) + parseInt(this.state.slPhongDat,10)
+                                                                            }
+                                                                            console.log('room2: ',room2);
+                                                                            axios.put(http + '/api/room_types/' + room2.idLP, room2).then(res => {
+                                                                                if (res.data != null) {
+                                                                                    axios.delete(http + '/api/bookings/' + booking.idDP).then(res => {
+                                                                                        if (res.data != null) {
+                                                                                            axios.delete(http + '/api/customer/' + customer.idKH).then(res => {
+                                                                                                if (res.data != null) {
+                                                                                                    toast.error(<div style={{fontSize:'16px'}}><BiErrorAlt/>  Đang có sự cố trên mail server, vui lòng đợi 15 giây sau</div>, {
+                                                                                                        position: toast.POSITION.BOTTOM_RIGHT,
+                                                                                                        autoClose: 4000
+                                                                                                    });  
+                                                                                                }
+                                                                                            })
+                                                                                        }
+                                                                                    });
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                    })
                                                                 }
                                                             })
                                                         }
@@ -308,9 +328,6 @@ export default class BookingInfo extends Component {
                         }); 
                     }
                 })
-                  
-                
-                
             }
         )
     }
@@ -451,20 +468,20 @@ export default class BookingInfo extends Component {
                                     </Row>
                                     <Row>
                                         <Col>
-                                            <span>{this.state.tenLP} X 1</span><br/>
-                                            <span>{parseInt(this.state.giaLP,10)}</span>
+                                            <span>{this.state.tenLP} X {this.state.slPhongDat}</span><br/>
+                                            <span>{parseInt(this.state.giaLP,10) * parseInt(this.state.slPhongDat)}</span>
                                             <hr/>
                                         </Col>
                                     </Row>
                                     <Row>
                                         <Col>
                                             <span>Total cost</span><br/>
-                                            <span>1 room for {this.state.diff} {this.state.diff > 1 ? 'nights' : 'night'}</span>
+                                            <span>{this.state.slPhongDat} {this.state.slPhongDat > 1 ? 'rooms' : 'room'} for {this.state.diff} {this.state.diff > 1 ? 'nights' : 'night'}</span>
                                         </Col>
                                     </Row>
                                     <Row style={{paddingBottom:'5%'}}>
                                         <Col>
-                                            <span style={{fontWeight:'bold', fontSize:'2vw', fontFamily:'Georgia'}}>{new Intl.NumberFormat().format(parseInt(this.state.giaLP,10) * this.state.diff)} VND</span>
+                                            <span style={{fontWeight:'bold', fontSize:'2vw', fontFamily:'Georgia'}}>{new Intl.NumberFormat().format(parseInt(this.state.giaLP,10) * this.state.diff * parseInt(this.state.slPhongDat))} VND</span>
                                         </Col>
                                     </Row>
                                 </Col>
@@ -475,7 +492,7 @@ export default class BookingInfo extends Component {
                                         <Col><span>Total booking cost</span><hr/></Col>
                                     </Row>
                                     <Row>
-                                        <Col><span style={{fontWeight:'bold', fontSize:'2vw'}}>{new Intl.NumberFormat().format(parseInt(this.state.giaLP,10) * this.state.diff)} VND</span></Col>
+                                        <Col><span style={{fontWeight:'bold', fontSize:'2vw'}}>{new Intl.NumberFormat().format(parseInt(this.state.giaLP,10) * this.state.diff * parseInt(this.state.slPhongDat))} VND</span></Col>
                                     </Row>
                                     <Row style={{ paddingTop:'7%'}} className="button-BookNow">
                                         <Col>

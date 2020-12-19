@@ -56,7 +56,7 @@ export default class YourBasketInfo extends Component {
             if(this.state.rooms!=null){
                 var ttp=0;
                 this.state.rooms.forEach(room => {
-                    ttp += parseInt(room.giaLP,10) * this.state.diff;
+                    ttp += parseInt(room.giaLP,10) * this.state.diff * parseInt(room.slPhong,10);
                 });
                 this.setState({ totalPrice: ttp });
             }
@@ -67,11 +67,11 @@ export default class YourBasketInfo extends Component {
         console.log('del cart item id: ', no);
         this.setState({
             rooms: this.state.rooms.filter((obj,index) => index!=no),
-            slPhong: this.state.slPhong-1,
+            slPhong: parseInt(this.state.slPhong,10)-parseInt(this.state.rooms[no].slPhong,10),
         }, ()=>{
             var ttp=0;
             this.state.rooms.forEach(room => {
-                ttp += parseInt(room.giaLP,10) * this.state.diff
+                ttp += parseInt(room.giaLP,10) * this.state.diff * parseInt(room.slPhong,10)
             });
             this.setState({ totalPrice: ttp });
             console.log(this.state.rooms);
@@ -98,10 +98,14 @@ export default class YourBasketInfo extends Component {
                     <Col xs="3" style={{borderRight:'1px solid #F3F1EF', height: '14vh', overflow: 'hidden'}}><img src={item.hinhAnh} style={{width:'12vw', height:'auto'}}/></Col>
                     <Col xs="6" style={{fontSize:'1.3vw', fontFamily:'Georgia', borderRight:'1px solid #F3F1EF'}}>
                         <Row>
-                            <Col><span style={{fontWeight:'bold', paddingLeft: '2vw'}}>Room: {item.tenLP}</span><hr/></Col>
+                            <Col><span style={{fontWeight:'bold', paddingLeft: '2vw'}}>Room: {item.tenLP} x {item.slPhong}</span><hr/></Col>
                         </Row>
                         <Row>
-                            <Col><span style={{fontWeight:'bold', fontSize:'1.4vw', lineHeight: '3vw', paddingLeft: '2vw'}}>Price: { new Intl.NumberFormat().format(parseInt(item.giaLP,10) * this.state.diff)} VND</span></Col>
+                            <Col>
+                                <span style={{fontWeight:'bold', fontSize:'1.4vw', lineHeight: '3vw', paddingLeft: '2vw'}}>
+                                    Price: { new Intl.NumberFormat().format(parseInt(item.giaLP,10) * this.state.diff * parseInt(item.slPhong,10))} VND
+                                </span>
+                            </Col>
                         </Row>
                     </Col>
                     <Col xs="3" style={{fontSize:'1.2vw', fontFamily:'Georgia'}}>
@@ -177,7 +181,7 @@ export default class YourBasketInfo extends Component {
             if(this.state.rooms!=null){
                 var ttp=0;
                 this.state.rooms.forEach(room => {
-                    ttp += parseInt(room.giaLP,10) * this.state.diff;
+                    ttp += parseInt(room.giaLP,10) * this.state.diff * parseInt(room.slPhong,10);
                 });
                 this.setState({ totalPrice: ttp });
             }
@@ -249,14 +253,12 @@ export default class YourBasketInfo extends Component {
                 }); 
                 this.setState({ goToHome: !this.state.goToHome })           
             } else {
-                if(this.state.slPhong>1) {
-                    toast.error(<div style={{fontSize:'20px'}}><BiErrorAlt/>  Bạn chỉ được chọn 1 phòng</div>, {
+                if(this.state.slPhong>5 || this.state.rooms.length>1) {
+                    toast.error(<div style={{fontSize:'20px'}}><BiErrorAlt/>  Chỉ chọn 5 phòng của 1 loại </div>, {
                         position: toast.POSITION.BOTTOM_RIGHT,
                         autoClose: 4000
                     });
-                }
-                else
-                {
+                } else {
                     axios.get('https://nativehotel.herokuapp.com/api/room_types/' + this.state.rooms[0].idLP).then( res => {
                         if (res.data != null) {
                             if(res.data.slPhongTrong>0){
@@ -401,7 +403,7 @@ export default class YourBasketInfo extends Component {
                             <Row>
                                 <Col style={{textAlign:'center'}}>
                                     <span  style={{fontSize:'2vh', fontFamily:'Georgia', fontWeight:'revert'}}>
-                                        Cost { this.state.slPhong > 1 ? this.state.slPhong + " rooms" : this.state.slPhong + " room"} for {this.state.diff} {this.state.diff > 1 ? 'nights' : 'night'}<br />
+                                        Cost rooms for {this.state.diff} {this.state.diff > 1 ? 'nights' : 'night'}<br />
                                         <span 
                                             className="hover-pointer hover-underline" 
                                             onClick={ ()=>{ this.setState({ modalDate: !this.state.modalDate }) } }
@@ -428,7 +430,9 @@ export default class YourBasketInfo extends Component {
                                     </Row>
                                     <Row>
                                         <Col>
-                                            <span style={{fontWeight:'bold', fontSize:'2vw'}}>{ new Intl.NumberFormat().format(this.state.totalPrice) } VND</span>
+                                            <span style={{fontWeight:'bold', fontSize:'2vw'}}>
+                                                { new Intl.NumberFormat().format(this.state.totalPrice) } VND
+                                            </span>
                                         </Col>
                                     </Row>
                                     <Row style={{ paddingTop:'7%'}} className="button-Continue">

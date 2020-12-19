@@ -40,12 +40,12 @@ class ChangeStatusBooking extends Command
      */
     public function handle()
     {
-        $bookings = Booking::select('idLP','idDP')->where('status','=','1')->whereDate('ngayDi','<=',Carbon::now()->toDateString())->get();
+        $bookings = Booking::select('idLP','idDP','slPhong')->where('status','=','1')->whereDate('ngayDi','<=',Carbon::now()->toDateString())->get();
         foreach ($bookings as $v) {
             $sl = RoomType::select('slPhongTrong')->where('idLP','=',$v->idLP)->get();
             // echo $sl[0]->slPhongTrong;
 
-            RoomType::where('idLP','=',$v->idLP)->update([ 'slPhongTrong' => $sl[0]->slPhongTrong+1 ]);
+            RoomType::where('idLP','=',$v->idLP)->update([ 'slPhongTrong' => $sl[0]->slPhongTrong + $v->slPhong ]);
             Booking::where('idDP','=',$v->idDP)->update([ 'status' => 2 ]);
         }
     }

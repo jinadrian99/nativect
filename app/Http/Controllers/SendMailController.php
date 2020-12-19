@@ -87,7 +87,7 @@ class SendMailController extends Controller
                                 Name: '. $request->tenKH .'
                             </td>
                             <td>
-                                Date Booking: '. $request->ngayDat .'
+                                ID Booking: '. $request->idBooking .'
                             </td>
                         </tr>
                         <tr>
@@ -95,7 +95,7 @@ class SendMailController extends Controller
                                 Email: '. $request->email .'
                             </td>
                             <td>
-                                ID Booking: '. $request->idBooking .'
+                                Amount room: '. $request->slPhong .'
                             </td>
                         </tr>
                         <tr>
@@ -127,6 +127,7 @@ class SendMailController extends Controller
                         </tr>
                         <tr>
                             <td colspan="2" style="text-align: center; padding-top: 20px">
+                                <i>Date Booking: '. $request->ngayDat .'</i>
                                 <h3>
                                     Total Price: <span>'. $request->tongTien .' VND</span>
                                 </h3> 
@@ -158,10 +159,10 @@ class SendMailController extends Controller
             $mail->Body    = $textBody;
 
             $mail->send();
-            return true;
+            return 'true';
         } catch (Exception $e) {
             // return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            return false;
+            return 'false';
         }
     }
 }
