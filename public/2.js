@@ -237,7 +237,8 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
       slPhong: 0,
       roomType: [],
       isGoToHomePage: false,
-      isGoToBasketPage: false
+      isGoToBasketPage: false,
+      isLoadingBooking: false
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.submitBookNow = _this.submitBookNow.bind(_assertThisInitialized(_this));
@@ -347,11 +348,29 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
       }
     }
   }, {
+    key: "showButton",
+    value: function showButton() {
+      if (!this.state.isLoadingBooking) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.submitBookNow
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BOOK NOW"));else return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Spinner"], {
+        color: "dark"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          display: "inline-block",
+          position: "relative",
+          top: "-4px"
+        }
+      }, "\xA0\xA0\xA0Wait for seconds"));
+    }
+  }, {
     key: "submitBookNow",
     value: function submitBookNow(e) {
       var _this3 = this;
 
       e.preventDefault();
+      this.setState({
+        isLoadingBooking: !this.state.isLoadingBooking
+      });
       var _this$state = this.state,
           tenKH = _this$state.tenKH,
           email = _this$state.email,
@@ -524,6 +543,10 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
                                 console.warn(res.data);
 
                                 if (res.data == true) {
+                                  _this3.setState({
+                                    isLoadingBooking: !_this3.state.isLoadingBooking
+                                  });
+
                                   _this3.notify();
 
                                   react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].success( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -559,6 +582,10 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
                                             if (res.data != null) {
                                               axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"](http + '/api/customer/' + customer.idKH).then(function (res) {
                                                 if (res.data != null) {
+                                                  _this3.setState({
+                                                    isLoadingBooking: !_this3.state.isLoadingBooking
+                                                  });
+
                                                   react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].error( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
                                                     style: {
                                                       fontSize: '16px'
@@ -918,9 +945,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
           paddingTop: '7%'
         },
         className: "button-BookNow"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.submitBookNow
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BOOK NOW"))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_3__["ToastContainer"], null));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], null, this.showButton()))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_3__["ToastContainer"], null));
     }
   }]);
 

@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Container, Row, Col } from 'reactstrap'
+import { Container, Row, Col, Spinner } from 'reactstrap'
 import { format } from 'date-fns';
 import { link } from '../../../link';
 const http = link;
@@ -41,7 +41,8 @@ export default class BookingInfo extends Component {
             roomType: [],
 
             isGoToHomePage: false,
-            isGoToBasketPage: false
+            isGoToBasketPage: false,
+            isLoadingBooking: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.submitBookNow = this.submitBookNow.bind(this);
@@ -120,8 +121,25 @@ export default class BookingInfo extends Component {
         }
     }
 
+    showButton(){
+        if(!this.state.isLoadingBooking)
+            return <button onClick={this.submitBookNow}><b>BOOK NOW</b></button>
+        else
+            return <>
+                <Spinner color="dark" />
+                <div style={{ 
+                    display: "inline-block",
+                    position: "relative",
+                    top: "-4px"
+                 }}>
+                    &nbsp;&nbsp;&nbsp;Wait for seconds
+                </div>
+            </>
+    }
+
     submitBookNow(e){
         e.preventDefault();
+        this.setState({ isLoadingBooking: !this.state.isLoadingBooking });
         const {tenKH, email, emailAgain, sdt, tenThe, soThe} = this.state;
         let isValidFullName = true;
         let isValidPhone = true;
@@ -269,6 +287,7 @@ export default class BookingInfo extends Component {
                                                             axios.post(http + '/api/send_mail', data_obj).then(res => {
                                                                 console.warn(res.data);
                                                                 if (res.data == true) {
+                                                                    this.setState({ isLoadingBooking: !this.state.isLoadingBooking });
                                                                     this.notify();
                                                                     toast.success(<div style={{fontSize:'20px'}}>Vui lòng kiểm tra lại email của bạn</div>, {
                                                                         position: toast.POSITION.BOTTOM_RIGHT,
@@ -297,6 +316,7 @@ export default class BookingInfo extends Component {
                                                                                         if (res.data != null) {
                                                                                             axios.delete(http + '/api/customer/' + customer.idKH).then(res => {
                                                                                                 if (res.data != null) {
+                                                                                                    this.setState({ isLoadingBooking: !this.state.isLoadingBooking });
                                                                                                     toast.error(<div style={{fontSize:'16px'}}><BiErrorAlt/>  Đang có sự cố trên mail server, vui lòng đợi 15 giây sau</div>, {
                                                                                                         position: toast.POSITION.BOTTOM_RIGHT,
                                                                                                         autoClose: 4000
@@ -496,7 +516,9 @@ export default class BookingInfo extends Component {
                                     </Row>
                                     <Row style={{ paddingTop:'7%'}} className="button-BookNow">
                                         <Col>
-                                            <button onClick={this.submitBookNow}><b>BOOK NOW</b></button>
+                                            {
+                                                this.showButton()
+                                            }
                                         </Col>
                                     </Row>
                                 </Col>
