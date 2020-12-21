@@ -43,7 +43,8 @@ export default class RoomInfo extends Component {
             slPhongTrong: 0,
             isOpen: false,
             tooltipOpen: false,
-            isGoToCartPage: false
+            isGoToCartPage: false,
+            isLoadingAddBasket: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.changeStartDate = this.changeStartDate.bind(this);
@@ -159,8 +160,32 @@ export default class RoomInfo extends Component {
         })
     }
 
+    showButton(){
+        if(this.state.isLoadingAddBasket)
+            return <>
+                <Spinner color="dark" />
+                <div style={{ 
+                    display: "inline-block",
+                    position: "relative",
+                    top: "-4px"
+                }}>
+                    &nbsp;&nbsp;&nbsp;Wait for seconds
+                </div>
+            </>
+        else
+            return <>
+                <button 
+                    style={{backgroundColor:'#B27440', border:'none', width:'10vw', height:'auto'}} 
+                    onClick={ ()=>this.addItemInShoppingCart() }
+                >
+                    <b style={{color:'white'}}>Add to cart</b>
+                </button>
+            </>
+    }
+
     addItemInShoppingCart(){
         // if(localStorage.getItem('itemsShoppingCart')==null){
+        this.setState({ isLoadingAddBasket: !this.state.isLoadingAddBasket });
         axios.get(http + '/api/room_types/' + this.state.roomType.idLP).then( res => {
             if (res.data != null) {
                 this.setState({
@@ -208,7 +233,7 @@ export default class RoomInfo extends Component {
                             var sl = parseInt(localStorage.getItem('slItemsShoppingCart'),10) + sl;
                             localStorage.setItem('slItemsShoppingCart', JSON.stringify(sl));
                         }
-            
+                        this.setState({ isLoadingAddBasket: !this.state.isLoadingAddBasket });
                         this.props.onAddItemInShoppingCart(parseInt(localStorage.getItem('slItemsShoppingCart'),10));
                         toast.success(<div style={{fontSize:'20px'}}><span style={{fontSize:'28px'}}><BiHappyBeaming /></span> Add to cart success</div>, {
                             position: toast.POSITION.BOTTOM_RIGHT,
@@ -218,6 +243,7 @@ export default class RoomInfo extends Component {
                             this.setState({ isGoToCartPage: !this.state.isGoToCartPage });
                         }, 4500);
                     } else if(this.state.giaLP=='Chưa có giá' || this.state.slPhongTrong<=0) {
+                        this.setState({ isLoadingAddBasket: !this.state.isLoadingAddBasket });
                         toast.error(<div style={{fontSize:'20px'}}><span style={{fontSize:'28px'}}><FaRegSadCry /></span>  Phiền bạn chọn phòng khác</div>, {
                             position: toast.POSITION.BOTTOM_RIGHT,
                             autoClose: 4000
@@ -230,6 +256,7 @@ export default class RoomInfo extends Component {
 
                         window.scrollTo(0, y);
                     } else {
+                        this.setState({ isLoadingAddBasket: !this.state.isLoadingAddBasket });
                         toast.error(<div style={{fontSize:'20px'}}><BiErrorAlt/>  Bạn chưa chọn ngày</div>, {
                             position: toast.POSITION.BOTTOM_RIGHT,
                             autoClose: 4000
@@ -414,12 +441,7 @@ export default class RoomInfo extends Component {
 
                                     <Row style={{padding:'5%'}}>
                                         <Col style={{textAlign:'center'}}>
-                                            <button 
-                                                style={{backgroundColor:'#B27440', border:'none', width:'10vw', height:'auto'}} 
-                                                onClick={ ()=>this.addItemInShoppingCart() }
-                                            >
-                                                <b style={{color:'white'}}>Add to cart</b>
-                                            </button>
+                                            { this.showButton() }
                                         </Col>
                                     </Row>
                                 </Col>
