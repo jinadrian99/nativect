@@ -463,6 +463,10 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
                 autoClose: 4000
               });
             }
+          } else {
+            _this3.setState({
+              isLoadingBooking: !_this3.state.isLoadingBooking
+            });
           }
 
           return;
@@ -877,7 +881,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
         },
         className: "formPersonalDetails"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "number",
+        type: "text",
         name: "soThe",
         placeholder: "CARD NUMBER*",
         required: true,

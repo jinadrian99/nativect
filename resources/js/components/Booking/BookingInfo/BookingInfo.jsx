@@ -215,6 +215,9 @@ export default class BookingInfo extends Component {
                             })
                         }
                     } 
+                    else{
+                        this.setState({ isLoadingBooking: !this.state.isLoadingBooking });
+                    }
                     return;
                 }
                 // axios de xet email co ton tai ko gui qua api existmail
@@ -460,7 +463,7 @@ export default class BookingInfo extends Component {
                                     </Row>
                                     <Row style={{ paddingTop:'5%'}} className="formPersonalDetails">
                                         <Col>
-                                            <input type="number" name="soThe" placeholder="CARD NUMBER*" required onChange={this.handleChange} autoComplete="off" style={{width:'100%'}}/>
+                                            <input type="text" name="soThe" placeholder="CARD NUMBER*" required onChange={this.handleChange} autoComplete="off" style={{width:'100%'}}/>
                                         </Col>
                                     </Row>
                                     <Row style={{ paddingTop:'5%'}} className="formPersonalDetails">

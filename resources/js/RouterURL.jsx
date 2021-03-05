@@ -9,7 +9,8 @@ const About = lazy(() => import('./components/About/About'));
 import Room from './components/Room/Room';
 import YourBasket from './components/Basket/YourBasket';
 const Booking = lazy(() => import('./components/Booking/Booking'));
-const LoginRegister = lazy(() => import('./components/LoginRegister/LoginRegister'));
+const Team = lazy(()=>import('./components/Team/Team'));
+// const LoginRegister = lazy(() => import('./components/LoginRegister/LoginRegister'));
 
 
 export default class RouterURL extends Component {
@@ -25,6 +26,8 @@ export default class RouterURL extends Component {
                         <Route exact path="/your_basket" component={ YourBasket }/>
                         <Route exact path="/booking" component={Booking}/>
                         {/* <Route exact path="/login_register" component={LoginRegister}/> */}
+
+                        <Route exact path="/team" component={Team}/>
                     </div>
                 </Suspense>
             </Router>

@@ -17,9 +17,11 @@ import { CgShoppingCart } from 'react-icons/cg';
 import {  RiPhoneLine } from 'react-icons/ri';
 import './NavTop.css';
 import { format } from 'date-fns';
+import { RiTeamLine } from 'react-icons/ri';
 import { ImCancelCircle } from 'react-icons/im';
 import { AiOutlineUser } from 'react-icons/ai';
 import { link } from '../../link';
+import { fromPairs } from 'lodash';
 
 const http = link;
 
@@ -182,6 +184,11 @@ export default class NavTop extends Component {
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                         </Nav>
+                        <NavbarText>
+                            <Link to="/team">
+                            <RiTeamLine style={{fontSize:"23px", fontWeight: "bold", color: "black"}} className="icon"/>
+                            <b style={{ color: 'black', fontSize: '18px' }}> Team</b></Link>
+                        </NavbarText>  
                         <NavbarText className="icon-shopping-cart">
                             <Dropdown isOpen={this.state.toggleCart} toggle={ ()=>this.shoppingCart() }>
                                 <DropdownToggle>
@@ -193,7 +200,7 @@ export default class NavTop extends Component {
                         </NavbarText>
                         <NavbarText>
                             <RiPhoneLine style={{fontSize:"23px", fontWeight: "bold", color: "black"}} className="icon"/>
-                            <b style={{ color: 'black', fontSize: '18px' }}>025548203</b>
+                            <b style={{ color: 'black', fontSize: '18px' }}> 025548203</b>
                         </NavbarText>  
                         {/* <NavbarText className="icon-shopping-cart">
                             <Dropdown 

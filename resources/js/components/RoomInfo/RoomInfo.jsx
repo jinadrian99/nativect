@@ -133,6 +133,11 @@ export default class RoomInfo extends Component {
             return;
         } else{
             var date = new Date(e);
+            console.warn(date, this.state.startDate);
+            if (format(this.state.startDate, 'yyyy/MM/dd') === format(date, 'yyyy/MM/dd')) {
+                alert('Bạn không được chọn ngày đi bằng ngày đến');
+                return;
+            }
             // console.log('today', new Date());
             // console.log('e: ', e);
             this.setState({
