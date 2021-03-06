@@ -44,12 +44,12 @@ class SendMailController extends Controller
         $mail = new PHPMailer(true);
 
         try {
-            $mail->SMTPDebug = 1;                     
+            $mail->SMTPDebug = 0;                     
             $mail->isSMTP();                                           
             $mail->Host       = 'smtp.gmail.com';                    
             $mail->SMTPAuth   = true;                                   
             $mail->Username   = 'nativehotelct@gmail.com';                    
-            $mail->Password   = 'Nh@123456';                              
+            $mail->Password   = "Nh@123456";                              
             $mail->SMTPSecure = 'tls';    
             $mail->Port       = 587; 
 
