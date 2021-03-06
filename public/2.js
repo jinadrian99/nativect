@@ -546,7 +546,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
                               axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(http + '/api/send_mail', data_obj).then(function (res) {
                                 console.warn(res.data);
 
-                                if (res.data == true) {
+                                if (res.data) {
                                   _this3.setState({
                                     isLoadingBooking: !_this3.state.isLoadingBooking
                                   });

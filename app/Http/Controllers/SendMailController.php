@@ -33,7 +33,7 @@ class SendMailController extends Controller
         // return;
 
         $real = app(EmailChecker::class)->checkEmail($request->email);
-        return $real["success"]? true : false;
+        return $real["success"]? 'true' : 'false';
     }
     public function sendMail(Request $request)
     {
@@ -54,7 +54,7 @@ class SendMailController extends Controller
             $mail->Port       = 587; 
 
             $mail->setFrom('nativehotelct@gmail.com', 'Native Hotel');
-            $mail->addAddress($request->email, $request->hoTen);    
+            $mail->addAddress($request->email, $request->tenKH);    
 
             $mail->AddEmbeddedImage('image/NativeAva.jpg', 'native_ava');
 
@@ -144,7 +144,7 @@ class SendMailController extends Controller
                                     src="cid:native_ava"
                                 />
                                 <br>
-                                <a href="http://nativehotel.herokuapp.com/" target="_blank">
+                                <a href="http://nativect.herokuapp.com/" target="_blank">
                                     Go to Native
                                 </a>
                             </td>

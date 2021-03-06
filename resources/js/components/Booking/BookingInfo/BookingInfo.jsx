@@ -289,7 +289,7 @@ export default class BookingInfo extends Component {
                                                             }
                                                             axios.post(http + '/api/send_mail', data_obj).then(res => {
                                                                 console.warn(res.data);
-                                                                if (res.data == true) {
+                                                                if (res.data) {
                                                                     this.setState({ isLoadingBooking: !this.state.isLoadingBooking });
                                                                     this.notify();
                                                                     toast.success(<div style={{fontSize:'20px'}}>Vui lòng kiểm tra lại email của bạn</div>, {
