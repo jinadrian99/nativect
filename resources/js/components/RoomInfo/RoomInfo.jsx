@@ -93,11 +93,11 @@ export default class RoomInfo extends Component {
         console.log('mang hinh: ', this.state.hinhAnh);
 
         var lst = this.state.hinhAnh.map((item, index)=>
-            <div key = { index } style={{ height: '43vh', width: '43vh', overflow: 'hidden' }}>
+            <div key = { index } style={{ height: '43vh', width: '43vw', overflow: 'hidden' }}>
                 <img 
                     className="size-image"
                     src = { item }
-                    style={{height: '43vh', width: '43vh'}}
+                    style={{height: '43vh', width: '43vw'}}
                 />
             </div>
         );

@@ -1,0 +1,26 @@
+.row-title{
+    margin-top: 11vh;
+}
+.text-title{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 4.5vh;
+}
+.text-title-head{
+    font-size: 7vh;
+}
+.minimize-font{
+    font-size: 2vh;
+}
+.rates-font-size{
+    font-size: 2.2vh;
+}
+
+.info-general-rooms .text-title{
+    font-size: 4vh;
+}
+.info-general-rooms ul {
+    list-style-type: none;
+}
+.info-general-rooms ul li {
+    line-height: 5vh;
+}

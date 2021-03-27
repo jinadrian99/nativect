@@ -1,151 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[9],{
 
-/***/ "./resources/js/admin/components/RoomTypes/RecordRoomType/RoomTypeRecord.jsx":
-/*!***********************************************************************************!*\
-  !*** ./resources/js/admin/components/RoomTypes/RecordRoomType/RoomTypeRecord.jsx ***!
-  \***********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return RoomTypesRecord; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_icons_ri__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-icons/ri */ "./node_modules/react-icons/ri/index.esm.js");
-/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-
-
-
-
-var RoomTypesRecord = /*#__PURE__*/function (_Component) {
-  _inherits(RoomTypesRecord, _Component);
-
-  var _super = _createSuper(RoomTypesRecord);
-
-  function RoomTypesRecord(props) {
-    var _this;
-
-    _classCallCheck(this, RoomTypesRecord);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      hinhAnh: '',
-      imgRaw: ''
-    };
-    return _this;
-  }
-
-  _createClass(RoomTypesRecord, [{
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      var imgs = JSON.parse(this.props.hinhAnh);
-      this.setState({
-        hinhAnh: imgs[0],
-        imgRaw: this.props.hinhAnh
-      });
-    }
-  }, {
-    key: "deleteRoomType",
-    value: function deleteRoomType() {
-      var obj = {
-        id: this.props.idLoaiPhong,
-        imgRaw: this.state.imgRaw
-      };
-      console.log(obj);
-      this.props.onSelectDelete(obj);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      console.log(this.props);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        style: {
-          lineHeight: '90px'
-        },
-        scope: "row"
-      }, this.props.idLoaiPhong), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        style: {
-          lineHeight: '90px'
-        }
-      }, this.props.tenLP), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        style: {
-          lineHeight: '90px'
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: this.state.hinhAnh,
-        alt: this.props.tenPhong,
-        width: "auto",
-        height: "90"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        style: {
-          lineHeight: '90px'
-        }
-      }, this.props.moTa[0].length > 40 ? this.props.moTa[0].slice(0, 40) + ' ...' : this.props.moTa[0]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        style: {
-          lineHeight: '90px'
-        }
-      }, this.props.slPhongTrong), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        style: {
-          lineHeight: '90px'
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: "/admin/form_room_type/" + this.props.idLoaiPhong
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-        color: "warning"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_4__["FaRegEdit"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "space-15"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-        color: "danger",
-        onClick: function onClick() {
-          return _this2.deleteRoomType();
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ri__WEBPACK_IMPORTED_MODULE_3__["RiDeleteBin5Line"], null))));
-    }
-  }]);
-
-  return RoomTypesRecord;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-
-
-/***/ }),
-
-/***/ "./resources/js/admin/components/RoomTypes/RoomTypes.jsx":
-/*!***************************************************************!*\
-  !*** ./resources/js/admin/components/RoomTypes/RoomTypes.jsx ***!
-  \***************************************************************/
+/***/ "./resources/js/admin/components/Rates/Rates.jsx":
+/*!*******************************************************!*\
+  !*** ./resources/js/admin/components/Rates/Rates.jsx ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -154,7 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
-/* harmony import */ var _RecordRoomType_RoomTypeRecord__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RecordRoomType/RoomTypeRecord */ "./resources/js/admin/components/RoomTypes/RecordRoomType/RoomTypeRecord.jsx");
+/* harmony import */ var _RecordRates_RatesRecord__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RecordRates/RatesRecord */ "./resources/js/admin/components/Rates/RecordRates/RatesRecord.jsx");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _Navigation_NavbarTop_NavbarTop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Navigation/NavbarTop/NavbarTop */ "./resources/js/admin/components/Navigation/NavbarTop/NavbarTop.jsx");
@@ -197,84 +55,26 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 var http = _link__WEBPACK_IMPORTED_MODULE_8__["link"];
 
-var RoomTypes = /*#__PURE__*/function (_Component) {
-  _inherits(RoomTypes, _Component);
+var Rates = /*#__PURE__*/function (_Component) {
+  _inherits(Rates, _Component);
 
-  var _super = _createSuper(RoomTypes);
+  var _super = _createSuper(Rates);
 
-  function RoomTypes(props) {
+  function Rates(props) {
     var _this;
 
-    _classCallCheck(this, RoomTypes);
+    _classCallCheck(this, Rates);
 
     _this = _super.call(this, props);
     _this.state = {
-      roomType: [],
-      tooltipOpen: false
+      rates: []
     };
-    _this.showRoomTypes = _this.showRoomTypes.bind(_assertThisInitialized(_this));
-    _this.deleteRoomType = _this.deleteRoomType.bind(_assertThisInitialized(_this));
+    _this.showRates = _this.showRates.bind(_assertThisInitialized(_this));
+    _this.loadRates = _this.loadRates.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(RoomTypes, [{
-    key: "loadRoomTypes",
-    value: function loadRoomTypes() {
-      var _this2 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.get(http + '/api/room_types').then(function (response) {
-        _this2.setState({
-          roomType: response.data
-        });
-      });
-    }
-  }, {
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      this.loadRoomTypes();
-    }
-  }, {
-    key: "deleteRoomType",
-    value: function deleteRoomType(obj) {
-      var _this3 = this;
-
-      if (window.confirm('Are you sure?')) {
-        // delete file old
-        var data = {
-          imgRaws: obj.imgRaw
-        };
-        console.log('img cần xóa', data);
-        axios__WEBPACK_IMPORTED_MODULE_3___default.a.post(http + '/api/room_types_delete_file', data).then(function (res) {
-          if (res.data) console.log('Đã xóa hình cũ');else console.log('Không có hình cũ');
-        });
-        axios__WEBPACK_IMPORTED_MODULE_3___default.a["delete"](http + '/api/room_types/' + obj.id).then(function (res) {
-          if (res.data != null) {
-            _this3.loadRoomTypes();
-          }
-        })["catch"](function (error) {
-          return console.log(error);
-        });
-      }
-    }
-  }, {
-    key: "showRoomTypes",
-    value: function showRoomTypes() {
-      var _this4 = this;
-
-      var lst = this.state.roomType.map(function (item, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RecordRoomType_RoomTypeRecord__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          key: index,
-          idLoaiPhong: item.idLP,
-          tenLP: item.tenLP,
-          hinhAnh: item.hinhAnh,
-          moTa: JSON.parse(item.moTa),
-          slPhongTrong: item.slPhongTrong,
-          onSelectDelete: _this4.deleteRoomType
-        });
-      });
-      return lst;
-    }
-  }, {
+  _createClass(Rates, [{
     key: "toggle",
     value: function toggle() {
       this.setState({
@@ -282,12 +82,59 @@ var RoomTypes = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "loadRates",
+    value: function loadRates() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.get(http + '/api/rates').then(function (response) {
+        _this2.setState({
+          rates: response.data
+        });
+      });
+    }
+  }, {
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      this.loadRates();
+    }
+  }, {
+    key: "deleteRates",
+    value: function deleteRates(id) {
+      var _this3 = this;
+
+      if (window.confirm('Are you sure?')) {
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a["delete"](http + '/api/rates/' + id).then(function (response) {
+          if (response.data != null) {
+            _this3.loadRates();
+          }
+        })["catch"](function (error) {
+          return console.log(error);
+        });
+      }
+    }
+  }, {
+    key: "showRates",
+    value: function showRates() {
+      var _this4 = this;
+
+      var lst = this.state.rates.map(function (item, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RecordRates_RatesRecord__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          key: index,
+          idBG: item.idBG,
+          idLP: item.idLP,
+          giaLP: item.giaLP,
+          timeApDung: item.timeApDung,
+          onSelectDelete: _this4.deleteRates
+        });
+      });
+      return lst;
+    }
+  }, {
     key: "render",
     value: function render() {
       var _ref,
           _this5 = this;
 
-      console.log(this.state);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navigation_NavbarTop_NavbarTop__WEBPACK_IMPORTED_MODULE_4__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         md: "2",
         style: (_ref = {
@@ -301,7 +148,7 @@ var RoomTypes = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Link"], {
-        to: "/admin/add_room_type"
+        to: "/admin/add_rates"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         outline: true,
         color: "secondary",
@@ -316,22 +163,140 @@ var RoomTypes = /*#__PURE__*/function (_Component) {
         toggle: function toggle() {
           return _this5.toggle();
         }
-      }, "Th\xEAm lo\u1EA1i ph\xF2ng"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      }, "Th\xEAm b\u1EA3ng gi\xE1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "text-center mt-2"
-      }, "DANH S\xC1CH LO\u1EA0I PH\xD2NG KH\xC1CH S\u1EA0N"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Table"], {
+      }, "DANH S\xC1CH B\u1EA2NG GI\xC1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Table"], {
         striped: true
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", {
         className: "text-center"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "id"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "T\xEAn lo\u1EA1i ph\xF2ng"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "H\xECnh \u1EA3nh"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "M\xF4 t\u1EA3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Sl ph\xF2ng tr\u1ED1ng"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Thao t\xE1c"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "id"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "id lo\u1EA1i ph\xF2ng"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Gi\xE1 lo\u1EA1i ph\xF2ng"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Th\u1EDDi gian \xE1p d\u1EE5ng"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Thao t\xE1c"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", {
         className: "text-center"
-      }, this.showRoomTypes()))))));
+      }, this.showRates()))))));
     }
   }]);
 
-  return RoomTypes;
+  return Rates;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (RoomTypes);
+/* harmony default export */ __webpack_exports__["default"] = (Rates);
+
+/***/ }),
+
+/***/ "./resources/js/admin/components/Rates/RecordRates/RatesRecord.jsx":
+/*!*************************************************************************!*\
+  !*** ./resources/js/admin/components/Rates/RecordRates/RatesRecord.jsx ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return RatesRecord; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_icons_ri__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-icons/ri */ "./node_modules/react-icons/ri/index.esm.js");
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+var RatesRecord = /*#__PURE__*/function (_Component) {
+  _inherits(RatesRecord, _Component);
+
+  var _super = _createSuper(RatesRecord);
+
+  function RatesRecord() {
+    _classCallCheck(this, RatesRecord);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(RatesRecord, [{
+    key: "deleteRates",
+    value: function deleteRates(id) {
+      this.props.onSelectDelete(id);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        style: {
+          lineHeight: '61px',
+          paddingTop: '0',
+          paddingBottom: '0'
+        },
+        scope: "row"
+      }, this.props.idBG), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        style: {
+          lineHeight: '61px',
+          paddingTop: '0',
+          paddingBottom: '0'
+        }
+      }, this.props.idLP), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        style: {
+          lineHeight: '61px',
+          paddingTop: '0',
+          paddingBottom: '0'
+        }
+      }, this.props.giaLP), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        style: {
+          lineHeight: '61px',
+          paddingTop: '0',
+          paddingBottom: '0'
+        }
+      }, this.props.timeApDung), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        style: {
+          lineHeight: '61px',
+          paddingTop: '0',
+          paddingBottom: '0'
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/admin/form_rates/" + this.props.idBG
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        color: "warning"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_4__["FaRegEdit"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "space-15"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        color: "danger",
+        onClick: function onClick(id) {
+          return _this.deleteRates(_this.props.idBG);
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ri__WEBPACK_IMPORTED_MODULE_3__["RiDeleteBin5Line"], null))));
+    }
+  }]);
+
+  return RatesRecord;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
 
 /***/ })
 

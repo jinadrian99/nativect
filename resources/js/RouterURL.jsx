@@ -7,6 +7,7 @@ import Home from './components/Home/Home';
 const Rates = lazy(() => import('./components/Rates/Rates'));
 const About = lazy(() => import('./components/About/About'));
 import Room from './components/Room/Room';
+const ExchangeRates = lazy(() => import('./components/ExchangeRates/ExchangeRates'));
 import YourBasket from './components/Basket/YourBasket';
 const Booking = lazy(() => import('./components/Booking/Booking'));
 const Team = lazy(()=>import('./components/Team/Team'));
@@ -21,6 +22,7 @@ export default class RouterURL extends Component {
                     <div>
                         <Route exact path="/" component={ Home }/>
                         <Route exact path="/room_rates" component={ Rates }/>
+                        <Route exact path="/exchange_rates" component={ ExchangeRates }/>
                         <Route exact path="/about" component={ About }/>
                         <Route exact path="/room/:id" component={ Room }/>
                         <Route exact path="/your_basket" component={ YourBasket }/>

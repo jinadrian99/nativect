@@ -24,6 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        // link use: https://cron-job.org/en/
         $schedule->command('command:changeStatusBooking')->dailyAt('11:30')->timezone('Asia/Ho_Chi_Minh');
     }
 

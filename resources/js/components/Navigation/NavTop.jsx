@@ -183,6 +183,9 @@ export default class NavTop extends Component {
                                     {this.showRoomTypes()}
                                 </DropdownMenu>
                             </UncontrolledDropdown>
+                            <NavbarText>
+                                <Link to="/exchange_rates"><NavbarText className="nav-link nav-item-cus"><b><span>Exchange Rates</span></b></NavbarText></Link>
+                            </NavbarText>
                         </Nav>
                         <NavbarText>
                             <Link to="/team">
