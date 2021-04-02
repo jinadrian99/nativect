@@ -516,15 +516,15 @@ export default class BookingInfo extends Component {
                                     </Row>
                                     <Row>
                                         <Col>
-                                            <span style={{fontWeight:'bold', fontSize:'2vw'}}>{this.state.apiPrice} 
-                                            <select style={{paddingLeft: '10px'}} className="changeMoney" onChange={this.onChangeMoney}>
-                                                <option value="VND">VND</option>
-                                                <option value="USD">USD</option>
-                                                <option value="GBP">GBP</option>
-                                                <option value="CNY">CNY</option>
-                                                <option value="CAD">CAD</option>
-                                                <option value="EUR">EUR</option>
-                                            </select>
+                                            <span style={{fontWeight:'bold', fontSize:'2vw'}}>{this.state.apiPrice}
+                                                <select style={{marginLeft: '10px'}} className="changeMoney" onChange={this.onChangeMoney}>
+                                                    <option value="VND">VND</option>
+                                                    <option value="USD">USD</option>
+                                                    <option value="GBP">GBP</option>
+                                                    <option value="CNY">CNY</option>
+                                                    <option value="CAD">CAD</option>
+                                                    <option value="EUR">EUR</option>
+                                                </select>
                                             </span>
                                         </Col>
                                     </Row>

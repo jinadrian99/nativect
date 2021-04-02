@@ -943,7 +943,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
         }
       }, this.state.apiPrice, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         style: {
-          paddingLeft: '10px'
+          marginLeft: '10px'
         },
         className: "changeMoney",
         onChange: this.onChangeMoney
