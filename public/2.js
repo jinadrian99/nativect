@@ -12,7 +12,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".formPersonalDetails select, .formPersonalDetails input{\r\n    border: none !important;\r\n    border-bottom:1px solid rgba(169, 169, 169, 0.823) !important;\r\n    outline: none;\r\n    font-family: Georgia, 'Times New Roman', Times, serif;\r\n    font-size: 1.2vw;\r\n}\r\n\r\n.breadcrumb-nativeLink a:hover{\r\n    color: gray !important;\r\n    text-decoration: none;\r\n}\r\n\r\n.breadcrumb-nativeLink a{\r\n    color: black !important;\r\n    text-decoration: none;\r\n}\r\n\r\n.button-BookNow button{\r\n    color: white !important;\r\n    background-color: black;\r\n    border: 1px solid black;\r\n    width: 11vw;\r\n    transition: 0.5s;\r\n}\r\n\r\n.button-BookNow button:hover{\r\n    color: black !important;\r\n    background-color: #F3F1EF;\r\n    border: 1px solid black;\r\n    width: 11vw;\r\n}\r\n\r\n.iconHotel{\r\n    position: relative;\r\n    top: -10px;\r\n}", ""]);
+exports.push([module.i, ".formPersonalDetails select, .formPersonalDetails input{\r\n    border: none !important;\r\n    border-bottom:1px solid rgba(169, 169, 169, 0.823) !important;\r\n    outline: none;\r\n    font-family: Georgia, 'Times New Roman', Times, serif;\r\n    font-size: 1.2vw;\r\n}\r\n\r\n.breadcrumb-nativeLink a:hover{\r\n    color: gray !important;\r\n    text-decoration: none;\r\n}\r\n\r\n.breadcrumb-nativeLink a{\r\n    color: black !important;\r\n    text-decoration: none;\r\n}\r\n\r\n.button-BookNow button{\r\n    color: white !important;\r\n    background-color: black;\r\n    border: 1px solid black;\r\n    width: 11vw;\r\n    transition: 0.5s;\r\n}\r\n\r\n.button-BookNow button:hover{\r\n    color: black !important;\r\n    background-color: #F3F1EF;\r\n    border: 1px solid black;\r\n    width: 11vw;\r\n}\r\n\r\n.iconHotel{\r\n    position: relative;\r\n    top: -10px;\r\n}\r\n\r\n.changeMoney{\r\n    border: none;\r\n}\r\n\r\n.changeMoney:active{\r\n    border: none !important;\r\n}", ""]);
 
 // exports
 
@@ -236,15 +236,17 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
       errors: {},
       slPhong: 0,
       roomType: [],
+      totalPriceVND: '',
+      apiPrice: '',
       isGoToHomePage: false,
-      isGoToBasketPage: false,
-      isLoadingBooking: false
+      isGoToBasketPage: false
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.submitBookNow = _this.submitBookNow.bind(_assertThisInitialized(_this));
     _this.notify = _this.notify.bind(_assertThisInitialized(_this));
     _this.resetForm = _this.resetForm.bind(_assertThisInitialized(_this));
     _this.chooseTypeCard = _this.chooseTypeCard.bind(_assertThisInitialized(_this));
+    _this.onChangeMoney = _this.onChangeMoney.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -297,6 +299,11 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
           });
         }, 4000);
       }
+
+      this.setState({
+        totalPriceVND: parseInt(this.state.giaLP, 10) * this.state.diff * parseInt(this.state.slPhongDat),
+        apiPrice: new Intl.NumberFormat().format(parseInt(this.state.giaLP, 10) * this.state.diff * parseInt(this.state.slPhongDat))
+      });
     }
   }, {
     key: "notify",
@@ -348,29 +355,31 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
       }
     }
   }, {
-    key: "showButton",
-    value: function showButton() {
-      if (!this.state.isLoadingBooking) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.submitBookNow
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BOOK NOW"));else return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Spinner"], {
-        color: "dark"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: {
-          display: "inline-block",
-          position: "relative",
-          top: "-4px"
+    key: "onChangeMoney",
+    value: function onChangeMoney(e) {
+      var _this3 = this;
+
+      console.log(e.target.value);
+      var data = {
+        priceVND: this.state.totalPriceVND,
+        needSym: e.target.value
+      };
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(http + '/api/exchange_rate_from_VND', data).then(function (res) {
+        if (res.data != null) {
+          console.warn('doi tien: ', res.data);
+
+          _this3.setState({
+            apiPrice: res.data
+          });
         }
-      }, "\xA0\xA0\xA0Wait for seconds"));
+      });
     }
   }, {
     key: "submitBookNow",
     value: function submitBookNow(e) {
-      var _this3 = this;
+      var _this4 = this;
 
       e.preventDefault();
-      this.setState({
-        isLoadingBooking: !this.state.isLoadingBooking
-      });
       var _this$state = this.state,
           tenKH = _this$state.tenKH,
           email = _this$state.email,
@@ -413,16 +422,16 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
       this.setState({
         errors: errors
       }, function () {
-        console.log(_this3.state.errors.nameLength);
-        console.log(_this3.state.errors.phoneLength);
-        console.log(_this3.state.errors.cardNameLength);
-        console.log(_this3.state.errors.cardNumberLength);
-        console.log(_this3.state.errors.emailAgainLength);
+        console.log(_this4.state.errors.nameLength);
+        console.log(_this4.state.errors.phoneLength);
+        console.log(_this4.state.errors.cardNameLength);
+        console.log(_this4.state.errors.cardNumberLength);
+        console.log(_this4.state.errors.emailAgainLength);
 
         if (!isValidFullName || !isValidPhone || !isValidCardName || !isValidCardNumber || !isValidEmailAgain) {
           if (!isValidFullName) {
-            if (_this3.state.errors.nameLength != "") {
-              react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].error( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.errors.nameLength), {
+            if (_this4.state.errors.nameLength != "") {
+              react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].error( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this4.state.errors.nameLength), {
                 position: react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].POSITION.BOTTOM_RIGHT,
                 autoClose: 4000
               });
@@ -430,8 +439,8 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
           }
 
           if (!isValidPhone) {
-            if (_this3.state.errors.phoneLength != "") {
-              react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].error( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.errors.phoneLength), {
+            if (_this4.state.errors.phoneLength != "") {
+              react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].error( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this4.state.errors.phoneLength), {
                 position: react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].POSITION.BOTTOM_RIGHT,
                 autoClose: 4000
               });
@@ -439,8 +448,8 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
           }
 
           if (!isValidCardName) {
-            if (_this3.state.errors.cardNameLength != "") {
-              react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].error( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.errors.cardNameLength), {
+            if (_this4.state.errors.cardNameLength != "") {
+              react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].error( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this4.state.errors.cardNameLength), {
                 position: react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].POSITION.BOTTOM_RIGHT,
                 autoClose: 4000
               });
@@ -448,8 +457,8 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
           }
 
           if (!isValidCardNumber) {
-            if (_this3.state.errors.cardNumberLength != "") {
-              react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].error( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.errors.cardNumberLength), {
+            if (_this4.state.errors.cardNumberLength != "") {
+              react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].error( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this4.state.errors.cardNumberLength), {
                 position: react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].POSITION.BOTTOM_RIGHT,
                 autoClose: 4000
               });
@@ -457,16 +466,12 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
           }
 
           if (!isValidEmailAgain) {
-            if (_this3.state.errors.emailAgainLength != "") {
-              react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].error( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this3.state.errors.emailAgainLength), {
+            if (_this4.state.errors.emailAgainLength != "") {
+              react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].error( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _this4.state.errors.emailAgainLength), {
                 position: react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].POSITION.BOTTOM_RIGHT,
                 autoClose: 4000
               });
             }
-          } else {
-            _this3.setState({
-              isLoadingBooking: !_this3.state.isLoadingBooking
-            });
           }
 
           return;
@@ -474,36 +479,36 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
 
 
         var checkEmail = {
-          email: _this3.state.email
+          email: _this4.state.email
         };
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(http + '/api/exist_mail', checkEmail).then(function (res) {
           if (res.data) {
             var id = JSON.parse(localStorage.getItem('itemsShoppingCart'))[0].idLP;
             axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(http + '/api/room_types/' + id).then(function (res) {
               if (res.data != null) {
-                _this3.setState({
+                _this4.setState({
                   roomType: res.data
                 }, function () {
-                  console.log('roomType: ', _this3.state.roomType);
+                  console.log('roomType: ', _this4.state.roomType);
                   var room = {
-                    idLP: _this3.state.roomType.idLP,
-                    tenLP: _this3.state.roomType.tenLP,
-                    hinhAnh: _this3.state.roomType.hinhAnh,
-                    moTa: _this3.state.roomType.moTa,
-                    slPhongTrong: parseInt(_this3.state.roomType.slPhongTrong, 10) - parseInt(_this3.state.slPhongDat, 10)
+                    idLP: _this4.state.roomType.idLP,
+                    tenLP: _this4.state.roomType.tenLP,
+                    hinhAnh: _this4.state.roomType.hinhAnh,
+                    moTa: _this4.state.roomType.moTa,
+                    slPhongTrong: parseInt(_this4.state.roomType.slPhongTrong, 10) - parseInt(_this4.state.slPhongDat, 10)
                   };
                   console.log('room: ', room);
                   axios__WEBPACK_IMPORTED_MODULE_2___default.a.put(http + '/api/room_types/' + room.idLP, room).then(function (res) {
                     if (res.data != null) {
                       var customer = {
-                        tenKH: _this3.state.tenKH,
-                        email: _this3.state.email,
-                        sdt: _this3.state.sdt,
-                        loaiThe: _this3.state.loaiThe,
-                        nganHang: _this3.state.nganHang,
-                        tenThe: _this3.state.tenThe,
-                        soThe: _this3.state.soThe,
-                        ngayHetHan: _this3.state.ngayHetHan != null ? Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(new Date(_this3.state.ngayHetHan), 'yyyy-MM-dd') : null
+                        tenKH: _this4.state.tenKH,
+                        email: _this4.state.email,
+                        sdt: _this4.state.sdt,
+                        loaiThe: _this4.state.loaiThe,
+                        nganHang: _this4.state.nganHang,
+                        tenThe: _this4.state.tenThe,
+                        soThe: _this4.state.soThe,
+                        ngayHetHan: _this4.state.ngayHetHan != null ? Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(new Date(_this4.state.ngayHetHan), 'yyyy-MM-dd') : null
                       };
                       console.log(customer);
                       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(http + '/api/customer', customer).then(function (res) {
@@ -514,12 +519,12 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
                           var booking = {
                             idLP: id,
                             idKH: customer.idKH,
-                            ngayDen: Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(_this3.state.startDate, 'yyyy-MM-dd'),
-                            ngayDi: Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(_this3.state.endDate, 'yyyy-MM-dd'),
-                            soDem: _this3.state.diff,
-                            tongTien: parseInt(_this3.state.giaLP, 10) * _this3.state.diff * parseInt(_this3.state.slPhongDat, 10),
+                            ngayDen: Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(_this4.state.startDate, 'yyyy-MM-dd'),
+                            ngayDi: Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(_this4.state.endDate, 'yyyy-MM-dd'),
+                            soDem: _this4.state.diff,
+                            tongTien: parseInt(_this4.state.giaLP, 10) * _this4.state.diff * parseInt(_this4.state.slPhongDat, 10),
                             status: 1,
-                            slPhong: _this3.state.slPhongDat
+                            slPhong: _this4.state.slPhongDat
                           };
                           console.log(booking);
                           axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(http + '/api/bookings', booking).then(function (res) {
@@ -529,29 +534,25 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
                                 idDP: res.data.idDP
                               };
                               var data_obj = {
-                                tenKH: _this3.state.tenKH,
-                                email: _this3.state.email,
-                                sdt: _this3.state.sdt,
-                                loaiThe: _this3.state.loaiThe,
-                                nganHang: _this3.state.nganHang,
-                                soThe: _this3.state.soThe,
+                                tenKH: _this4.state.tenKH,
+                                email: _this4.state.email,
+                                sdt: _this4.state.sdt,
+                                loaiThe: _this4.state.loaiThe,
+                                nganHang: _this4.state.nganHang,
+                                soThe: _this4.state.soThe,
                                 ngayDat: Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(new Date(), 'dd/MM/yyyy'),
                                 idBooking: booking.idDP,
-                                tenLP: _this3.state.roomType.tenLP,
-                                ngayDen: Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(_this3.state.startDate, 'dd/MM/yyyy'),
-                                ngayDi: Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(_this3.state.endDate, 'dd/MM/yyyy'),
-                                tongTien: new Intl.NumberFormat().format(parseInt(_this3.state.giaLP, 10) * _this3.state.diff * parseInt(_this3.state.slPhongDat, 10)),
-                                slPhong: _this3.state.slPhongDat
+                                tenLP: _this4.state.roomType.tenLP,
+                                ngayDen: Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(_this4.state.startDate, 'dd/MM/yyyy'),
+                                ngayDi: Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["format"])(_this4.state.endDate, 'dd/MM/yyyy'),
+                                tongTien: new Intl.NumberFormat().format(parseInt(_this4.state.giaLP, 10) * _this4.state.diff * parseInt(_this4.state.slPhongDat, 10)),
+                                slPhong: _this4.state.slPhongDat
                               };
                               axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(http + '/api/send_mail', data_obj).then(function (res) {
                                 console.warn(res.data);
 
-                                if (res.data) {
-                                  _this3.setState({
-                                    isLoadingBooking: !_this3.state.isLoadingBooking
-                                  });
-
-                                  _this3.notify();
+                                if (res.data == true) {
+                                  _this4.notify();
 
                                   react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].success( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
                                     style: {
@@ -565,19 +566,19 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
                                   localStorage.removeItem('slItemsShoppingCart');
                                   localStorage.removeItem('dateArriveCart');
                                   setTimeout(function () {
-                                    _this3.setState({
-                                      isGoToHomePage: !_this3.state.isGoToHomePage
+                                    _this4.setState({
+                                      isGoToHomePage: !_this4.state.isGoToHomePage
                                     });
                                   }, 8000);
                                 } else {
                                   axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(http + '/api/room_types/' + id).then(function (res) {
                                     if (res.data != null) {
                                       var room2 = {
-                                        idLP: _this3.state.roomType.idLP,
-                                        tenLP: _this3.state.roomType.tenLP,
-                                        hinhAnh: _this3.state.roomType.hinhAnh,
-                                        moTa: _this3.state.roomType.moTa,
-                                        slPhongTrong: parseInt(res.data.slPhongTrong, 10) + parseInt(_this3.state.slPhongDat, 10)
+                                        idLP: _this4.state.roomType.idLP,
+                                        tenLP: _this4.state.roomType.tenLP,
+                                        hinhAnh: _this4.state.roomType.hinhAnh,
+                                        moTa: _this4.state.roomType.moTa,
+                                        slPhongTrong: parseInt(res.data.slPhongTrong, 10) + parseInt(_this4.state.slPhongDat, 10)
                                       };
                                       console.log('room2: ', room2);
                                       axios__WEBPACK_IMPORTED_MODULE_2___default.a.put(http + '/api/room_types/' + room2.idLP, room2).then(function (res) {
@@ -586,10 +587,6 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
                                             if (res.data != null) {
                                               axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"](http + '/api/customer/' + customer.idKH).then(function (res) {
                                                 if (res.data != null) {
-                                                  _this3.setState({
-                                                    isLoadingBooking: !_this3.state.isLoadingBooking
-                                                  });
-
                                                   react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].error( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
                                                     style: {
                                                       fontSize: '16px'
@@ -881,7 +878,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
         },
         className: "formPersonalDetails"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
+        type: "number",
         name: "soThe",
         placeholder: "CARD NUMBER*",
         required: true,
@@ -929,7 +926,7 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
           fontSize: '2vw',
           fontFamily: 'Georgia'
         }
-      }, new Intl.NumberFormat().format(parseInt(this.state.giaLP, 10) * this.state.diff * parseInt(this.state.slPhongDat)), " VND"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], {
+      }, new Intl.NumberFormat().format(this.state.totalPriceVND), " VND"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], {
         style: {
           paddingTop: '15%'
         }
@@ -944,12 +941,32 @@ var BookingInfo = /*#__PURE__*/function (_Component) {
           fontWeight: 'bold',
           fontSize: '2vw'
         }
-      }, new Intl.NumberFormat().format(parseInt(this.state.giaLP, 10) * this.state.diff * parseInt(this.state.slPhongDat)), " VND"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], {
+      }, this.state.apiPrice, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        style: {
+          paddingLeft: '10px'
+        },
+        className: "changeMoney",
+        onChange: this.onChangeMoney
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "VND"
+      }, "VND"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "USD"
+      }, "USD"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "GBP"
+      }, "GBP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "CNY"
+      }, "CNY"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "CAD"
+      }, "CAD"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "EUR"
+      }, "EUR"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], {
         style: {
           paddingTop: '7%'
         },
         className: "button-BookNow"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], null, this.showButton()))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_3__["ToastContainer"], null));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.submitBookNow
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BOOK NOW"))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_3__["ToastContainer"], null));
     }
   }]);
 

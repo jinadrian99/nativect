@@ -35,11 +35,3 @@
     position: relative;
     top: -10px;
 }
-
-.changeMoney{
-    border: none;
-}
-
-.changeMoney:active{
-    border: none !important;
-}

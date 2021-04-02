@@ -37,6 +37,7 @@ Route::post('exist_mail','App\Http\Controllers\SendMailController@checkExistMail
 Route::post('send_mail','App\Http\Controllers\SendMailController@sendMail');
 
 Route::post('exchange_rates','App\Http\Controllers\ExchangeRateController@getExchangeRate');
+Route::post('exchange_rate_from_VND','App\Http\Controllers\ExchangeRateController@getExchangeRateFromVND');
 // Route::get('register','RegisterController@index');
 // Route::post('register','RegisterController@store');
 // Route::put('register/{id}','RegisterController@update');

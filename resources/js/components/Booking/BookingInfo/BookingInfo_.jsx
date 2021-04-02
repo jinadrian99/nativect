@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Container, Row, Col } from 'reactstrap'
+import { Container, Row, Col, Spinner } from 'reactstrap'
 import { format } from 'date-fns';
 import { link } from '../../../link';
 const http = link;
@@ -39,18 +39,16 @@ export default class BookingInfo extends Component {
             errors: {},
             slPhong: 0,
             roomType: [],
-            totalPriceVND: '',
-            apiPrice: '',
 
             isGoToHomePage: false,
-            isGoToBasketPage: false
+            isGoToBasketPage: false,
+            isLoadingBooking: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.submitBookNow = this.submitBookNow.bind(this);
         this.notify = this.notify.bind(this);
         this.resetForm = this.resetForm.bind(this);
         this.chooseTypeCard = this.chooseTypeCard.bind(this);
-        this.onChangeMoney = this.onChangeMoney.bind(this);
     }
 
     componentWillMount(){
@@ -85,10 +83,6 @@ export default class BookingInfo extends Component {
                 this.setState({ isGoToBasketPage: !this.state.isGoToBasketPage });
             }, 4000);
         }
-        this.setState({
-            totalPriceVND: parseInt(this.state.giaLP,10) * this.state.diff * parseInt(this.state.slPhongDat),
-            apiPrice: new Intl.NumberFormat().format(parseInt(this.state.giaLP,10) * this.state.diff * parseInt(this.state.slPhongDat))
-        })
     }
 
     notify(){
@@ -127,24 +121,25 @@ export default class BookingInfo extends Component {
         }
     }
 
-    onChangeMoney(e){
-        console.log(e.target.value);
-        var data = {
-            priceVND: this.state.totalPriceVND,
-            needSym: e.target.value
-        }
-        axios.post(http + '/api/exchange_rate_from_VND', data).then(res => {
-            if (res.data != null) {
-                console.warn('doi tien: ', res.data)
-                this.setState({
-                    apiPrice: res.data
-                });
-            }
-        })
+    showButton(){
+        if(!this.state.isLoadingBooking)
+            return <button onClick={this.submitBookNow}><b>BOOK NOW</b></button>
+        else
+            return <>
+                <Spinner color="dark" />
+                <div style={{ 
+                    display: "inline-block",
+                    position: "relative",
+                    top: "-4px"
+                 }}>
+                    &nbsp;&nbsp;&nbsp;Wait for seconds
+                </div>
+            </>
     }
 
     submitBookNow(e){
         e.preventDefault();
+        this.setState({ isLoadingBooking: !this.state.isLoadingBooking });
         const {tenKH, email, emailAgain, sdt, tenThe, soThe} = this.state;
         let isValidFullName = true;
         let isValidPhone = true;
@@ -220,6 +215,9 @@ export default class BookingInfo extends Component {
                             })
                         }
                     } 
+                    else{
+                        this.setState({ isLoadingBooking: !this.state.isLoadingBooking });
+                    }
                     return;
                 }
                 // axios de xet email co ton tai ko gui qua api existmail
@@ -291,7 +289,8 @@ export default class BookingInfo extends Component {
                                                             }
                                                             axios.post(http + '/api/send_mail', data_obj).then(res => {
                                                                 console.warn(res.data);
-                                                                if (res.data == true) {
+                                                                if (res.data) {
+                                                                    this.setState({ isLoadingBooking: !this.state.isLoadingBooking });
                                                                     this.notify();
                                                                     toast.success(<div style={{fontSize:'20px'}}>Vui lòng kiểm tra lại email của bạn</div>, {
                                                                         position: toast.POSITION.BOTTOM_RIGHT,
@@ -320,6 +319,7 @@ export default class BookingInfo extends Component {
                                                                                         if (res.data != null) {
                                                                                             axios.delete(http + '/api/customer/' + customer.idKH).then(res => {
                                                                                                 if (res.data != null) {
+                                                                                                    this.setState({ isLoadingBooking: !this.state.isLoadingBooking });
                                                                                                     toast.error(<div style={{fontSize:'16px'}}><BiErrorAlt/>  Đang có sự cố trên mail server, vui lòng đợi 15 giây sau</div>, {
                                                                                                         position: toast.POSITION.BOTTOM_RIGHT,
                                                                                                         autoClose: 4000
@@ -463,7 +463,7 @@ export default class BookingInfo extends Component {
                                     </Row>
                                     <Row style={{ paddingTop:'5%'}} className="formPersonalDetails">
                                         <Col>
-                                            <input type="number" name="soThe" placeholder="CARD NUMBER*" required onChange={this.handleChange} autoComplete="off" style={{width:'100%'}}/>
+                                            <input type="text" name="soThe" placeholder="CARD NUMBER*" required onChange={this.handleChange} autoComplete="off" style={{width:'100%'}}/>
                                         </Col>
                                     </Row>
                                     <Row style={{ paddingTop:'5%'}} className="formPersonalDetails">
@@ -504,7 +504,7 @@ export default class BookingInfo extends Component {
                                     </Row>
                                     <Row style={{paddingBottom:'5%'}}>
                                         <Col>
-                                            <span style={{fontWeight:'bold', fontSize:'2vw', fontFamily:'Georgia'}}>{new Intl.NumberFormat().format(this.state.totalPriceVND)} VND</span>
+                                            <span style={{fontWeight:'bold', fontSize:'2vw', fontFamily:'Georgia'}}>{new Intl.NumberFormat().format(parseInt(this.state.giaLP,10) * this.state.diff * parseInt(this.state.slPhongDat))} VND</span>
                                         </Col>
                                     </Row>
                                 </Col>
@@ -515,22 +515,13 @@ export default class BookingInfo extends Component {
                                         <Col><span>Total booking cost</span><hr/></Col>
                                     </Row>
                                     <Row>
-                                        <Col>
-                                            <span style={{fontWeight:'bold', fontSize:'2vw'}}>{this.state.apiPrice} 
-                                            <select style={{paddingLeft: '10px'}} className="changeMoney" onChange={this.onChangeMoney}>
-                                                <option value="VND">VND</option>
-                                                <option value="USD">USD</option>
-                                                <option value="GBP">GBP</option>
-                                                <option value="CNY">CNY</option>
-                                                <option value="CAD">CAD</option>
-                                                <option value="EUR">EUR</option>
-                                            </select>
-                                            </span>
-                                        </Col>
+                                        <Col><span style={{fontWeight:'bold', fontSize:'2vw'}}>{new Intl.NumberFormat().format(parseInt(this.state.giaLP,10) * this.state.diff * parseInt(this.state.slPhongDat))} VND</span></Col>
                                     </Row>
                                     <Row style={{ paddingTop:'7%'}} className="button-BookNow">
                                         <Col>
-                                            <button onClick={this.submitBookNow}><b>BOOK NOW</b></button>
+                                            {
+                                                this.showButton()
+                                            }
                                         </Col>
                                     </Row>
                                 </Col>
