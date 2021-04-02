@@ -12,12 +12,3 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-
-# MACOS
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
