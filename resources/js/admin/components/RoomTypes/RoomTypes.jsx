@@ -6,7 +6,13 @@ import NavbarTop from '../Navigation/NavbarTop/NavbarTop';
 import SidebarLeft from '../Navigation/Sidebar/SidebarLeft';
 import { Link } from 'react-router-dom';
 import { GrAdd } from "react-icons/gr";
+import { BiErrorAlt, } from "react-icons/bi";
+import { AiFillCheckCircle } from "react-icons/ai";
 import { link } from '../../../link';
+
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const http = link;
 
 class RoomTypes extends Component {
@@ -35,22 +41,48 @@ class RoomTypes extends Component {
     deleteRoomType(obj){
         if (window.confirm('Are you sure?')) {
             // delete file old
-            var data = {
-                imgRaws: obj.imgRaw,
-            };
-            console.log('img cần xóa',data);
-            axios.post(http + '/api/room_types_delete_file',data).then(res=>{
-                if(res.data)
-                    console.log('Đã xóa hình cũ');
-                else
-                    console.log('Không có hình cũ');
-            })
-            axios.delete(http + '/api/room_types/'+obj.id).then(res=>{
-                if (res.data != null) {
+            // var data = {
+            //     imgRaws: obj.imgRaw,
+            // };
+            // console.log('img cần xóa',data);
+            // axios.post(http + '/api/room_types_delete_file',data).then(res=>{
+            //     if(res.data)
+            //         console.log('Đã xóa hình cũ');
+            //     else
+            //         console.log('Không có hình cũ');
+            // })
+            // axios.delete(http + '/api/room_types/'+obj.id).then(res=>{
+            //     if (res.data != null) {
+            //         this.loadRoomTypes();
+            //     }
+            // })
+            // .catch(error => console.log(error));
+
+            axios.delete(http + '/api/room_types/'+obj.id)
+            .then(res => {
+                // console.warn(res);
+                if (res.status == 204) {
+                    toast.success(<div style={{fontSize:'20px'}}><AiFillCheckCircle/>  Xoá loại phòng thành công.</div>, {
+                        position: toast.POSITION.BOTTOM_RIGHT,
+                        autoClose: 4000
+                    });
                     this.loadRoomTypes();
                 }
             })
-            .catch(error => console.log(error));
+            .catch(err => {
+                if(err.response.status == 400){
+                    toast.error(<div style={{fontSize:'20px'}}><BiErrorAlt/>  Loại phòng đang tồn tại trong bảng đặt phòng. KHÔNG THỂ XÓA!!!</div>,{
+                        position: toast.POSITION.BOTTOM_RIGHT,
+                        autoClose: 4000
+                    })
+                }
+                else if (err.response.status == 500) {
+                    toast.error(<div style={{fontSize:'20px'}}><BiErrorAlt/>  Lỗi Server</div>,{
+                        position: toast.POSITION.BOTTOM_RIGHT,
+                        autoClose: 4000
+                    })
+                }
+            });
         }
     }
 
@@ -78,7 +110,7 @@ class RoomTypes extends Component {
     render() {
         console.log(this.state);
         return (
-            <>
+            <div style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
                 <Row>
                     <Col>
                         <NavbarTop />
@@ -99,25 +131,31 @@ class RoomTypes extends Component {
                                 Thêm loại phòng
                             </Tooltip>
                             <h3 className="text-center mt-2">DANH SÁCH LOẠI PHÒNG KHÁCH SẠN</h3>
-                            <Table striped>
-                                <thead className="text-center">
-                                    <tr>
-                                        <th>id</th>
-                                        <th>Tên loại phòng</th>
-                                        <th>Hình ảnh</th>
-                                        <th>Mô tả</th>
-                                        <th>Sl phòng trống</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="text-center">
-                                    { this.showRoomTypes() }
-                                </tbody>
-                            </Table>   
+                            <div style={{ height: '77vh', overflow: 'scroll' }}>
+                                <Table striped>
+                                    <thead className="text-center">
+                                        <tr>
+                                            <th>id</th>
+                                            <th>Tên loại phòng</th>
+                                            <th>Hình ảnh</th>
+                                            <th>Mô tả</th>
+                                            <th>Sl phòng trống</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="text-center">
+                                        { this.showRoomTypes() }
+                                    </tbody>
+                                </Table>   
+                            </div>
+                           
                         </div>
                     </Col>
                 </Row>
-            </>
+                <Row>
+                    <ToastContainer/>
+                </Row>
+            </div>
         );
     }
 }

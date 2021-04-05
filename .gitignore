@@ -14,3 +14,5 @@ npm-debug.log
 yarn-error.log
 ._.*
 ._*
+
+# find . -depth -name '.DS_Store' -exec git rm --cached '{}' \; -print

@@ -7,10 +7,12 @@ use Carbon\Carbon;
 use File;
 
 use App\Models\RoomType;
+use App\Models\Booking;
 
 class RoomTypeController extends Controller
 {
     public function uploadFile(Request $req){
+        $arr_Extension= array("png","jpg","jpeg","");
         if($req->hasFile('data')){
             $json_name_img = array();
             $files = $req->file('data');
@@ -37,9 +39,10 @@ class RoomTypeController extends Controller
                 // echo 'Kiểu files: ' . $file->getMimeType();
                 // echo '<br />';
 
-                $file->move('image', $new_name);
-
-                $json_name_img[] = $new_name;
+                if(in_array($file->getClientOriginalExtension(),$arr_Extension)){
+                    $file->move('image', $new_name);   
+                    $json_name_img[] = $new_name;
+                }
             }
             return $json_name_img;
             // return $new_name;
@@ -150,6 +153,17 @@ class RoomTypeController extends Controller
         $RoomType->update($request->all());
     }
 
+    private function deleteFileImg($jsonImg){
+        if($jsonImg!=null){
+            $imgRaws = json_decode($jsonImg); 
+            foreach($imgRaws as $imgRaw){
+                File::delete(public_path().$imgRaw);
+            }
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -158,8 +172,18 @@ class RoomTypeController extends Controller
      */
     public function destroy($id)
     {
+        $flag = Booking::where('idLP', '=', $id)->count();
+        if($flag != 0){
+            return response()->json('Tồn tại', 400);
+        }
         $RoomType = RoomType::findOrFail($id);
-        $RoomType->delete();
-        return 204;
+        // echo($RoomType->hinhAnh);
+        $fileImg = $this->deleteFileImg($RoomType->hinhAnh);
+        // echo($fileImg);
+        if ($fileImg) {
+            $RoomType->delete();
+            return response()->json("ok", 204);
+        }
+        return response()->json("bad request", 500);
     }
 }
