@@ -184,7 +184,7 @@ export default class OwnAccountForm extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{overflow: 'hidden', width: '100vw', height: '100vh'}}>
                 <Row>
                     <Col>
                         <NavbarTop />

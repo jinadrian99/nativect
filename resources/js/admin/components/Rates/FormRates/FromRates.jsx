@@ -105,7 +105,7 @@ export default class FromRates extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{overflow: 'hidden', width: '100vw', height: '100vh'}}>
                 <Row>
                     <Col>
                         <NavbarTop />

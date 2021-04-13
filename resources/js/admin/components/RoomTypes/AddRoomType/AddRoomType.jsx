@@ -220,7 +220,7 @@ export default class AddRoomType extends Component {
     
     render() {
         return (
-            <div>
+            <div style={{overflow: 'hidden', width: '100vw', height: '100vh'}}>
                 <Row>
                     <Col>
                         <NavbarTop />
@@ -240,7 +240,7 @@ export default class AddRoomType extends Component {
                             <Tooltip placement="right" isOpen={this.state.tooltipOpen} target="btnAdd" toggle={()=>this.toggle()}>
                                 Hủy bỏ thao tác
                             </Tooltip>
-                            <h3 className="text-center mt-2">ĐIỀN THÊM THÔNG TIN LOẠI PHÒNG</h3>
+                            <h3 className="text-center mt-2">ĐIỀN THÊM THÔNG TIN LOẠI PHÒNG</h3>    
                             <hr />
                             <div style={{height: '15px'}} />
                             <Row>
@@ -386,7 +386,7 @@ export default class AddRoomType extends Component {
                                         </FormGroup>
                                         <div style={{ height: '10vh' }}/>
                                         <Row content="text-center">
-                                            <Col style={{marginLeft: '78%'}}>
+                                            <Col style={{marginLeft: '75%'}}>
                                                 <Button color="warning" type="submit">Save</Button>
                                                 <div className="space-15"/>
                                                 <Button color="danger" type="reset">Reset</Button>

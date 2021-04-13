@@ -78,7 +78,7 @@ class Slide extends Component {
 
     render() {
         return (
-            <>
+            <div style={{overflow: 'hidden', width: '100vw', height: '100vh'}}>
                 <Row>
                     <Col>
                         <NavbarTop />
@@ -90,31 +90,39 @@ class Slide extends Component {
                     </Col>
                     <Col md="10" style={{paddingLeft: '0'}}>
                         <div className="container">
-                            <Link to = "/admin/add_slide">
-                                <Button outline color="secondary" className="btn-add" id="btnAdd">
-                                    <GrAdd className="icon-top" />
-                                </Button>
-                            </Link>
-                            <Tooltip placement="right" isOpen={this.state.tooltipOpen} target="btnAdd" toggle={()=>this.toggle()}>
-                                Thêm slide quảng cáo
-                            </Tooltip>
-                            <h3 className="text-center mt-2">DANH SÁCH SLIDE QUẢNG CÁO</h3>
-                            <Table striped>
-                                <thead className="text-center">
-                                    <tr>
-                                        <th>id</th>
-                                        <th>Hình ảnh</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="text-center">
-                                    { this.showSlides() }
-                                </tbody>
-                            </Table>   
+                            <Row>
+                                <Col md='1'>
+                                    <Link to = "/admin/add_slide">
+                                        <Button outline color="secondary" className="btn-add" id="btnAdd">
+                                            <GrAdd className="icon-top" />
+                                        </Button>
+                                    </Link>
+                                    <Tooltip placement="right" isOpen={this.state.tooltipOpen} target="btnAdd" toggle={()=>this.toggle()}>
+                                        Thêm slide quảng cáo
+                                    </Tooltip>
+                                </Col>
+                                <Col md='11'>
+                                    <h3 className="text-center mt-2">DANH SÁCH SLIDE QUẢNG CÁO</h3>                                    
+                                </Col>
+                            </Row>
+                            <div style={{ height: '80vh', overflow: 'scroll' }}>
+                                <Table striped>
+                                    <thead className="text-center">
+                                        <tr>
+                                            <th>id</th>
+                                            <th>Hình ảnh</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="text-center">
+                                        { this.showSlides() }
+                                    </tbody>
+                                </Table> 
+                            </div>
                         </div>
                     </Col>
                 </Row>
-            </>
+            </div>
         );
     }
 }

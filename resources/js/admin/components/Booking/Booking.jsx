@@ -47,7 +47,7 @@ class Booking extends Component {
     }
     render() {
         return (
-            <>
+            <div style={{overflow: 'hidden', width: '100vw', height: '100vh'}}>
                 <Row>
                     <Col>
                         <NavbarTop />
@@ -60,28 +60,30 @@ class Booking extends Component {
                     <Col md="10" style={{paddingLeft: '0'}}>
                         <div className="container">
                             <h3 className="text-center mt-2">DANH SÁCH ĐẶT PHÒNG KHÁCH SẠN</h3>
-                            <Table striped>
-                                <thead className="text-center">
-                                    <tr>
-                                        <th>id</th>
-                                        <th>id loại phòng</th>
-                                        <th>id khách hàng</th>
-                                        <th>Số lượng phòng đặt</th>
-                                        <th>Ngày đến</th>
-                                        <th>Ngày đi</th>
-                                        <th>Số đêm</th>
-                                        <th>Tổng tiền</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="text-center">
-                                    { this.showBooking() }
-                                </tbody>
-                            </Table>   
+                            <div style={{ height: '80vh', overflow: 'scroll' }}>
+                                <Table striped>
+                                    <thead className="text-center">
+                                        <tr>
+                                            <th>id</th>
+                                            <th>id loại phòng</th>
+                                            <th>id khách hàng</th>
+                                            <th>Số lượng phòng đặt</th>
+                                            <th>Ngày đến</th>
+                                            <th>Ngày đi</th>
+                                            <th>Số đêm</th>
+                                            <th>Tổng tiền</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="text-center">
+                                        { this.showBooking() }
+                                    </tbody>
+                                </Table>   
+                            </div>
                         </div>
                     </Col>
                 </Row>
-            </>
+            </div>
         );
     }
 }

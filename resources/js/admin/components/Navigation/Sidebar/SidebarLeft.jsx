@@ -104,7 +104,7 @@ export default class SidebarLeft extends Component {
     render() {
         console.log(JSON.parse(sessionStorage.getItem('objAdmin')).phanQuyen);
         return (
-            <div style={{ height: '92vh', backgroundColor: '#343A40' }}>
+            <div style={{ height: '94vh', backgroundColor: '#343A40' }}>
                 <Navbar className="text-light" color="dark" light style={{padding: "0 0"}}>
                     <Nav navbar style={{ width: '100%' }}>
                         { this.showKH() }

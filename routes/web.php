@@ -42,6 +42,9 @@ Route::group(['prefix' => 'admin'], function () {
     // Route::get('/slides', function () {
     //     return view('admin.index');
     // });
+    // Route::get('/add_room_type', function () {
+    //     return view('admin.index');
+    // });
     // Route::get('/room_types', function () {
     //     return view('admin.index');
     // });

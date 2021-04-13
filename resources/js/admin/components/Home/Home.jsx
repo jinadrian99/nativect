@@ -7,7 +7,7 @@ import { Jumbotron, Container } from 'reactstrap';
 export default class Home extends Component {
     render() {
         return (
-            <div>
+            <div style={{overflow: 'hidden', width: '100vw', height: '100vh'}}>
                 <Row>
                     <Col>
                         <NavbarTop/>

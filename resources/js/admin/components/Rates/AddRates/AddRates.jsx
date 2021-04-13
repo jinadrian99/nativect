@@ -17,9 +17,14 @@ import { ToastContainer, toast, cssTransition } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './toast.css';
 import { ImCancelCircle } from "react-icons/im";
+import { BiErrorAlt } from "react-icons/bi";
 import { MdVerifiedUser } from 'react-icons/md';
+
+
+import { differenceInDays } from 'date-fns';
 import axios from 'axios';
 import { link } from '../../../../link';
+
 const http = link;
 
 export default class AddRates extends Component {
@@ -64,6 +69,15 @@ export default class AddRates extends Component {
     }
 
     handleChange(e){
+        if(e.target.name == "timeApDung"){
+            if(differenceInDays(new Date(e.target.value),new Date()) < 0){
+                toast.error(<div style={{fontSize:'20px'}}><BiErrorAlt/>  Bạn đã chọn ngày quá khứ</div>, {
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                    autoClose: 4000
+                });
+                return;
+            }
+        }
         this.setState({
             [e.target.name]: e.target.value
         });
@@ -126,7 +140,8 @@ export default class AddRates extends Component {
     }
     render() {
         return (
-            <div>
+            <div style={{overflow: 'hidden', width: '100vw', height: '100vh'}}>
+                <ToastContainer/>
                 <Row>
                     <Col>
                         <NavbarTop />
@@ -149,7 +164,7 @@ export default class AddRates extends Component {
                             </Tooltip>
                             <h3 className="text-center mt-2">ĐIỀN THÔNG TIN BẢNG GIÁ</h3>
                             <hr />
-                            <div style={{height: '15px'}} />
+                            <div style={{height: '15px' }} />
                             <Row>
                                 <Col>
                                     <Form onSubmit={this.saveChange} className="text-center" style={{marginRight: '15%', marginLeft: '15%', width: '70%'}}>
@@ -175,7 +190,7 @@ export default class AddRates extends Component {
                                         </FormGroup>
                                         <div style={{ height: '10vh' }}/>
                                         <Row content="text-center">
-                                            <Col style={{marginLeft: '78%'}}>
+                                            <Col style={{marginLeft: '75%'}}>
                                                 <Button color="warning" type="submit">Save</Button>
                                                 <div className="space-15"/>
                                                 <Button color="danger" type="reset">Reset</Button>

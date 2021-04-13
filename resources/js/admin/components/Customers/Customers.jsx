@@ -72,7 +72,7 @@ export class Register extends Component {
 
     render() {
         return (
-            <>
+            <div style={{overflow: 'hidden', width: '100vw', height: '100vh'}}>
                 <Row>
                     <Col>
                         <NavbarTop />
@@ -93,26 +93,28 @@ export class Register extends Component {
                                 Thêm khách hàng
                             </Tooltip> */}
                             <h3 className="text-center mt-2">THÔNG TIN KHÁCH HÀNG</h3>
-                            <Table striped>
-                                <thead className="text-center">
-                                    <tr>
-                                        <th>id</th>
-                                        <th>Họ tên</th>
-                                        <th>Email</th>
-                                        <th>Số ĐT</th>
-                                        <th>Loại thẻ</th>
-                                        <th>Ngân Hàng</th>
-                                        <th>Số thẻ tín dụng</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="text-center">
-                                    { this.showObjectCustomers() }
-                                </tbody>
-                            </Table>   
+                            <div style={{ height: '80vh', overflow: 'scroll' }}>
+                                <Table striped>
+                                    <thead className="text-center">
+                                        <tr>
+                                            <th>id</th>
+                                            <th>Họ tên</th>
+                                            <th>Email</th>
+                                            <th>Số ĐT</th>
+                                            <th>Loại thẻ</th>
+                                            <th>Ngân Hàng</th>
+                                            <th>Số thẻ tín dụng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="text-center">
+                                        { this.showObjectCustomers() }
+                                    </tbody>
+                                </Table> 
+                            </div>
                         </div>
                     </Col>
                 </Row>
-            </>
+            </div>
         );
     }
 }

@@ -79,7 +79,7 @@ export default class FromCustomer extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{overflow: 'hidden', width: '100vw', height: '100vh'}}>
                 <Row>
                     <Col>
                         <NavbarTop />
@@ -126,7 +126,7 @@ export default class FromCustomer extends Component {
                             </Row>
                             <div style={{ height: '10vh' }}/>
                             <Row content="text-center">
-                                <Col style={{marginLeft: '70%'}}>
+                                <Col style={{marginLeft: '75%'}}>
                                     <Button color="danger" onClick={()=>this.undoPages()}>Cancel</Button>
                                     <div className="space-15"/>
                                     <Button color="warning" onClick={()=>this.saveChange()}>Update</Button>

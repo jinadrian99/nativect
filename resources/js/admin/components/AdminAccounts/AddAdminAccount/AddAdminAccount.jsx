@@ -129,7 +129,7 @@ export default class AddAdminAccount extends Component {
     
     render() {
         return (
-            <div>
+            <div style={{overflow: 'hidden', width: '100vw', height: '100vh'}}>
                 <Row>
                     <Col>
                         <NavbarTop />
@@ -182,7 +182,7 @@ export default class AddAdminAccount extends Component {
                                         </FormGroup>
                                         <div style={{ height: '10vh' }}/>
                                         <Row content="text-center">
-                                            <Col style={{marginLeft: '78%'}}>
+                                            <Col style={{marginLeft: '75%'}}>
                                                 <Button color="warning" type="submit">Save</Button>
                                                 <div className="space-15"/>
                                                 <Button color="danger" type="reset">Reset</Button>

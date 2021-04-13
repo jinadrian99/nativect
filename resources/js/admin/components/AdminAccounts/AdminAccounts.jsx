@@ -65,7 +65,7 @@ class AdminAccounts extends Component {
 
     render() {
         return (
-            <>
+            <div  style={{overflow: 'hidden', width: '100vw', height: '100vh'}}>
                 <Row>
                     <Col>
                         <NavbarTop />
@@ -77,32 +77,40 @@ class AdminAccounts extends Component {
                     </Col>
                     <Col md="10" style={{paddingLeft: '0'}}>
                         <div className="container">
-                            <Link to = "/admin/add_admin_account">
-                                <Button outline color="secondary" className="btn-add" id="btnAdd">
-                                    <GrAdd className="icon-top" />
-                                </Button>
-                            </Link>
-                            <Tooltip placement="right" isOpen={this.state.tooltipOpen} target="btnAdd" toggle={()=>this.toggle()}>
-                                Thêm tài khoản admin
-                            </Tooltip>
-                            <h3 className="text-center mt-2">DANH SÁCH TÀI KHOẢN TRANG ADMIN</h3>
-                            <Table striped>
-                                <thead className="text-center">
-                                    <tr>
-                                        <th>id</th>
-                                        <th>username</th>
-                                        <th>Phân quyền</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="text-center">
-                                    { this.showAdminAccounts() }
-                                </tbody>
-                            </Table>   
+                            <Row>
+                                <Col md="1">
+                                    <Link to = "/admin/add_admin_account">
+                                        <Button outline color="secondary" className="btn-add" id="btnAdd">
+                                            <GrAdd className="icon-top" />
+                                        </Button>
+                                    </Link>
+                                    <Tooltip placement="right" isOpen={this.state.tooltipOpen} target="btnAdd" toggle={()=>this.toggle()}>
+                                        Thêm tài khoản admin
+                                    </Tooltip>
+                                </Col>
+                                <Col md="11">
+                                    <h3 className="text-center mt-2">DANH SÁCH TÀI KHOẢN TRANG ADMIN</h3>
+                                </Col>
+                            </Row>
+                            <div style={{ height: '80vh', overflow: 'scroll' }}>
+                                <Table striped>
+                                    <thead className="text-center">
+                                        <tr>
+                                            <th>id</th>
+                                            <th>username</th>
+                                            <th>Phân quyền</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="text-center">
+                                        { this.showAdminAccounts() }
+                                    </tbody>
+                                </Table>   
+                            </div>
                         </div>
                     </Col>
                 </Row>
-            </>
+            </div>
         );
     }
 }
